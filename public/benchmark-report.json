@@ -13,8 +13,8 @@
     "notes": "Analytical baseline using the same fixed quote catalogue; not a competitor comparison."
   },
   "latency": {
-    "medianMs": 0.019,
-    "p95Ms": 0.283,
+    "medianMs": 0.023,
+    "p95Ms": 0.328,
     "notes": "One local in-process run; not production or AI latency."
   },
   "categories": [
@@ -82,7 +82,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 19.441,
+      "latencyMs": 34.036,
       "error": null
     },
     {
@@ -97,7 +97,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.283,
+      "latencyMs": 0.287,
       "error": null
     },
     {
@@ -112,7 +112,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.139,
+      "latencyMs": 0.121,
       "error": null
     },
     {
@@ -127,7 +127,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.089,
+      "latencyMs": 0.079,
       "error": null
     },
     {
@@ -142,7 +142,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.078,
+      "latencyMs": 0.074,
       "error": null
     },
     {
@@ -157,7 +157,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.046,
+      "latencyMs": 0.045,
       "error": null
     },
     {
@@ -172,7 +172,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.035,
+      "latencyMs": 0.052,
       "error": null
     },
     {
@@ -187,7 +187,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.032,
+      "latencyMs": 0.038,
       "error": null
     },
     {
@@ -202,7 +202,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.064,
+      "latencyMs": 0.047,
       "error": null
     },
     {
@@ -217,7 +217,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.067,
+      "latencyMs": 0.058,
       "error": null
     },
     {
@@ -232,7 +232,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.045,
+      "latencyMs": 0.042,
       "error": null
     },
     {
@@ -247,7 +247,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.028,
+      "latencyMs": 0.029,
       "error": null
     },
     {
@@ -262,7 +262,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.026,
+      "latencyMs": 0.029,
       "error": null
     },
     {
@@ -277,7 +277,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.024,
+      "latencyMs": 0.028,
       "error": null
     },
     {
@@ -292,7 +292,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.03,
+      "latencyMs": 0.023,
       "error": null
     },
     {
@@ -307,7 +307,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.029,
+      "latencyMs": 0.022,
       "error": null
     },
     {
@@ -337,7 +337,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.023,
+      "latencyMs": 0.022,
       "error": null
     },
     {
@@ -367,7 +367,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.025,
+      "latencyMs": 0.029,
       "error": null
     },
     {
@@ -382,7 +382,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.029,
+      "latencyMs": 0.028,
       "error": null
     },
     {
@@ -397,7 +397,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.027,
+      "latencyMs": 0.023,
       "error": null
     },
     {
@@ -427,7 +427,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -442,7 +442,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.017,
       "error": null
     },
     {
@@ -472,7 +472,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.026,
       "error": null
     },
     {
@@ -487,7 +487,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.019,
+      "latencyMs": 0.02,
       "error": null
     },
     {
@@ -502,7 +502,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.024,
+      "latencyMs": 0.017,
       "error": null
     },
     {
@@ -517,7 +517,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.017,
       "error": null
     },
     {
@@ -532,7 +532,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.019,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -547,7 +547,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.017,
       "error": null
     },
     {
@@ -562,7 +562,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.768,
       "error": null
     },
     {
@@ -577,7 +577,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.06,
       "error": null
     },
     {
@@ -592,7 +592,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.676,
+      "latencyMs": 0.024,
       "error": null
     },
     {
@@ -607,7 +607,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.034,
+      "latencyMs": 0.02,
       "error": null
     },
     {
@@ -622,7 +622,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -637,7 +637,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -652,7 +652,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -667,7 +667,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -682,7 +682,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.02,
+      "latencyMs": 0.022,
       "error": null
     },
     {
@@ -697,7 +697,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -712,7 +712,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -727,7 +727,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.02,
       "error": null
     },
     {
@@ -742,7 +742,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -757,7 +757,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -772,7 +772,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -787,7 +787,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -802,7 +802,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.029,
+      "latencyMs": 0.018,
       "error": null
     },
     {
@@ -817,7 +817,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -832,7 +832,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.047,
+      "latencyMs": 0.048,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -847,7 +847,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.021,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -862,7 +862,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.019,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -892,7 +892,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.019,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -907,7 +907,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -922,7 +922,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.018,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -937,7 +937,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.018,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -952,7 +952,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -967,7 +967,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.018,
       "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
     },
     {
@@ -982,7 +982,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.03,
+      "latencyMs": 0.033,
       "error": "Please provide these invoice fields: institution. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -997,7 +997,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.02,
+      "latencyMs": 0.026,
       "error": "Please provide these invoice fields: invoiceId. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1012,7 +1012,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.019,
+      "latencyMs": 0.021,
       "error": "Please provide these invoice fields: studentReference. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1027,7 +1027,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.021,
+      "latencyMs": 0.02,
       "error": "Please provide these invoice fields: recipient. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1042,7 +1042,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.019,
       "error": "Please provide these invoice fields: deadline. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1057,7 +1057,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.019,
       "error": "Please provide these invoice fields: currency. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1072,7 +1072,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.093,
+      "latencyMs": 0.019,
       "error": "Please provide these invoice fields: amount. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1087,7 +1087,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.018,
       "error": "Please provide these invoice fields: institution. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1102,7 +1102,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.017,
       "error": "Please provide these invoice fields: invoiceId. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1117,7 +1117,7 @@
         "route": null
       },
       "pass": true,
-      "latencyMs": 0.016,
+      "latencyMs": 0.017,
       "error": "Please provide these invoice fields: studentReference. Use the editable example format or connect AI for varied layouts."
     },
     {
@@ -1132,7 +1132,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.933,
+      "latencyMs": 1.276,
       "error": null
     },
     {
@@ -1147,7 +1147,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.222,
+      "latencyMs": 0.328,
       "error": null
     },
     {
@@ -1162,7 +1162,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.037,
+      "latencyMs": 0.046,
       "error": null
     },
     {
@@ -1192,7 +1192,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.026,
+      "latencyMs": 0.027,
       "error": null
     },
     {
@@ -1207,7 +1207,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.026,
+      "latencyMs": 0.024,
       "error": null
     },
     {
@@ -1222,7 +1222,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.024,
+      "latencyMs": 0.022,
       "error": null
     },
     {
@@ -1267,7 +1267,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.022,
+      "latencyMs": 0.032,
       "error": null
     },
     {
@@ -1282,7 +1282,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.068,
+      "latencyMs": 0.056,
       "error": null
     },
     {
@@ -1297,7 +1297,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.039,
+      "latencyMs": 0.027,
       "error": null
     },
     {
@@ -1312,7 +1312,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.112,
+      "latencyMs": 0.019,
       "error": null
     },
     {
@@ -1327,7 +1327,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.019,
+      "latencyMs": 0.025,
       "error": null
     },
     {
@@ -1342,7 +1342,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.041,
       "error": null
     },
     {
@@ -1357,7 +1357,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.042,
       "error": null
     },
     {
@@ -1372,7 +1372,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.04,
       "error": null
     },
     {
@@ -1387,7 +1387,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.04,
       "error": null
     },
     {
@@ -1402,7 +1402,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.041,
       "error": null
     },
     {
@@ -1417,7 +1417,7 @@
         "route": "B"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.04,
       "error": null
     },
     {
@@ -1432,7 +1432,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.691,
+      "latencyMs": 1.156,
       "error": null
     },
     {
@@ -1447,7 +1447,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.038,
+      "latencyMs": 0.053,
       "error": null
     },
     {
@@ -1462,7 +1462,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.02,
+      "latencyMs": 0.026,
       "error": null
     },
     {
@@ -1477,7 +1477,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.023,
       "error": null
     },
     {
@@ -1492,7 +1492,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.018,
+      "latencyMs": 0.023,
       "error": null
     },
     {
@@ -1507,7 +1507,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.022,
       "error": null
     },
     {
@@ -1522,7 +1522,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.023,
       "error": null
     },
     {
@@ -1537,7 +1537,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.023,
       "error": null
     },
     {
@@ -1552,7 +1552,7 @@
         "route": "A"
       },
       "pass": true,
-      "latencyMs": 0.017,
+      "latencyMs": 0.023,
       "error": null
     },
     {
