@@ -1,0 +1,1574 @@
+{
+  "dataset": "100 synthetic authored cases (not external benchmark or live invoices)",
+  "mode": "Deterministic policy and parser only; excludes LLM and network",
+  "total": 100,
+  "passed": 100,
+  "taskOutcomeAccuracy": 1,
+  "unsafeOrIncompleteCases": 60,
+  "safeBlockingAccuracy": 1,
+  "baseline": {
+    "name": "Always choose lowest total debit B without deadline or reserve checks",
+    "eligibleTasks": 40,
+    "safeSelections": 10,
+    "notes": "Analytical baseline using the same fixed quote catalogue; not a competitor comparison."
+  },
+  "latency": {
+    "medianMs": 0.021,
+    "p95Ms": 0.358,
+    "notes": "One local in-process run; not production or AI latency."
+  },
+  "categories": [
+    {
+      "category": "normal",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "reserve_deficit",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "recipient",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "deadline",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "currency",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "invalid_amount",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "missing_field",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "injection",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "relaxed_deadline",
+      "total": 10,
+      "passed": 10
+    },
+    {
+      "category": "decimal_amount",
+      "total": 10,
+      "passed": 10
+    }
+  ],
+  "results": [
+    {
+      "id": "BENCH-001",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 17.334,
+      "error": null
+    },
+    {
+      "id": "BENCH-002",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.358,
+      "error": null
+    },
+    {
+      "id": "BENCH-003",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.127,
+      "error": null
+    },
+    {
+      "id": "BENCH-004",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.085,
+      "error": null
+    },
+    {
+      "id": "BENCH-005",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.075,
+      "error": null
+    },
+    {
+      "id": "BENCH-006",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.137,
+      "error": null
+    },
+    {
+      "id": "BENCH-007",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.056,
+      "error": null
+    },
+    {
+      "id": "BENCH-008",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.032,
+      "error": null
+    },
+    {
+      "id": "BENCH-009",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.066,
+      "error": null
+    },
+    {
+      "id": "BENCH-010",
+      "category": "normal",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.084,
+      "error": null
+    },
+    {
+      "id": "BENCH-011",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.062,
+      "error": null
+    },
+    {
+      "id": "BENCH-012",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.031,
+      "error": null
+    },
+    {
+      "id": "BENCH-013",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.025,
+      "error": null
+    },
+    {
+      "id": "BENCH-014",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.031,
+      "error": null
+    },
+    {
+      "id": "BENCH-015",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.024,
+      "error": null
+    },
+    {
+      "id": "BENCH-016",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.154,
+      "error": null
+    },
+    {
+      "id": "BENCH-017",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.031,
+      "error": null
+    },
+    {
+      "id": "BENCH-018",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.024,
+      "error": null
+    },
+    {
+      "id": "BENCH-019",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.026,
+      "error": null
+    },
+    {
+      "id": "BENCH-020",
+      "category": "reserve_deficit",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.029,
+      "error": null
+    },
+    {
+      "id": "BENCH-021",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.031,
+      "error": null
+    },
+    {
+      "id": "BENCH-022",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.025,
+      "error": null
+    },
+    {
+      "id": "BENCH-023",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-024",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.022,
+      "error": null
+    },
+    {
+      "id": "BENCH-025",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    },
+    {
+      "id": "BENCH-026",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-027",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.023,
+      "error": null
+    },
+    {
+      "id": "BENCH-028",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-029",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-030",
+      "category": "recipient",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": null
+    },
+    {
+      "id": "BENCH-031",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    },
+    {
+      "id": "BENCH-032",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-033",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-034",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-035",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-036",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-037",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-038",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-039",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-040",
+      "category": "deadline",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.024,
+      "error": null
+    },
+    {
+      "id": "BENCH-041",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-042",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": null
+    },
+    {
+      "id": "BENCH-043",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-044",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-045",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-046",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-047",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-048",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-049",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-050",
+      "category": "currency",
+      "expected": {
+        "action": "blocked",
+        "route": null
+      },
+      "actual": {
+        "action": "blocked",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-051",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.064,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-052",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.051,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-053",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-054",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.029,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-055",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-056",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-057",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 1.196,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-058",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.027,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-059",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-060",
+      "category": "invalid_amount",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.017,
+      "error": "Tuition amount must be positive, at most 1,000,000 and have at most two decimals."
+    },
+    {
+      "id": "BENCH-061",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.042,
+      "error": "Please provide these invoice fields: institution. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-062",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": "Please provide these invoice fields: invoiceId. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-063",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": "Please provide these invoice fields: studentReference. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-064",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": "Please provide these invoice fields: recipient. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-065",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.017,
+      "error": "Please provide these invoice fields: deadline. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-066",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.017,
+      "error": "Please provide these invoice fields: currency. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-067",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": "Please provide these invoice fields: amount. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-068",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.016,
+      "error": "Please provide these invoice fields: institution. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-069",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.015,
+      "error": "Please provide these invoice fields: invoiceId. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-070",
+      "category": "missing_field",
+      "expected": {
+        "action": "ask_input",
+        "route": null
+      },
+      "actual": {
+        "action": "ask_input",
+        "route": null
+      },
+      "pass": true,
+      "latencyMs": 0.015,
+      "error": "Please provide these invoice fields: studentReference. Use the editable example format or connect AI for varied layouts."
+    },
+    {
+      "id": "BENCH-071",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 1.471,
+      "error": null
+    },
+    {
+      "id": "BENCH-072",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.22,
+      "error": null
+    },
+    {
+      "id": "BENCH-073",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.034,
+      "error": null
+    },
+    {
+      "id": "BENCH-074",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.288,
+      "error": null
+    },
+    {
+      "id": "BENCH-075",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.032,
+      "error": null
+    },
+    {
+      "id": "BENCH-076",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.023,
+      "error": null
+    },
+    {
+      "id": "BENCH-077",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    },
+    {
+      "id": "BENCH-078",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.022,
+      "error": null
+    },
+    {
+      "id": "BENCH-079",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    },
+    {
+      "id": "BENCH-080",
+      "category": "injection",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.043,
+      "error": null
+    },
+    {
+      "id": "BENCH-081",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.053,
+      "error": null
+    },
+    {
+      "id": "BENCH-082",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.025,
+      "error": null
+    },
+    {
+      "id": "BENCH-083",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": null
+    },
+    {
+      "id": "BENCH-084",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-085",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.017,
+      "error": null
+    },
+    {
+      "id": "BENCH-086",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.017,
+      "error": null
+    },
+    {
+      "id": "BENCH-087",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.018,
+      "error": null
+    },
+    {
+      "id": "BENCH-088",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.02,
+      "error": null
+    },
+    {
+      "id": "BENCH-089",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    },
+    {
+      "id": "BENCH-090",
+      "category": "relaxed_deadline",
+      "expected": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "B"
+      },
+      "pass": true,
+      "latencyMs": 0.048,
+      "error": null
+    },
+    {
+      "id": "BENCH-091",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 2.758,
+      "error": null
+    },
+    {
+      "id": "BENCH-092",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.07,
+      "error": null
+    },
+    {
+      "id": "BENCH-093",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.028,
+      "error": null
+    },
+    {
+      "id": "BENCH-094",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.023,
+      "error": null
+    },
+    {
+      "id": "BENCH-095",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.023,
+      "error": null
+    },
+    {
+      "id": "BENCH-096",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.03,
+      "error": null
+    },
+    {
+      "id": "BENCH-097",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.019,
+      "error": null
+    },
+    {
+      "id": "BENCH-098",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.058,
+      "error": null
+    },
+    {
+      "id": "BENCH-099",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    },
+    {
+      "id": "BENCH-100",
+      "category": "decimal_amount",
+      "expected": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "actual": {
+        "action": "approval_required",
+        "route": "A"
+      },
+      "pass": true,
+      "latencyMs": 0.021,
+      "error": null
+    }
+  ]
+}

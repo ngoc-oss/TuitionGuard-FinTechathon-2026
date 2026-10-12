@@ -1,0 +1,16 @@
+{
+  "mode": "Deterministic tool workflow and mocked model protocol; NOT live Groq",
+  "count": 8,
+  "passed": 8,
+  "checks": [
+    "No agent payment tool exists",
+    "Mock tool protocol completes same tools",
+    "Mock AI selects independently verified route",
+    "Malicious tool name cannot execute",
+    "Out-of-order policy calls blocked",
+    "Incomplete AI extraction asks for fields",
+    "Instruction-bearing invoice cannot auto approve",
+    "Invented recipient absent from source cannot produce a plan"
+  ],
+  "liveGroq": "not_run_no_key"
+}

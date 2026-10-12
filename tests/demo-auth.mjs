@@ -1,0 +1,17 @@
+import assert from 'node:assert/strict';
+import {startDemoChallenge,verifyDemoChallenge} from '../lib/demo-auth.ts';
+const now=1000,accounts=[];
+assert.throws(()=>startDemoChallenge('register','bad','User',accounts,now),/authEmailError/);
+assert.throws(()=>startDemoChallenge('login','user@example.com','',accounts,now),/authMissing/);
+const registration=startDemoChallenge('register','User@Example.com','Demo',accounts,now);
+assert.equal(registration.email,'user@example.com');
+assert.equal(verifyDemoChallenge(registration,'000000',now).account,undefined);
+const verified=verifyDemoChallenge(registration,registration.code,now);assert.equal(verified.account.name,'Demo');accounts.push(verified.account);
+assert.throws(()=>startDemoChallenge('register','user@example.com','Demo',accounts,now),/authExists/);
+const login=startDemoChallenge('login','user@example.com','',accounts,now);
+assert.equal(verifyDemoChallenge(login,login.code,now).account.email,'user@example.com');
+assert.equal(verifyDemoChallenge(login,login.code,now+120000).error,'authExpired');
+let locked=login;for(let i=0;i<5;i++)locked=verifyDemoChallenge(locked,'000000',now).challenge;
+assert.equal(verifyDemoChallenge(locked,locked.code,now).error,'authLocked');
+const resend=startDemoChallenge('login','user@example.com','',accounts,now+130000);assert.ok(verifyDemoChallenge(resend,resend.code,now+130001).account);
+console.log('10 demo authentication assertions passed. No email delivery or server authentication tested.');

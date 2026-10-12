@@ -1,0 +1,94 @@
+{
+  "reviewRegressions": {
+    "count": 37,
+    "passed": 37,
+    "environment": "Authored edge cases and actual API handlers with SQLite adapter; live-check transport is MOCKED, not Groq",
+    "sourceFingerprint": "d5a8dd1361fcd26d8399b94e4373af7e6b58c4da8690d87b952f71cd06d29063"
+  },
+  "generatedAt": "2026-10-11T12:25:09.850Z",
+  "syntheticBenchmark": {
+    "total": 100,
+    "passed": 100,
+    "categories": [
+      {
+        "category": "normal",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "reserve_deficit",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "recipient",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "deadline",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "currency",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "invalid_amount",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "missing_field",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "injection",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "relaxed_deadline",
+        "total": 10,
+        "passed": 10
+      },
+      {
+        "category": "decimal_amount",
+        "total": 10,
+        "passed": 10
+      }
+    ],
+    "baseline": {
+      "name": "Always choose lowest total debit B without deadline or reserve checks",
+      "eligibleTasks": 40,
+      "safeSelections": 10,
+      "notes": "Analytical baseline using the same fixed quote catalogue; not a competitor comparison."
+    }
+  },
+  "apiHandlerTests": {
+    "count": 46,
+    "passed": 46,
+    "environment": "Actual API handlers with an in-memory SQLite D1 adapter"
+  },
+  "agentProtocolTests": {
+    "count": 8,
+    "passed": 8,
+    "environment": "Deterministic tool workflow and mocked model protocol; NOT live Groq"
+  },
+  "workerRuntimeTests": {
+    "count": 15,
+    "passed": 15,
+    "environment": "Built Cloudflare Worker in Miniflare with local D1; no deployed URL fetch"
+  },
+  "liveGroq": "not_run_no_key",
+  "browserVisualQA": "unavailable",
+  "limits": [
+    "Synthetic benchmark results are not real-world fraud or model accuracy.",
+    "Agent protocol tests use mocked model messages; live Groq reliability and token cost are unmeasured.",
+    "All funds, providers, rates and university records are simulated.",
+    "Provider ledger shares application infrastructure; it is not an external bank."
+  ]
+}

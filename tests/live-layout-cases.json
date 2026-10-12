@@ -1,0 +1,325 @@
+{
+  "provenance": "20 authored synthetic invoice layouts; not real invoices or external benchmark. Missing-field cases require clarification. {{DEADLINE}} is replaced by an explicit ISO time 48 hours after run start.",
+  "cases": [
+    {
+      "id": "LAYOUT-001",
+      "layout": "labelled English",
+      "invoiceText": "Tuition notice\nInstitution: Demo International University\nInvoice ID: LAYOUT-001\nStudent reference: STU-001\nTuition amount: 18000 CNY\nRecipient account: UNIVERSITY-CNY-001\nDeadline: {{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-001",
+        "studentReference": "STU-001",
+        "amount": 18000,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-002",
+      "layout": "English letter",
+      "invoiceText": "Dear student STU-002, Demo International University requests CNY 18,125 for tuition under invoice LAYOUT-002. Transfer to UNIVERSITY-CNY-001. The payment deadline is {{DEADLINE}}.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-002",
+        "studentReference": "STU-002",
+        "amount": 18125,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-003",
+      "layout": "Vietnamese labels",
+      "invoiceText": "THÔNG BÁO HỌC PHÍ\nTrường: Demo International University\nSố hóa đơn: LAYOUT-003\nMã sinh viên: STU-003\nHọc phí cần thanh toán: 18250 CNY\nTài khoản nhận: UNIVERSITY-CNY-001\nHạn thanh toán: {{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-003",
+        "studentReference": "STU-003",
+        "amount": 18250,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-004",
+      "layout": "Chinese labels",
+      "invoiceText": "学费通知\n学校：Demo International University\n发票号码：LAYOUT-004\n学生编号：STU-004\n学费：18375 CNY\n收款账户：UNIVERSITY-CNY-001\n截止时间：{{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-004",
+        "studentReference": "STU-004",
+        "amount": 18375,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-005",
+      "layout": "JSON",
+      "invoiceText": "{\n  \"institution\": \"Demo International University\",\n  \"invoiceId\": \"LAYOUT-005\",\n  \"studentReference\": \"STU-005\",\n  \"amount\": 18500,\n  \"currency\": \"CNY\",\n  \"recipient\": \"UNIVERSITY-CNY-001\",\n  \"deadline\": \"{{DEADLINE}}\"\n}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-005",
+        "studentReference": "STU-005",
+        "amount": 18500,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-006",
+      "layout": "reordered paragraph",
+      "invoiceText": "Payment deadline {{DEADLINE}}. Beneficiary Demo International University, account UNIVERSITY-CNY-001. Reference STU-006. Tuition due CNY 18625. Invoice LAYOUT-006.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-006",
+        "studentReference": "STU-006",
+        "amount": 18625,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-007",
+      "layout": "labelled English",
+      "invoiceText": "Tuition notice\nInstitution: Demo International University\nInvoice ID: LAYOUT-007\nStudent reference: STU-007\nTuition amount: 18750 CNY\nRecipient account: UNIVERSITY-CNY-001\nDeadline: {{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-007",
+        "studentReference": "STU-007",
+        "amount": 18750,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-008",
+      "layout": "English letter",
+      "invoiceText": "Dear student STU-008, Demo International University requests CNY 18,875 for tuition under invoice LAYOUT-008. Transfer to UNIVERSITY-CNY-001. The payment deadline is {{DEADLINE}}.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-008",
+        "studentReference": "STU-008",
+        "amount": 18875,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-009",
+      "layout": "Vietnamese labels",
+      "invoiceText": "THÔNG BÁO HỌC PHÍ\nTrường: Demo International University\nSố hóa đơn: LAYOUT-009\nMã sinh viên: STU-009\nHọc phí cần thanh toán: 19000 CNY\nTài khoản nhận: UNIVERSITY-CNY-001\nHạn thanh toán: {{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-009",
+        "studentReference": "STU-009",
+        "amount": 19000,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-010",
+      "layout": "Chinese labels",
+      "invoiceText": "学费通知\n学校：Demo International University\n发票号码：LAYOUT-010\n学生编号：STU-010\n学费：19125 CNY\n收款账户：UNIVERSITY-CNY-001\n截止时间：{{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-010",
+        "studentReference": "STU-010",
+        "amount": 19125,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-011",
+      "layout": "JSON",
+      "invoiceText": "{\n  \"institution\": \"Demo International University\",\n  \"invoiceId\": \"LAYOUT-011\",\n  \"studentReference\": \"STU-011\",\n  \"amount\": 19250,\n  \"currency\": \"CNY\",\n  \"recipient\": \"UNIVERSITY-CNY-001\",\n  \"deadline\": \"{{DEADLINE}}\"\n}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-011",
+        "studentReference": "STU-011",
+        "amount": 19250,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-012",
+      "layout": "reordered paragraph",
+      "invoiceText": "Payment deadline {{DEADLINE}}. Beneficiary Demo International University, account UNIVERSITY-CNY-001. Reference STU-012. Tuition due CNY 19375. Invoice LAYOUT-012.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-012",
+        "studentReference": "STU-012",
+        "amount": 19375,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-013",
+      "layout": "labelled English",
+      "invoiceText": "Tuition notice\nInstitution: Demo International University\nInvoice ID: LAYOUT-013\nStudent reference: STU-013\nTuition amount: 19500 CNY\nRecipient account: UNIVERSITY-CNY-001\nDeadline: {{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-013",
+        "studentReference": "STU-013",
+        "amount": 19500,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-014",
+      "layout": "English letter",
+      "invoiceText": "Dear student STU-014, Demo International University requests CNY 19,625 for tuition under invoice LAYOUT-014. Transfer to UNIVERSITY-CNY-001. The payment deadline is {{DEADLINE}}.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-014",
+        "studentReference": "STU-014",
+        "amount": 19625,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-015",
+      "layout": "Vietnamese labels",
+      "invoiceText": "THÔNG BÁO HỌC PHÍ\nTrường: Demo International University\nSố hóa đơn: LAYOUT-015\nMã sinh viên: STU-015\nHọc phí cần thanh toán: 19750 CNY\nTài khoản nhận: UNIVERSITY-CNY-001\nHạn thanh toán: {{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-015",
+        "studentReference": "STU-015",
+        "amount": 19750,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-016",
+      "layout": "Chinese labels",
+      "invoiceText": "学费通知\n学校：Demo International University\n发票号码：LAYOUT-016\n学生编号：STU-016\n学费：19875 CNY\n收款账户：UNIVERSITY-CNY-001\n截止时间：{{DEADLINE}}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-016",
+        "studentReference": "STU-016",
+        "amount": 19875,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-017",
+      "layout": "JSON",
+      "invoiceText": "{\n  \"institution\": \"Demo International University\",\n  \"invoiceId\": \"LAYOUT-017\",\n  \"studentReference\": \"STU-017\",\n  \"amount\": 20000,\n  \"currency\": \"CNY\",\n  \"recipient\": \"UNIVERSITY-CNY-001\",\n  \"deadline\": \"{{DEADLINE}}\"\n}",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-017",
+        "studentReference": "STU-017",
+        "amount": 20000,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-018",
+      "layout": "reordered paragraph",
+      "invoiceText": "Payment deadline {{DEADLINE}}. Beneficiary Demo International University, account UNIVERSITY-CNY-001. Reference STU-018. Tuition due CNY 20125. Invoice LAYOUT-018.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-018",
+        "studentReference": "STU-018",
+        "amount": 20125,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "complete",
+      "missingField": null
+    },
+    {
+      "id": "LAYOUT-019",
+      "layout": "labelled English",
+      "invoiceText": "Tuition notice\nInstitution: Demo International University\nInvoice ID: LAYOUT-019\nStudent reference: STU-019\nTuition amount: 20250 CNY\nRecipient account: UNIVERSITY-CNY-001\nDeadline: [not specified]",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-019",
+        "studentReference": "STU-019",
+        "amount": 20250,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "needs_input",
+      "missingField": "deadline"
+    },
+    {
+      "id": "LAYOUT-020",
+      "layout": "English letter",
+      "invoiceText": "Dear student [not specified], Demo International University requests CNY 20,375 for tuition under invoice LAYOUT-020. Transfer to UNIVERSITY-CNY-001. The payment deadline is {{DEADLINE}}.",
+      "expectedFields": {
+        "institution": "Demo International University",
+        "invoiceId": "LAYOUT-020",
+        "studentReference": "STU-020",
+        "amount": 20375,
+        "currency": "CNY",
+        "recipient": "UNIVERSITY-CNY-001",
+        "deadline": "{{DEADLINE}}"
+      },
+      "expectedAction": "needs_input",
+      "missingField": "studentReference"
+    }
+  ]
+}

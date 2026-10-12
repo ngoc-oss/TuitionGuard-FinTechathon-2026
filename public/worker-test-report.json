@@ -1,0 +1,22 @@
+{
+  "mode": "Built Cloudflare Worker in Miniflare with local D1; no deployed URL fetch",
+  "count": 15,
+  "passed": 15,
+  "checks": [
+    "Built Worker renders product page",
+    "Built Worker rejects anonymous account",
+    "Built Worker creates tool plan",
+    "Built Worker submits transfer",
+    "D1 receipt mismatch held",
+    "D1 funds held without premature debit",
+    "Corrected receipt settles in Worker",
+    "D1 settlement debits once",
+    "Built Worker rejects malformed amount",
+    "Built Worker rejects impossible calendar date",
+    "Built Worker holds unknown provider status",
+    "Unknown status never debits in D1",
+    "Live checks require a key in built Worker",
+    "Concurrent different invoices require renewed balance approval",
+    "D1 reserves only one approved balance snapshot"
+  ]
+}

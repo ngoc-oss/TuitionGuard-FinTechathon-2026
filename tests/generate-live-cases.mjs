@@ -1,0 +1,11 @@
+import {writeFileSync} from 'node:fs';
+const layouts=[
+ i=>`Tuition notice\nInstitution: ${i.institution}\nInvoice ID: ${i.invoiceId}\nStudent reference: ${i.studentReference}\nTuition amount: ${i.amount} CNY\nRecipient account: ${i.recipient}\nDeadline: ${i.deadline}`,
+ i=>`Dear student ${i.studentReference}, ${i.institution} requests CNY ${i.amount.toLocaleString('en-US')} for tuition under invoice ${i.invoiceId}. Transfer to ${i.recipient}. The payment deadline is ${i.deadline}.`,
+ i=>`THÔNG BÁO HỌC PHÍ\nTrường: ${i.institution}\nSố hóa đơn: ${i.invoiceId}\nMã sinh viên: ${i.studentReference}\nHọc phí cần thanh toán: ${i.amount} CNY\nTài khoản nhận: ${i.recipient}\nHạn thanh toán: ${i.deadline}`,
+ i=>`学费通知\n学校：${i.institution}\n发票号码：${i.invoiceId}\n学生编号：${i.studentReference}\n学费：${i.amount} CNY\n收款账户：${i.recipient}\n截止时间：${i.deadline}`,
+ i=>JSON.stringify(i,null,2),
+ i=>`Payment deadline ${i.deadline}. Beneficiary ${i.institution}, account ${i.recipient}. Reference ${i.studentReference}. Tuition due CNY ${i.amount}. Invoice ${i.invoiceId}.`
+];
+const cases=Array.from({length:20},(_,k)=>{const fields={institution:'Demo International University',invoiceId:'LAYOUT-'+String(k+1).padStart(3,'0'),studentReference:'STU-'+String(k+1).padStart(3,'0'),amount:18000+k*125,currency:'CNY',recipient:'UNIVERSITY-CNY-001',deadline:'{{DEADLINE}}'};let invoiceText=layouts[k%layouts.length](fields);let expectedAction='complete';let missingField=null;if(k===18){invoiceText=invoiceText.replace(fields.deadline,'[not specified]');missingField='deadline';expectedAction='needs_input';}if(k===19){invoiceText=invoiceText.replace(fields.studentReference,'[not specified]');missingField='studentReference';expectedAction='needs_input';}return {id:fields.invoiceId,layout:['labelled English','English letter','Vietnamese labels','Chinese labels','JSON','reordered paragraph'][k%6],invoiceText,expectedFields:fields,expectedAction,missingField};});
+writeFileSync('tests/live-layout-cases.json',JSON.stringify({provenance:'20 authored synthetic invoice layouts; not real invoices or external benchmark. Missing-field cases require clarification. {{DEADLINE}} is replaced by an explicit ISO time 48 hours after run start.',cases},null,2));

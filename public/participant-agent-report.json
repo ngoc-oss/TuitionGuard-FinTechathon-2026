@@ -1,0 +1,64 @@
+{
+  "scope": "Scripted agents with synthetic evidence; not live AI, blockchain or financial execution",
+  "checks": 16,
+  "passed": 16,
+  "interactiveChecks": [
+    {
+      "name": "Missing consent holds release",
+      "passed": true
+    },
+    {
+      "name": "Missing milestone evidence holds release",
+      "passed": true
+    },
+    {
+      "name": "Evidence produces proposal, not automatic release",
+      "passed": true
+    },
+    {
+      "name": "No approval blocks release",
+      "passed": true
+    },
+    {
+      "name": "Changed recipient freezes proposed release",
+      "passed": true
+    },
+    {
+      "name": "Stale evidence requires review",
+      "passed": true
+    },
+    {
+      "name": "Dispute freezes release",
+      "passed": true
+    },
+    {
+      "name": "Approved milestone releases once",
+      "passed": true
+    },
+    {
+      "name": "Duplicate release blocked",
+      "passed": true
+    },
+    {
+      "name": "Expired FX proposal rejected",
+      "passed": true
+    },
+    {
+      "name": "FX needs human approval",
+      "passed": true
+    },
+    {
+      "name": "Falling-rate downside disclosed",
+      "passed": true
+    },
+    {
+      "name": "Rising-rate scenario calculated",
+      "passed": true
+    }
+  ],
+  "additionalChecks": [
+    "Risk change blocks approved milestone",
+    "All milestones complete in order",
+    "Completed milestone cannot release again"
+  ]
+}
