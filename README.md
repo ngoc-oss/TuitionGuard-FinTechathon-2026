@@ -1,23 +1,38 @@
 # TuitionGuard — Safe Cross-Border Tuition Payments
 
-**FinTechathon International Track — Topic C Prototype**  
+[![CI](https://github.com/ngoc-oss/TuitionGuard-FinTechathon-2026/actions/workflows/ci.yml/badge.svg)](https://github.com/ngoc-oss/TuitionGuard-FinTechathon-2026/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/ngoc-oss/TuitionGuard-FinTechathon-2026/actions/workflows/codeql.yml/badge.svg)](https://github.com/ngoc-oss/TuitionGuard-FinTechathon-2026/actions/workflows/codeql.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![pnpm](https://img.shields.io/badge/pnpm-11.25.0-orange.svg)](https://pnpm.io/)
+[![Node](https://img.shields.io/badge/Node.js-%3E%3D22.13.0-green.svg)](https://nodejs.org/)
+
+TuitionGuard is a FinTechathon prototype for planning and reviewing simulated cross-border tuition payments. It combines deterministic financial policy checks, a protected living-expense reserve, human approval, and provider-receipt reconciliation.
+
+**FinTechathon Shenzhen International Track — Topic C Prototype**  
 Autonomous Bounded Financial Agent with Deterministic Policy Enforcement, Living Reserve Protection, and Multi-Field Provider Reconciliation.
 
 ---
 
+## Requirements
+
+- **Node.js**: 24 (recommended; Node.js `>=22.13.0` is declared in `package.json`)
+- **pnpm**: 11.25.0 (the version pinned in `package.json`)
+- **Git**: For version control and submission tracking
+
+For detailed installation, troubleshooting, and optional live-AI setup, see [docs/SETUP.md](./docs/SETUP.md). Contribution workflow and quality checks are in [CONTRIBUTING.md](./CONTRIBUTING.md).
+
 ## 🚀 Quick Start on Windows
 
-1. Ensure **Node.js 22+ or 24** is installed.
-2. In the `TuitionGuard` directory, run:
+From the project root (`TuitionGuard`), run:
 
 ```powershell
 pnpm install --frozen-lockfile
 pnpm dev:demo
 ```
 
-3. Open **http://127.0.0.1:5173** in your browser. (Press `Ctrl+C` in terminal to stop).
-   - If port 5173 is occupied, run: `pnpm dev:demo --port 5174`.
-   - The interactive reviewer demo works completely offline and locally without requiring database setup or external accounts.
+- Open **http://127.0.0.1:5173** in your browser. (Press `Ctrl+C` in terminal to stop).
+- If port 5173 is occupied, run: `pnpm dev:demo --port 5174`.
+- The interactive reviewer demo works completely offline and locally without requiring database setup or external accounts.
 
 ---
 
@@ -39,13 +54,15 @@ TuitionGuard is designed to protect international students against fraudulent re
 ## 🛠️ Verification & Build Commands
 
 ```powershell
-pnpm typecheck       # Run TypeScript compiler checks (tsc --noEmit)
-pnpm test            # Run synthetic regression test suite
-pnpm build:demo      # Compile production demo bundle into dist-demo/
-pnpm preview:demo    # Preview compiled bundle at http://127.0.0.1:4173
+pnpm lint            # ESLint checks
+pnpm typecheck       # TypeScript checks (tsc --noEmit)
+pnpm test            # Synthetic regression test suite
+pnpm build:demo      # Compile the demo into dist-demo/
+pnpm preview:demo    # Preview the production bundle at http://127.0.0.1:4173
 ```
 
 - A standalone single-file HTML preview is also available at `public/tuitionguard-offline.html` for offline presentation without Node.js runtime.
+- GitHub Actions runs lint, typecheck, tests, and the demo production build for pushes and pull requests. CodeQL and dependency review provide additional security checks.
 
 ---
 
@@ -70,3 +87,8 @@ pnpm preview:demo    # Preview compiled bundle at http://127.0.0.1:4173
 
 - **Memory-Only API Keys**: Any Groq API keys entered in the AI Connection tab remain exclusively in volatile browser memory and are wiped upon page reload. Keys are never saved to disk, databases, or Git history.
 - **Simulated Financial Environment**: All provider quotes, accounts, and bank ledgers are sandbox simulations designed for competitive demonstration. No live banking rails or real funds are transacted.
+- **Vulnerability reports**: Please do not disclose security issues publicly before maintainers have had a chance to assess them. See [CONTRIBUTING.md](./CONTRIBUTING.md) for reporting guidance.
+
+## License
+
+This project is licensed under the [MIT License](./LICENSE).

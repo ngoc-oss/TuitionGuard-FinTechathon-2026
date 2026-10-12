@@ -1,6 +1,8 @@
 {
-  "name": "site-creator-vinext-starter",
+  "name": "tuitionguard",
   "version": "0.1.0",
+  "description": "A safe cross-border tuition payment demo with deterministic policy enforcement and receipt reconciliation.",
+  "license": "MIT",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
