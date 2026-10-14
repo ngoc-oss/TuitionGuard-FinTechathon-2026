@@ -11,8 +11,8 @@ TuitionGuard is a FinTechathon prototype for planning and reviewing simulated cr
 **FinTechathon Shenzhen International Track — Topic C Prototype**  
 Autonomous Bounded Financial Agent with Deterministic Policy Enforcement, Living Reserve Protection, and Multi-Field Provider Reconciliation.
 ## Offline Demo
-
-[Download TuitionGuard HTML Demo](./TuitionGuard_GitHub_Synced.html)
+[Open Online Demo](https://ngoc-oss.github.io/TuitionGuard-FinTechathon-2026/)
+[Download TuitionGuard HTML Demo](./index.html)
 
 Open the link, click **Download raw file**, then open the downloaded HTML file in Chrome.
 
