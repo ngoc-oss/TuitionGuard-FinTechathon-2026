@@ -57,19 +57,22 @@ check('key with spaces is refused before any request',(()=>{try{groqBrowserClien
 check('results never claim a payment',[r].every(x=>x.paymentExecuted===false));
 
 
-// 9. Google Gemini through its OpenAI-compatible endpoint.
-const GKEY='AIza'+'b'.repeat(35);
-const sig=(m,n)=>({...m,message:{...m.message,tool_calls:m.message.tool_calls?.map(c=>({...c,extra_content:{google:{thought_signature:'SIG-'+n}}}))}});
-f=fakeGroq(honestScript(byId.normal.invoiceText).map((m,n)=>sig(m,n)));r=await runAgentCheck(byId.normal,PROVIDERS.gemini.mode,llmBrowserClient('gemini',GKEY,PROVIDERS.gemini.defaultModel,f));
-check('gemini normal case passes with route A',r.passed&&r.observed==='route:A'&&r.mode==='live_gemini');
-check('gemini calls the Google OpenAI-compatible endpoint',f.urls.every(u=>u==='https://generativelanguage.googleapis.com/v1beta/openai/chat/completions'));
-check('gemini request sends tools and max_tokens',f.bodies[0].tools.length===4&&f.bodies[0].max_tokens>0&&!('max_completion_tokens' in f.bodies[0]));
-check('gemini thought signatures are sent back on the next turn',JSON.stringify(f.bodies[1].messages).includes('SIG-0'));
-f=fakeGroq([{status:400,errorBody:[{error:{message:'API key not valid. Please pass a valid API key.'}}]}]);r=await runAgentCheck(byId.normal,'live_gemini',llmBrowserClient('gemini',GKEY,'gemini-3.8-flash',f));
-check('gemini array-style error body is surfaced',!r.passed&&/Google Gemini returned HTTP 400/.test(r.error)&&/API key not valid/.test(r.error));
-r=await runAgentCheck(byId.normal,'live_gemini',llmBrowserClient('gemini',GKEY,'gemini-3.8-flash',async()=>{throw new TypeError('Failed to fetch');}));
-check('network/CORS failure is a clear FAIL',!r.passed&&r.observed==='provider_error'&&/could not be reached/.test(r.error));
-check('a Groq key is not accepted as a Gemini key',(()=>{try{llmBrowserClient('gemini','gsk_x','m');return false;}catch{return true;}})());
+// 9. OpenAI Chat Completions.
+const OKEY='sk-proj-'+'b'.repeat(40);
+f=fakeGroq(honestScript(byId.normal.invoiceText));r=await runAgentCheck(byId.normal,PROVIDERS.openai.mode,llmBrowserClient('openai',OKEY,PROVIDERS.openai.defaultModel,f));
+check('openai normal case passes with route A',r.passed&&r.observed==='route:A'&&r.mode==='live_openai');
+check('openai calls api.openai.com chat completions',f.urls.every(u=>u==='https://api.openai.com/v1/chat/completions'));
+check('openai request sends tools, reasoning_effort none, no temperature',f.bodies[0].tools.length===4&&f.bodies[0].reasoning_effort==='none'&&!('temperature' in f.bodies[0])&&f.bodies[0].max_completion_tokens>0);
+const g=fakeGroq(honestScript(byId.normal.invoiceText));await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'m',g));
+check('groq request still sends temperature and no reasoning_effort',g.bodies[0].temperature===0.1&&!('reasoning_effort' in g.bodies[0]));
+f=fakeGroq([{status:401,errorBody:{error:{message:'Incorrect API key provided: sk-proj-****.'}}}]);r=await runAgentCheck(byId.normal,'live_openai',llmBrowserClient('openai',OKEY,'gpt-6-luna',f));
+check('openai 401 is surfaced with provider message',!r.passed&&/OpenAI returned HTTP 401/.test(r.error)&&/Incorrect API key/.test(r.error));
+const w2=[];f=fakeGroq([{status:429,errorBody:{error:{message:'You exceeded your current quota, please check your plan and billing details.'}}}]);
+r=await runAgentCheck(byId.normal,'live_openai',llmBrowserClient('openai',OKEY,'gpt-6-luna',f,{sleep:async ms=>{w2.push(ms);}}));
+check('openai insufficient quota is not retried and says to add credit',!r.passed&&w2.length===0&&/no remaining credit/.test(r.error));
+r=await runAgentCheck(byId.normal,'live_openai',llmBrowserClient('openai',OKEY,'gpt-6-luna',async()=>{throw new TypeError('Failed to fetch');}));
+check('network failure is a clear FAIL',!r.passed&&r.observed==='provider_error'&&/could not be reached/.test(r.error));
+check('a Groq key is not accepted as an OpenAI key',(()=>{try{llmBrowserClient('openai','gsk_'+'x'.repeat(30),'m');return false;}catch{return true;}})());
 
 // 10. Rate limits: wait as instructed, retry, and record it; give up clearly if it persists.
 const waits=[];const noSleep=async ms=>{waits.push(ms);};
@@ -86,12 +89,12 @@ check('persistent 429 is FAIL with re-run advice after bounded retries',!r.passe
 f=fakeGroq([{status:429,errorBody:{error:{message:'Daily quota exceeded. Please try again in 3h20m.'}}}]);waits.length=0;
 r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'m',f,{sleep:noSleep}));
 check('a wait longer than the cap is not attempted',!r.passed&&waits.length===0);
-check('gemini retryDelay is parsed',retryAfterSeconds(null,'Quota exceeded. [{"@type":"type.googleapis.com/google.rpc.RetryInfo","retryDelay":"12s"}]')===12);
+check('openai millisecond wait is parsed',retryAfterSeconds(null,'Rate limit reached. Please try again in 450ms.')===0.45);
 check('groq minute+second wait is parsed',retryAfterSeconds(null,'Please try again in 1m2.5s.')===62.5);
 
 // 11. Key check is minimal: unfamiliar key formats are accepted; the provider decides validity.
-check('new-format Gemini key with dots is accepted',keyProblem('gemini','AQ.Ab8RN6Kx_example-Key.123456789')===null);
-check('empty key gives a clear message',/Paste your Google Gemini API key/.test(keyProblem('gemini','  ')));
-check('Gemini key pasted under Groq is flagged',/looks like a Google key/.test(keyProblem('groq','AIza'+'c'.repeat(35))));
-writeFileSync('public/ai-live-check-report.json',JSON.stringify({suite:'ai-live-check',scope:'Public AI Connection panel logic. Live-mode checks use fake Groq and Gemini endpoints; no real model accuracy is measured here.',passed:checks.length,checks},null,2)+'\n');
+check('unfamiliar key format is accepted',keyProblem('openai','sk-svcacct-Ab8RN6Kx_example.Key123')===null);
+check('empty key gives a clear message',/Paste your OpenAI API key/.test(keyProblem('openai','  ')));
+check('OpenAI key pasted under Groq is flagged',/looks like an OpenAI key/.test(keyProblem('groq','sk-'+'c'.repeat(35))));
+writeFileSync('public/ai-live-check-report.json',JSON.stringify({suite:'ai-live-check',scope:'Public AI Connection panel logic. Live-mode checks use fake Groq and OpenAI endpoints; no real model accuracy is measured here.',passed:checks.length,checks},null,2)+'\n');
 console.log(checks.length+' AI connection panel checks passed');

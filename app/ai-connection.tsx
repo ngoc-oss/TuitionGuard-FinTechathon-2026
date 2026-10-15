@@ -9,9 +9,9 @@ import { buildCases, runAgentCheck, llmBrowserClient, keyProblem, PROVIDERS, typ
 export default function AiConnection({ lang }: { lang: Lang }) {
   const t = (en: string, vi: string, zh: string) => (lang === 'vi' ? vi : lang === 'zh' ? zh : en);
 
-  const [provider, setProvider] = useState<Provider>('gemini');
+  const [provider, setProvider] = useState<Provider>('groq');
   const [key, setKey] = useState<string>('');
-  const [model, setModel] = useState<string>(PROVIDERS.gemini.defaultModel);
+  const [model, setModel] = useState<string>(PROVIDERS.groq.defaultModel);
   const [ranModel, setRanModel] = useState<string | null>(null);
   const cfg = PROVIDERS[provider];
   const [showKey, setShowKey] = useState<boolean>(false);
@@ -65,7 +65,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
       panel: 'Public AI Connection — bounded agent checks',
       mode: ranMode,
       scope: live
-        ? `Live ${ranMode === 'live_gemini' ? 'Gemini' : 'Groq'} tool-calling run of lib/agent.ts on 4 authored synthetic cases. PASS is computed from the observed orchestrator outcome. Tokens are provider-reported (null when not reported). Not a representative accuracy benchmark.`
+        ? `Live ${ranMode === 'live_openai' ? 'OpenAI' : 'Groq'} tool-calling run of lib/agent.ts on 4 authored synthetic cases. PASS is computed from the observed orchestrator outcome. Tokens are provider-reported (null when not reported). Not a representative accuracy benchmark.`
         : 'Deterministic run of lib/agent.ts with no language model. Shows policy and tool-order enforcement only; says nothing about model accuracy.',
       exportedAt: new Date().toISOString(),
       requestedModel: ranModel,
@@ -114,8 +114,8 @@ export default function AiConnection({ lang }: { lang: Lang }) {
           <label className="j-select-label">
             <span>{t('AI provider', 'Nhà cung cấp AI', 'AI 服务商')}</span>
             <select value={provider} onChange={e => switchProvider(e.target.value as Provider)}>
-              <option value="gemini">Google Gemini</option>
               <option value="groq">Groq</option>
+              <option value="openai">OpenAI</option>
             </select>
           </label>
           <label>

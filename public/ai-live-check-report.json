@@ -1,7 +1,7 @@
 {
   "suite": "ai-live-check",
-  "scope": "Public AI Connection panel logic. Live-mode checks use fake Groq and Gemini endpoints; no real model accuracy is measured here.",
-  "passed": 43,
+  "scope": "Public AI Connection panel logic. Live-mode checks use fake Groq and OpenAI endpoints; no real model accuracy is measured here.",
+  "passed": 44,
   "checks": [
     "deterministic normal meets expected outcome (route:A)",
     "deterministic normal makes no model call and reports no tokens",
@@ -30,21 +30,22 @@
     "attacker recipient is blocked by directory verification",
     "key with spaces is refused before any request",
     "results never claim a payment",
-    "gemini normal case passes with route A",
-    "gemini calls the Google OpenAI-compatible endpoint",
-    "gemini request sends tools and max_tokens",
-    "gemini thought signatures are sent back on the next turn",
-    "gemini array-style error body is surfaced",
-    "network/CORS failure is a clear FAIL",
-    "a Groq key is not accepted as a Gemini key",
+    "openai normal case passes with route A",
+    "openai calls api.openai.com chat completions",
+    "openai request sends tools, reasoning_effort none, no temperature",
+    "groq request still sends temperature and no reasoning_effort",
+    "openai 401 is surfaced with provider message",
+    "openai insufficient quota is not retried and says to add credit",
+    "network failure is a clear FAIL",
+    "a Groq key is not accepted as an OpenAI key",
     "groq 429 is retried after the wait Groq asks for, then passes",
     "Retry-After header is honoured",
     "persistent 429 is FAIL with re-run advice after bounded retries",
     "a wait longer than the cap is not attempted",
-    "gemini retryDelay is parsed",
+    "openai millisecond wait is parsed",
     "groq minute+second wait is parsed",
-    "new-format Gemini key with dots is accepted",
+    "unfamiliar key format is accepted",
     "empty key gives a clear message",
-    "Gemini key pasted under Groq is flagged"
+    "OpenAI key pasted under Groq is flagged"
   ]
 }
