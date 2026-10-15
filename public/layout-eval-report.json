@@ -1,0 +1,15 @@
+{
+  "suite": "layout-eval",
+  "scope": "Scoring logic for the 20-invoice live test, exercised with fake models. Not a live model result.",
+  "passed": 8,
+  "checks": [
+    "dataset has 20 cases (18 complete, 2 needs_input)",
+    "a correct agent scores 20/20",
+    "missing-field invoices end in needs_input, not a guess",
+    "tokens and calls are counted per invoice",
+    "a wrong amount is FAIL with the field identified",
+    "inventing a missing deadline is FAIL",
+    "provider error is FAIL and counted separately",
+    "a prose answer without tool calls is FAIL"
+  ]
+}
