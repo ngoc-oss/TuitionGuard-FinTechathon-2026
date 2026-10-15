@@ -1,0 +1,31 @@
+{
+  "suite": "ai-live-check",
+  "scope": "Public AI Connection panel logic. Live-mode checks use a fake Groq endpoint; no real model accuracy is measured here.",
+  "passed": 24,
+  "checks": [
+    "deterministic normal meets expected outcome (route:A)",
+    "deterministic normal makes no model call and reports no tokens",
+    "deterministic normal records a real tool trace",
+    "deterministic funds meets expected outcome (blocked:reserve)",
+    "deterministic funds makes no model call and reports no tokens",
+    "deterministic funds records a real tool trace",
+    "deterministic recipient meets expected outcome (blocked:recipient)",
+    "deterministic recipient makes no model call and reports no tokens",
+    "deterministic recipient records a real tool trace",
+    "deterministic injection meets expected outcome (route:A)",
+    "deterministic injection makes no model call and reports no tokens",
+    "deterministic injection records a real tool trace",
+    "live normal passes with route A",
+    "live mode counts real model calls",
+    "live mode sums provider-reported tokens",
+    "live request actually sends the four tool definitions",
+    "internal usage field is not echoed back to the provider",
+    "missing provider usage is reported as null",
+    "chat reply without tool calls is FAIL",
+    "HTTP 401 is FAIL with provider_error",
+    "injected submit_payment is blocked, never passed",
+    "attacker recipient is blocked by directory verification",
+    "sandbox-style fake key is refused",
+    "results never claim a payment"
+  ]
+}

@@ -5,7 +5,7 @@
     "environment": "Authored edge cases and actual API handlers with SQLite adapter; live-check transport is MOCKED, not Groq",
     "sourceFingerprint": "d5a8dd1361fcd26d8399b94e4373af7e6b58c4da8690d87b952f71cd06d29063"
   },
-  "generatedAt": "2026-10-12T08:14:41.234Z",
+  "generatedAt": "2026-10-15T19:18:40.890Z",
   "syntheticBenchmark": {
     "total": 100,
     "passed": 100,

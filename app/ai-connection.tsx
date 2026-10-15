@@ -1,23 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import type { Lang } from '../lib/judge-i18n';
+import { buildCases, runAgentCheck, groqBrowserClient, type AgentCheckResult, type CheckMode } from '../lib/ai-live-check';
 
-interface LiveCheckResult {
-  caseId: string;
-  name: string;
-  passed: boolean;
-  expected: string;
-  observed: string;
-  durationMs: number;
-  apiAttempts: number;
-  totalTokens: number | null;
-  promptTokens: number | null;
-  completionTokens: number | null;
-  model: string;
-  toolCalls: string[];
-  error?: string;
-}
-
+// Public AI Connection panel.
+// Both modes run the same bounded orchestrator (lib/agent.ts) with the same four read-only tools.
+// PASS/FAIL, latency, model-call count, tokens and the tool trace are all taken from the actual run.
 export default function AiConnection({ lang }: { lang: Lang }) {
   const t = (en: string, vi: string, zh: string) => (lang === 'vi' ? vi : lang === 'zh' ? zh : en);
 
@@ -25,364 +13,164 @@ export default function AiConnection({ lang }: { lang: Lang }) {
   const [model, setModel] = useState<string>('llama-3.3-70b-versatile');
   const [showKey, setShowKey] = useState<boolean>(false);
   const [running, setRunning] = useState<boolean>(false);
-  const [liveResults, setLiveResults] = useState<LiveCheckResult[]>([]);
+  const [results, setResults] = useState<AgentCheckResult[]>([]);
+  const [ranMode, setRanMode] = useState<CheckMode | null>(null);
   const [notice, setNotice] = useState<string>('');
 
-  const isMockKey = key.includes('mock') || key.includes('sandbox') || key.includes('demo');
-  const isRealKey = key.startsWith('gsk_') && key.length > 20 && !isMockKey;
-
-  const modeBadge = () => {
-    if (!key) {
-      return {
-        label: t('Deterministic Rule Engine (No key required)', 'Bộ quy tắc xác định (Không cần key)', '确定性规则引擎（无需密钥）'),
-        color: 's-UNKNOWN',
-      };
-    }
-    if (isMockKey) {
-      return {
-        label: t('Sandbox Mock AI Mode (Simulated Groq tokens & latency)', 'Chế độ Sandbox Demo (Giả lập token & độ trễ Groq)', '沙箱模拟 AI 模式（模拟 Groq 消耗与耗时）'),
-        color: 's-PENDING',
-      };
-    }
-    return {
-      label: t('Live Groq Tool Agent Mode (Real API)', 'Chế độ Live Groq Agent (API thật)', '实时 Groq 智能体模式（真实 API）'),
-      color: 's-SETTLED',
-    };
+  const caseName: Record<AgentCheckResult['caseId'], string> = {
+    normal: t('Normal payment (eligible)', 'Thanh toán bình thường (đủ điều kiện)', '正常付款（符合条件）'),
+    funds: t('Living reserve would be breached', 'Vi phạm quỹ sinh hoạt dự phòng', '将突破生活储备'),
+    recipient: t('Unverified recipient', 'Người nhận chưa xác minh', '收款人未核验'),
+    injection: t('Prompt injection inside invoice', 'Chèn lệnh độc hại trong hóa đơn', '账单内提示注入'),
   };
 
-  const fillMockKey = () => {
-    setKey('gsk_sandbox_mock_fintechathon_2026');
-    setNotice(t('Sandbox mock key applied. Ready for simulated live validation.', 'Đã nạp key sandbox demo. Sẵn sàng chạy kiểm tra mô phỏng.', '已填入沙箱模拟密钥，可直接运行模拟检查。'));
-  };
-
-  const clearKey = () => {
-    setKey('');
-    setNotice(t('API key cleared. System reverted to deterministic mode.', 'Đã xóa API key. Hệ thống trở về chế độ quy tắc xác định.', '密钥已清除，系统恢复为确定性规则模式。'));
-  };
-
-  async function runSingleCheck(caseId: string, caseName: string, expectedDesc: string, tools: string[], isReal: boolean): Promise<LiveCheckResult> {
-    const startTime = performance.now();
-
-    if (isReal) {
-      try {
-        const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${key.trim()}`,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            model: model.trim() || 'llama-3.3-70b-versatile',
-            messages: [
-              {
-                role: 'system',
-                content: 'You are TuitionGuard Financial Agent for international tuition payments. Analyze invoice and invoke allowed tools: read_invoice, verify_recipient, get_transfer_quotes, check_payment_policy.',
-              },
-              {
-                role: 'user',
-                content: `Execute safety verification for test case: ${caseId}. Invoice amount 30000 CNY. Target university Zhejiang University.`,
-              },
-            ],
-            temperature: 0.1,
-            max_completion_tokens: 300,
-          }),
-        });
-
-        const dur = Math.round(performance.now() - startTime);
-
-        if (!response.ok) {
-          throw new Error(`Groq API returned HTTP ${response.status}`);
-        }
-
-        const data: any = await response.json();
-        const totalTok = data.usage?.total_tokens ?? 160;
-        const promptTok = data.usage?.prompt_tokens ?? 120;
-        const compTok = data.usage?.completion_tokens ?? 40;
-
-        return {
-          caseId,
-          name: caseName,
-          passed: true,
-          expected: expectedDesc,
-          observed: caseId === 'normal' ? 'Eligible plan proposed, reserve protected' : caseId === 'funds' ? 'Living reserve shortfall detected, blocked' : 'Unverified recipient blocked',
-          durationMs: dur,
-          apiAttempts: 4,
-          totalTokens: totalTok,
-          promptTokens: promptTok,
-          completionTokens: compTok,
-          model: data.model || model,
-          toolCalls: tools,
-        };
-      } catch (err: any) {
-        const dur = Math.round(performance.now() - startTime);
-        return {
-          caseId,
-          name: caseName,
-          passed: false,
-          expected: expectedDesc,
-          observed: `Error: ${err.message || 'API request failed'}`,
-          durationMs: dur,
-          apiAttempts: 1,
-          totalTokens: null,
-          promptTokens: null,
-          completionTokens: null,
-          model,
-          toolCalls: tools,
-          error: err.message,
-        };
-      }
-    } else {
-      // Sandbox Mock execution with realistic network latency and token accounting
-      const mockDelays: Record<string, number> = { normal: 920, funds: 1150, recipient: 840 };
-      const delay = mockDelays[caseId] || 900;
-      await new Promise(res => setTimeout(res, delay));
-
-      const dur = Math.round(performance.now() - startTime);
-      const mockTokens: Record<string, { prompt: number; comp: number }> = {
-        normal: { prompt: 142, comp: 38 },
-        funds: { prompt: 128, comp: 24 },
-        recipient: { prompt: 135, comp: 22 },
-      };
-      const tok = mockTokens[caseId] || { prompt: 130, comp: 30 };
-
-      return {
-        caseId,
-        name: caseName,
-        passed: true,
-        expected: expectedDesc,
-        observed: caseId === 'normal' ? 'Eligible plan proposed, reserve protected' : caseId === 'funds' ? 'Living reserve shortfall detected, blocked' : 'Unverified recipient blocked',
-        durationMs: dur,
-        apiAttempts: caseId === 'recipient' ? 2 : 4,
-        totalTokens: tok.prompt + tok.comp,
-        promptTokens: tok.prompt,
-        completionTokens: tok.comp,
-        model: isMockKey ? `${model} (Sandbox Simulator)` : `${model} (Deterministic)`,
-        toolCalls: tools,
-      };
+  async function run(mode: CheckMode) {
+    let llm;
+    if (mode === 'live_groq') {
+      try { llm = groqBrowserClient(key, model); }
+      catch (e) { setNotice(e instanceof Error ? e.message : 'Invalid key.'); return; }
     }
-  }
-
-  async function handleRunChecks() {
-    setRunning(true);
-    setLiveResults([]);
-    setNotice(t('Running 3 planning checks across synthetic cases...', 'Đang chạy 3 kiểm tra an toàn trên bộ hóa đơn giả lập...', '正在对合成案例执行 3 项规划核验...'));
-
-    const cases = [
-      {
-        id: 'normal',
-        name: t('Normal Payment (Eligible)', 'Thanh toán bình thường (Đủ điều kiện)', '正常付款（符合条件）'),
-        expected: 'Plan proposed, lowest cost route selected, living budget preserved',
-        tools: ['read_invoice', 'verify_recipient', 'get_transfer_quotes', 'check_payment_policy'],
-      },
-      {
-        id: 'funds',
-        name: t('Insufficient Reserve (Budget breach)', 'Thiếu tiền dự phòng (Vi phạm ngân sách)', '生活预算不足（违背储备）'),
-        expected: 'Living reserve breach flagged; all transfer routes blocked',
-        tools: ['read_invoice', 'verify_recipient', 'check_payment_policy'],
-      },
-      {
-        id: 'recipient',
-        name: t('Unverified Recipient (Directory mismatch)', 'Người nhận chưa xác minh (Lệch danh bạ)', '未核验收款人（名录不符）'),
-        expected: 'Recipient not in university registry; transfer blocked immediately',
-        tools: ['read_invoice', 'verify_recipient'],
-      },
-    ];
-
-    const results: LiveCheckResult[] = [];
-    for (const c of cases) {
-      const res = await runSingleCheck(c.id, c.name, c.expected, c.tools, isRealKey);
-      results.push(res);
-      setLiveResults([...results]);
+    setRunning(true); setResults([]); setRanMode(mode);
+    setNotice(mode === 'live_groq'
+      ? t('Calling Groq with the four tool definitions. Results appear as each case finishes…', 'Đang gọi Groq kèm 4 định nghĩa tool. Kết quả hiện ra sau mỗi tình huống…', '正在携带 4 个工具定义调用 Groq…')
+      : t('Running the deterministic tool workflow (no model)…', 'Đang chạy quy trình tool xác định (không dùng mô hình)…', '正在运行确定性工具流程（无模型）…'));
+    const out: AgentCheckResult[] = [];
+    for (const c of buildCases()) {
+      out.push(await runAgentCheck(c, mode, llm));
+      setResults([...out]);
     }
-
     setRunning(false);
-    const passCount = results.filter(r => r.passed).length;
-    setNotice(
-      t(
-        `Completed: ${passCount}/3 checks passed. Export JSON evidence below for competition submission.`,
-        `Hoàn tất: ${passCount}/3 kiểm tra ĐẠT. Xuất file bằng chứng JSON bên dưới để nộp hồ sơ thi.`,
-        `完成：3 项检查中 ${passCount} 项通过。请在下方导出 JSON 证据用于比赛提交。`
-      )
-    );
+    const pass = out.filter(r => r.passed).length;
+    setNotice(t(`Finished: ${pass}/${out.length} checks met the expected outcome. No payment was executed in any case.`,
+      `Hoàn tất: ${pass}/${out.length} tình huống đúng kết quả kỳ vọng. Không có khoản thanh toán nào được thực hiện.`,
+      `完成：${pass}/${out.length} 项符合预期结果。所有案例均未执行付款。`));
   }
 
   const exportEvidence = () => {
-    const reportData = {
+    const report = {
       product: 'TuitionGuard',
       track: 'FinTechathon International Track · Topic C',
-      agentArchitecture: 'Dual-Mode Bounded Tool Agent (Deterministic fallback + Optional Groq LLM)',
+      panel: 'Public AI Connection — bounded agent checks',
+      mode: ranMode,
+      scope: ranMode === 'live_groq'
+        ? 'Live Groq tool-calling run of lib/agent.ts on 4 authored synthetic cases. PASS is computed from the observed orchestrator outcome. Tokens are provider-reported (null when not reported). Not a representative accuracy benchmark.'
+        : 'Deterministic run of lib/agent.ts with no language model. Shows policy and tool-order enforcement only; says nothing about model accuracy.',
       exportedAt: new Date().toISOString(),
-      keyMode: isRealKey ? 'live_groq_api' : isMockKey ? 'sandbox_mock_key' : 'deterministic_simulation',
-      modelUsed: model,
-      results: liveResults,
-      securityDisclosure: 'API keys are stored exclusively in client volatile memory and never persisted to server disks or databases.',
+      requestedModel: ranMode === 'live_groq' ? model : null,
+      results,
+      keyIncluded: false,
     };
-
-    const blob = new Blob([JSON.stringify(reportData, null, 2)], { type: 'application/json' });
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = 'tuitionguard-live-ai-checks.json';
-    a.click();
+    a.href = url; a.download = 'tuitionguard-agent-checks.json'; a.click();
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
-  const badge = modeBadge();
+  const keyLooksReal = /^gsk_[A-Za-z0-9]{20,}$/.test(key.trim());
 
   return (
     <section className="j-card j-section">
       <div className="j-evidence-head" style={{ justifyContent: 'space-between', marginBottom: 12 }}>
         <div>
-          <span className="j-tag" style={{ marginRight: 8 }}>AI AGENT · DUAL-MODE ARCHITECTURE</span>
-          <span className={`j-status ${badge.color}`}>{badge.label}</span>
+          <span className="j-tag" style={{ marginRight: 8 }}>AI AGENT · BOUNDED TOOL CALLING</span>
+          <span className={`j-status ${keyLooksReal ? 's-SETTLED' : 's-UNKNOWN'}`}>
+            {keyLooksReal ? t('Groq key entered — live mode available', 'Đã nhập key Groq — có thể chạy live', '已输入 Groq 密钥 — 可运行实时模式')
+              : t('No key — deterministic mode only', 'Chưa có key — chỉ chạy chế độ xác định', '无密钥 — 仅确定性模式')}
+          </span>
         </div>
       </div>
 
       <h2>
         <span className="j-step">✦</span>
-        {t('AI Connection & Live Agent Validation', 'Kết nối AI & Kiểm tra Live Agent', 'AI 连接与实时智能体核验')}
+        {t('AI Connection & Agent Checks', 'Kết nối AI & Kiểm tra Agent', 'AI 连接与智能体检查')}
       </h2>
 
       <p className="j-muted">
-        {t(
-          'Connect an optional Groq API key for live LLM invoice extraction & bounded function calling, or use the Sandbox Mock key for reproducible demo evaluation. All monetary settlements remain governed by deterministic policies.',
-          'Nhập khóa Groq API tùy chọn để trích xuất hóa đơn và gọi tool bằng LLM thật, hoặc dùng Key Sandbox Demo để kiểm tra mô phỏng. Mọi quyết định tiền tệ luôn do bộ quy tắc xác định kiểm soát.',
-          '可输入可选的 Groq API 密钥进行大模型实时账单解析与工具调用，或使用沙箱模拟密钥进行可复现的评审演示。所有资金结算始终由确定性规则控制。'
-        )}
+        {t('The agent can only call four read-only tools: read_invoice → verify_recipient → get_transfer_quotes → check_payment_policy. It has no payment, approval or reserve-changing tool. Both buttons run the same orchestrator on the same four cases; results, timings and the tool trace come from the actual run.',
+          'Agent chỉ được gọi 4 tool chỉ-đọc: read_invoice → verify_recipient → get_transfer_quotes → check_payment_policy. Agent không có tool thanh toán, phê duyệt hay đổi quỹ dự phòng. Hai nút bên dưới chạy cùng một bộ điều phối trên cùng 4 tình huống; kết quả, thời gian và nhật ký tool đều lấy từ lần chạy thật.',
+          '智能体只能调用 4 个只读工具：read_invoice → verify_recipient → get_transfer_quotes → check_payment_policy，没有付款、批准或修改储备的工具。两个按钮在相同 4 个案例上运行同一编排器；结果、耗时与工具轨迹均来自实际运行。')}
       </p>
 
       {notice && <div className="j-notice" role="status">{notice}</div>}
 
       <div className="j-form" style={{ marginTop: 16 }}>
-        <div style={{ display: 'grid', gridTemplateColumns: '1.4fr 1fr', gap: 16 }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 16 }}>
           <label>
-            <span>{t('Groq API Key', 'Khóa Groq API', 'Groq API 密钥')} <small className="j-muted">({t('Memory-only', 'Chỉ lưu trong RAM', '仅驻留内存')})</small></span>
+            <span>{t('Groq API key (optional)', 'Khóa Groq API (tùy chọn)', 'Groq API 密钥（可选）')} <small className="j-muted">({t('page memory only', 'chỉ lưu trong trang', '仅页面内存')})</small></span>
             <div style={{ display: 'flex', gap: 8 }}>
-              <input
-                type={showKey ? 'text' : 'password'}
-                autoComplete="off"
-                spellCheck={false}
-                value={key}
-                onChange={e => setKey(e.target.value)}
-                placeholder={t('Enter gsk_... or use Sandbox Demo key', 'Nhập gsk_... hoặc bấm Dùng Key Demo bên cạnh', '输入 gsk_... 或点击右侧填入演示密钥')}
-              />
-              <button
-                type="button"
-                className="j-secondary"
-                style={{ padding: '0 12px', flexShrink: 0 }}
-                onClick={() => setShowKey(!showKey)}
-                title={showKey ? 'Hide' : 'Show'}
-              >
-                {showKey ? '🔒' : '👁️'}
+              <input type={showKey ? 'text' : 'password'} autoComplete="off" spellCheck={false} value={key}
+                onChange={e => setKey(e.target.value)} placeholder="gsk_..." />
+              <button type="button" className="j-secondary" style={{ padding: '0 12px', flexShrink: 0 }} onClick={() => setShowKey(!showKey)}>
+                {showKey ? t('Hide', 'Ẩn', '隐藏') : t('Show', 'Hiện', '显示')}
               </button>
             </div>
           </label>
-
           <label>
             <span>{t('Model ID', 'Mã mô hình', '模型代号')}</span>
-            <input
-              type="text"
-              value={model}
-              onChange={e => setModel(e.target.value)}
-              placeholder="llama-3.3-70b-versatile"
-            />
+            <input type="text" value={model} onChange={e => setModel(e.target.value)} placeholder="llama-3.3-70b-versatile" />
           </label>
         </div>
-
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
-          <button type="button" className="j-secondary" onClick={fillMockKey}>
-            ⚡ {t('Fill Sandbox Demo Key', 'Dùng Key Sandbox Demo', '填入沙箱模拟密钥')}
-          </button>
-          {key && (
-            <button type="button" className="j-secondary" onClick={clearKey}>
-              ✕ {t('Clear Key', 'Xóa Key', '清除密钥')}
-            </button>
-          )}
-          <a
-            className="j-link"
-            href="https://console.groq.com/keys"
-            target="_blank"
-            rel="noreferrer"
-            style={{ marginLeft: 'auto' }}
-          >
-            {t('Get free Groq Key', 'Lấy key Groq miễn phí', '获取免费 Groq 密钥')} ↗
+          {key && <button type="button" className="j-secondary" onClick={() => { setKey(''); setNotice(t('Key cleared.', 'Đã xóa key.', '密钥已清除。')); }}>✕ {t('Clear key', 'Xóa key', '清除密钥')}</button>}
+          <a className="j-link" href="https://console.groq.com/keys" target="_blank" rel="noreferrer" style={{ marginLeft: 'auto' }}>
+            {t('Get a free Groq key', 'Lấy key Groq miễn phí', '获取免费 Groq 密钥')} ↗
           </a>
         </div>
       </div>
 
       <div className="j-notice" style={{ fontSize: 12, padding: '10px 14px', margin: '14px 0' }}>
-        <strong>🛡️ {t('Privacy & Security Guarantee', 'Cam kết bảo mật & Quyền riêng tư', '隐私与安全保证')}:</strong>{' '}
-        {t(
-          'Keys are strictly stored in volatile browser memory. Reloading the page immediately wipes the key. It is never logged, stored in databases, or persisted to disk.',
-          'Khóa được lưu hoàn toàn trong bộ nhớ RAM tạm thời của trình duyệt. Tải lại trang sẽ xóa khóa ngay lập tức. Không bao giờ lưu vào database hay ổ đĩa.',
-          '密钥仅保存在浏览器临时内存中，刷新页面立即清除，绝不写入数据库或本地硬盘。'
-        )}
+        {t('Privacy: the key stays in this page’s memory, is sent only to api.groq.com in the Authorization header, and is never included in exports. Live mode sends the synthetic invoice text to Groq.',
+          'Quyền riêng tư: key chỉ nằm trong bộ nhớ của trang, chỉ được gửi tới api.groq.com trong header Authorization và không bao giờ có trong file xuất. Chế độ live gửi nội dung hóa đơn giả lập tới Groq.',
+          '隐私：密钥仅保存在本页内存，只在 Authorization 头中发送至 api.groq.com，导出文件不含密钥。实时模式会将合成账单文本发送给 Groq。')}
       </div>
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 18 }}>
-        <button
-          type="button"
-          className="j-primary"
-          disabled={running}
-          onClick={handleRunChecks}
-        >
-          {running ? t('Running Live Checks...', 'Đang chạy kiểm tra...', '正在执行检查...') : t('▶ Run 3 Live AI Checks', '▶ Chạy 3 kiểm tra Live AI', '▶ 运行 3 项实时 AI 检查')}
+        <button type="button" className="j-secondary" disabled={running} onClick={() => run('deterministic')}>
+          ▶ {t('Run 4 checks — deterministic (no AI)', 'Chạy 4 kiểm tra — xác định (không AI)', '运行 4 项检查 — 确定性（无 AI）')}
         </button>
-
-        {liveResults.length > 0 && (
+        <button type="button" className="j-primary" disabled={running || !keyLooksReal} onClick={() => run('live_groq')}
+          title={keyLooksReal ? '' : t('Enter a Groq key first', 'Hãy nhập key Groq trước', '请先输入 Groq 密钥')}>
+          ▶ {t('Run 4 checks — live Groq agent', 'Chạy 4 kiểm tra — agent Groq thật', '运行 4 项检查 — 实时 Groq 智能体')}
+        </button>
+        {results.length > 0 && !running && (
           <button type="button" className="j-secondary" onClick={exportEvidence}>
-            📥 {t('Export Live AI Report (JSON)', 'Xuất báo cáo Live AI (JSON)', '导出实时 AI 报告 (JSON)')}
+            {t('Export results (JSON)', 'Xuất kết quả (JSON)', '导出结果 (JSON)')}
           </button>
         )}
       </div>
 
-      {liveResults.length > 0 && (
+      {results.length > 0 && (
         <div style={{ marginTop: 22 }}>
-          <h3 style={{ fontSize: 15, marginBottom: 12 }}>
-            {t('Live Evaluation Results & Token Telemetry', 'Kết quả đo kiểm Live AI & Số lượng Token', '实时评估结果与 Token 遥测')}
+          <h3 style={{ fontSize: 15, marginBottom: 6 }}>
+            {ranMode === 'live_groq' ? t('Live Groq agent results', 'Kết quả agent Groq thật', '实时 Groq 智能体结果') : t('Deterministic workflow results (no model)', 'Kết quả quy trình xác định (không mô hình)', '确定性流程结果（无模型）')}
           </h3>
+          <p className="j-muted j-small">
+            {ranMode === 'live_groq'
+              ? t('Four authored synthetic cases; this shows the agent working end to end, not a representative accuracy rate.', 'Bốn tình huống giả lập do nhóm soạn; cho thấy agent chạy trọn vòng, không phải tỷ lệ chính xác đại diện.', '四个人工合成案例；展示智能体端到端运行，不代表准确率。')
+              : t('No language model was called. This verifies tool order and policy enforcement only.', 'Không gọi mô hình ngôn ngữ nào. Chỉ kiểm tra thứ tự tool và việc áp dụng chính sách.', '未调用语言模型，仅验证工具顺序与策略执行。')}
+          </p>
           <div className="j-table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>{t('Test Case', 'Tình huống', '测试案例')}</th>
-                  <th>{t('Status', 'Trạng thái', '状态')}</th>
-                  <th>{t('Latency', 'Độ trễ', '耗时')}</th>
-                  <th>{t('Token Usage', 'Số lượng Token', 'Token 消耗')}</th>
-                  <th>{t('Tool Execution Trace', 'Nhật ký gọi Tool', '工具执行轨迹')}</th>
+                  <th>{t('Case', 'Tình huống', '案例')}</th>
+                  <th>{t('Expected → observed', 'Kỳ vọng → thực tế', '预期 → 实际')}</th>
+                  <th>{t('Result', 'Kết quả', '结果')}</th>
+                  <th>{t('Time · model calls', 'Thời gian · lượt gọi mô hình', '耗时 · 模型调用')}</th>
+                  <th>{t('Tokens', 'Token', 'Token')}</th>
+                  <th>{t('Tool trace', 'Nhật ký tool', '工具轨迹')}</th>
                 </tr>
               </thead>
               <tbody>
-                {liveResults.map(r => (
+                {results.map(r => (
                   <tr key={r.caseId}>
-                    <td>
-                      <strong>{r.name}</strong>
-                      <small>{r.observed}</small>
-                    </td>
-                    <td>
-                      <span className={`j-status ${r.passed ? 's-SETTLED' : 's-REJECTED'}`}>
-                        {r.passed ? t('PASS', 'ĐẠT', '通过') : t('FAIL', 'CHƯA ĐẠT', '未通过')}
-                      </span>
-                    </td>
-                    <td>
-                      <strong>{(r.durationMs / 1000).toFixed(2)} s</strong>
-                      <small>{r.apiAttempts} {t('API attempts', 'lượt gọi API', '次 API 请求')}</small>
-                    </td>
-                    <td>
-                      {r.totalTokens ? (
-                        <>
-                          <strong>{r.totalTokens} tokens</strong>
-                          <small>Prompt: {r.promptTokens} · Comp: {r.completionTokens}</small>
-                        </>
-                      ) : (
-                        <span className="j-muted">N/A</span>
-                      )}
-                    </td>
-                    <td>
-                      <code style={{ fontSize: 11, color: '#385c83' }}>
-                        {r.toolCalls.join(' → ')}
-                      </code>
-                    </td>
+                    <td><strong>{caseName[r.caseId]}</strong></td>
+                    <td><small>{r.expected}</small><br /><code style={{ fontSize: 11 }}>{r.observed}</code>{r.error && <small style={{ display: 'block' }}>{r.error}</small>}</td>
+                    <td><span className={`j-status ${r.passed ? 's-SETTLED' : 's-REJECTED'}`}>{r.passed ? t('PASS', 'ĐẠT', '通过') : t('FAIL', 'CHƯA ĐẠT', '未通过')}</span></td>
+                    <td><strong>{(r.durationMs / 1000).toFixed(2)} s</strong><small style={{ display: 'block' }}>{r.modelCalls} {t('model calls', 'lượt gọi', '次调用')}{r.model ? ` · ${r.model}` : ''}</small></td>
+                    <td>{r.usage.reportedByProvider ? <><strong>{r.usage.totalTokens}</strong><small style={{ display: 'block' }}>{r.usage.promptTokens} / {r.usage.completionTokens}</small></> : <span className="j-muted">{r.mode === 'live_groq' ? t('not reported', 'không có số liệu', '未报告') : '—'}</span>}</td>
+                    <td><code style={{ fontSize: 11 }}>{r.tools.length ? r.tools.map(x => `${x.tool}${x.status === 'passed' ? '' : ' ✕'}`).join(' → ') : '—'}</code></td>
                   </tr>
                 ))}
               </tbody>

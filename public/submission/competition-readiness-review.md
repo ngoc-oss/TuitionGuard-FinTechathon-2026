@@ -31,7 +31,7 @@ The LLM's intended contribution is reading varied invoice layouts and language, 
 Avoid “cheapest transfer in the market”, “fraud-proof”, “fully autonomous banking”, “100% accurate AI”, “first in the world” or “regulatory compliant”. Quotes, accounts and providers are simulated; the provider ledger shares this application's infrastructure.
 
 ## Mandatory final rehearsal
-- Connect a restricted Groq key in AI connection; run and export the three live smoke checks. These checks do not move funds.
+- Connect a restricted Groq key in AI Connection; run “Run 4 checks — live Groq agent” and export the results. PASS is computed from the observed orchestrator outcome. These checks do not move funds.
 - Run tests/live-groq-evaluation.mjs on the 20 varied authored layouts. Keep failures; do not replace failed cases silently.
 - Record normal payment, reserve blocking, timeout recovery and receipt mismatch using the actual UI. Video script is provided; no real recording has been created here.
 - Reopen the Site with the reviewer access configuration intended for judging. A private URL alone is not a judge-accessible submission.

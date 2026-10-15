@@ -19,12 +19,12 @@
           "target": "CNY",
           "amount": 30000,
           "recipient": "DEMO-CN-UNIVERSITY-001",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": false
         },
         "balance": 130000000,
         "reserve": 18000000,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -69,7 +69,7 @@
           "eligible": true,
           "reasons": []
         },
-        "fingerprint": "{\"invoice\":{\"id\":\"safe\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1791894323769,\"walletLimit\":false},\"balance\":130000000,\"reserve\":18000000,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":true,\"reasons\":[]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
+        "fingerprint": "{\"invoice\":{\"id\":\"safe\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1792264721241,\"walletLimit\":false},\"balance\":130000000,\"reserve\":18000000,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":true,\"reasons\":[]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
       }
     },
     {
@@ -88,12 +88,12 @@
           "target": "CNY",
           "amount": 30000,
           "recipient": "DEMO-CN-UNIVERSITY-001",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": false
         },
         "balance": 130000000,
         "reserve": 130000001,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -134,7 +134,7 @@
           }
         ],
         "selected": null,
-        "fingerprint": "{\"invoice\":{\"id\":\"funds\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1791894323769,\"walletLimit\":false},\"balance\":130000000,\"reserve\":130000001,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":false,\"reasons\":[\"funds\"]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\",\"funds\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":false,\"reasons\":[\"funds\"]}],\"selected\":null}"
+        "fingerprint": "{\"invoice\":{\"id\":\"funds\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1792264721241,\"walletLimit\":false},\"balance\":130000000,\"reserve\":130000001,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":false,\"reasons\":[\"funds\"]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\",\"funds\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":false,\"reasons\":[\"funds\"]}],\"selected\":null}"
       }
     },
     {
@@ -153,12 +153,12 @@
           "target": "CNY",
           "amount": 30000,
           "recipient": "WRONG",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": false
         },
         "balance": 130000000,
         "reserve": 18000000,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -199,7 +199,7 @@
           }
         ],
         "selected": null,
-        "fingerprint": "{\"invoice\":{\"id\":\"recipient\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"WRONG\",\"deadline\":1791894323769,\"walletLimit\":false},\"balance\":130000000,\"reserve\":18000000,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":false,\"reasons\":[\"recipient\"]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"recipient\",\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":false,\"reasons\":[\"recipient\"]}],\"selected\":null}"
+        "fingerprint": "{\"invoice\":{\"id\":\"recipient\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"WRONG\",\"deadline\":1792264721241,\"walletLimit\":false},\"balance\":130000000,\"reserve\":18000000,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":false,\"reasons\":[\"recipient\"]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"recipient\",\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":false,\"reasons\":[\"recipient\"]}],\"selected\":null}"
       }
     },
     {
@@ -218,12 +218,12 @@
           "target": "CNY",
           "amount": 30000,
           "recipient": "DEMO-CN-UNIVERSITY-001",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": true
         },
         "balance": 130000000,
         "reserve": 18000000,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -292,7 +292,7 @@
           "eligible": true,
           "reasons": []
         },
-        "fingerprint": "{\"invoice\":{\"id\":\"limit\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1791894323769,\"walletLimit\":true},\"balance\":130000000,\"reserve\":18000000,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":true,\"reasons\":[]},{\"id\":\"W\",\"rate\":3600,\"principal\":108000000,\"fee\":0,\"total\":108000000,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]},{\"id\":\"L\",\"rate\":3600,\"principal\":108000000,\"fee\":0,\"total\":108000000,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
+        "fingerprint": "{\"invoice\":{\"id\":\"limit\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1792264721241,\"walletLimit\":true},\"balance\":130000000,\"reserve\":18000000,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":true,\"reasons\":[]},{\"id\":\"W\",\"rate\":3600,\"principal\":108000000,\"fee\":0,\"total\":108000000,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]},{\"id\":\"L\",\"rate\":3600,\"principal\":108000000,\"fee\":0,\"total\":108000000,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
       }
     },
     {
@@ -311,12 +311,12 @@
           "target": "CNY",
           "amount": 10000,
           "recipient": "DEMO-CN-UNIVERSITY-001",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": true
         },
         "balance": 130000000,
         "reserve": 18000000,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -381,7 +381,7 @@
           "eligible": true,
           "reasons": []
         },
-        "fingerprint": "{\"invoice\":{\"id\":\"cap_equal\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":10000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1791894323769,\"walletLimit\":true},\"balance\":130000000,\"reserve\":18000000,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":36072000,\"fee\":120000,\"total\":36192000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":36036000,\"fee\":80000,\"total\":36116000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":36180000,\"fee\":180000,\"total\":36360000,\"hours\":2,\"eligible\":true,\"reasons\":[]},{\"id\":\"W\",\"rate\":3600,\"principal\":36000000,\"fee\":0,\"total\":36000000,\"hours\":1,\"eligible\":true,\"reasons\":[]},{\"id\":\"L\",\"rate\":3600,\"principal\":36000000,\"fee\":0,\"total\":36000000,\"hours\":1,\"eligible\":true,\"reasons\":[]}],\"selected\":{\"id\":\"W\",\"rate\":3600,\"principal\":36000000,\"fee\":0,\"total\":36000000,\"hours\":1,\"eligible\":true,\"reasons\":[]}}"
+        "fingerprint": "{\"invoice\":{\"id\":\"cap_equal\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":10000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1792264721241,\"walletLimit\":true},\"balance\":130000000,\"reserve\":18000000,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":36072000,\"fee\":120000,\"total\":36192000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":36036000,\"fee\":80000,\"total\":36116000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":36180000,\"fee\":180000,\"total\":36360000,\"hours\":2,\"eligible\":true,\"reasons\":[]},{\"id\":\"W\",\"rate\":3600,\"principal\":36000000,\"fee\":0,\"total\":36000000,\"hours\":1,\"eligible\":true,\"reasons\":[]},{\"id\":\"L\",\"rate\":3600,\"principal\":36000000,\"fee\":0,\"total\":36000000,\"hours\":1,\"eligible\":true,\"reasons\":[]}],\"selected\":{\"id\":\"W\",\"rate\":3600,\"principal\":36000000,\"fee\":0,\"total\":36000000,\"hours\":1,\"eligible\":true,\"reasons\":[]}}"
       }
     },
     {
@@ -400,12 +400,12 @@
           "target": "CNY",
           "amount": 10000.01,
           "recipient": "DEMO-CN-UNIVERSITY-001",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": true
         },
         "balance": 130000000,
         "reserve": 18000000,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -474,7 +474,7 @@
           "eligible": true,
           "reasons": []
         },
-        "fingerprint": "{\"invoice\":{\"id\":\"cap_above\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":10000.01,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1791894323769,\"walletLimit\":true},\"balance\":130000000,\"reserve\":18000000,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":36072037,\"fee\":120000,\"total\":36192037,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":36036037,\"fee\":80000,\"total\":36116037,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":36180037,\"fee\":180000,\"total\":36360037,\"hours\":2,\"eligible\":true,\"reasons\":[]},{\"id\":\"W\",\"rate\":3600,\"principal\":36000036,\"fee\":0,\"total\":36000036,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]},{\"id\":\"L\",\"rate\":3600,\"principal\":36000036,\"fee\":0,\"total\":36000036,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":36072037,\"fee\":120000,\"total\":36192037,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
+        "fingerprint": "{\"invoice\":{\"id\":\"cap_above\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":10000.01,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1792264721241,\"walletLimit\":true},\"balance\":130000000,\"reserve\":18000000,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":36072037,\"fee\":120000,\"total\":36192037,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":36036037,\"fee\":80000,\"total\":36116037,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":36180037,\"fee\":180000,\"total\":36360037,\"hours\":2,\"eligible\":true,\"reasons\":[]},{\"id\":\"W\",\"rate\":3600,\"principal\":36000036,\"fee\":0,\"total\":36000036,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]},{\"id\":\"L\",\"rate\":3600,\"principal\":36000036,\"fee\":0,\"total\":36000036,\"hours\":1,\"eligible\":false,\"reasons\":[\"limit\"]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":36072037,\"fee\":120000,\"total\":36192037,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
       }
     },
     {
@@ -493,12 +493,12 @@
           "target": "CNY",
           "amount": 30000,
           "recipient": "DEMO-CN-UNIVERSITY-001",
-          "deadline": 1791894323769,
+          "deadline": 1792264721241,
           "walletLimit": false
         },
         "balance": 130000000,
         "reserve": 18000000,
-        "expires": 1791721823769,
+        "expires": 1792092221241,
         "quotes": [
           {
             "id": "A",
@@ -543,7 +543,7 @@
           "eligible": true,
           "reasons": []
         },
-        "fingerprint": "{\"invoice\":{\"id\":\"approval\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1791894323769,\"walletLimit\":false},\"balance\":130000000,\"reserve\":18000000,\"expires\":1791721823769,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":true,\"reasons\":[]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
+        "fingerprint": "{\"invoice\":{\"id\":\"approval\",\"student\":\"STU-0086\",\"source\":\"VND\",\"target\":\"CNY\",\"amount\":30000,\"recipient\":\"DEMO-CN-UNIVERSITY-001\",\"deadline\":1792264721241,\"walletLimit\":false},\"balance\":130000000,\"reserve\":18000000,\"expires\":1792092221241,\"quotes\":[{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]},{\"id\":\"B\",\"rate\":3603.5999999999995,\"principal\":108108000,\"fee\":80000,\"total\":108188000,\"hours\":72,\"eligible\":false,\"reasons\":[\"deadline\"]},{\"id\":\"C\",\"rate\":3617.9999999999995,\"principal\":108540000,\"fee\":180000,\"total\":108720000,\"hours\":2,\"eligible\":true,\"reasons\":[]}],\"selected\":{\"id\":\"A\",\"rate\":3607.2,\"principal\":108216000,\"fee\":120000,\"total\":108336000,\"hours\":8,\"eligible\":true,\"reasons\":[]}}"
       }
     }
   ]
