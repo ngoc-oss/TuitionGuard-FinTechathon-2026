@@ -50,7 +50,7 @@ TuitionGuard is designed to protect international students against fraudulent re
 
 - **Dual-Mode Agent Architecture**:
   - **Deterministic Policy Mode (Default)**: Strict financial rules enforcing recipient registry checks, per-channel limits (10,000 CNY wallet caps), and living budget protection without risk of LLM hallucinations.
-  - **Live Groq AI Agent Mode (Optional)**: Bounded tool-calling agent using Meta's `llama-3.3-70b-versatile` on Groq to parse unconstrained invoice formats and extract structured payment terms with real-time latency and token telemetry.
+  - **Live Groq AI Agent Mode (Optional)**: Bounded tool-calling agent using `openai/gpt-oss-120b` (Groq's recommended replacement after `llama-3.3-70b-versatile` was shut down on 16 August 2026) on Groq to parse unconstrained invoice formats and extract structured payment terms with real-time latency and token telemetry.
 - **Living Reserve Protection**: Guarantees that essential student living budgets are safeguarded before any cross-border tuition debit can be approved.
 - **6 Cross-Border Currency Directions**: Full simulation coverage across **VND, CNY, and USD** with real-time spread and fee transparency.
 - **Human-in-the-Loop Approval**: Exact-term plan hash, 5-minute cryptographic expiry, and mandatory user authorization.

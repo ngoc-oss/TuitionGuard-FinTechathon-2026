@@ -11,16 +11,25 @@ for(const c of cases){const r=await runAgentCheck(c,'deterministic');
  check(`deterministic ${c.id} records a real tool trace`,r.tools.length>=2&&r.tools[0].tool==='read_invoice');}
 
 // 2. Live client against a fake Groq endpoint that follows the protocol correctly.
-function fakeGroq(script){let i=0;const bodies=[];const f=async(url,init)=>{bodies.push(JSON.parse(init.body));const step=script[i++];if(step.status&&step.status!==200)return {ok:false,status:step.status,json:async()=>({})};return {ok:true,status:200,json:async()=>({model:'fake-model',usage:step.usage===undefined?{prompt_tokens:100,completion_tokens:20,total_tokens:120}:step.usage,choices:[{message:step.message}]})};};f.bodies=bodies;return f;}
+function fakeGroq(script){let i=0;const bodies=[];const f=async(url,init)=>{bodies.push(JSON.parse(init.body));const step=script[i++];if(step.status&&step.status!==200)return {ok:false,status:step.status,json:async()=>(step.errorBody||{})};return {ok:true,status:200,json:async()=>({model:'fake-model',usage:step.usage===undefined?{prompt_tokens:100,completion_tokens:20,total_tokens:120}:step.usage,choices:[{message:step.message}]})};};f.bodies=bodies;return f;}
 const call=(id,name,args)=>({message:{role:'assistant',content:null,tool_calls:[{id,type:'function',function:{name,arguments:JSON.stringify(args)}}]}});
 function honestScript(text){const fields=parseInvoice(text);return [call('1','read_invoice',{fields}),call('2','verify_recipient',{}),call('3','get_transfer_quotes',{}),call('4','check_payment_policy',{}),{message:{role:'assistant',content:'done'}}];}
 const KEY='gsk_'+'a'.repeat(40);
-let f=fakeGroq(honestScript(byId.normal.invoiceText));let r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'llama-3.3-70b-versatile',f));
+let f=fakeGroq(honestScript(byId.normal.invoiceText));let r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'openai/gpt-oss-120b',f));
 check('live normal passes with route A',r.passed&&r.observed==='route:A');
 check('live mode counts real model calls',r.modelCalls===4);
 check('live mode sums provider-reported tokens',r.usage.totalTokens===480&&r.usage.reportedByProvider&&r.model==='fake-model');
 check('live request actually sends the four tool definitions',f.bodies[0].tools.length===4&&f.bodies[0].tool_choice==='auto');
 check('internal usage field is not echoed back to the provider',!JSON.stringify(f.bodies.at(-1).messages).includes('__usage'));
+
+// 2b. Reasoning models return extra fields; only standard fields are sent back.
+f=fakeGroq(honestScript(byId.normal.invoiceText).map(s=>({...s,message:{...s.message,reasoning:'private chain of thought'}})));r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'openai/gpt-oss-120b',f));
+check('reasoning-model reply still completes route A',r.passed&&r.observed==='route:A');
+check('provider reasoning field is not echoed back',!JSON.stringify(f.bodies.at(-1).messages).includes('private chain of thought'));
+
+// 2c. Retired model: HTTP 404 surfaces Groq's own message and a model hint.
+f=fakeGroq([{status:404,errorBody:{error:{message:'The model `llama-3.3-70b-versatile` does not exist or you do not have access to it.'}}}]);r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'llama-3.3-70b-versatile',f));
+check('HTTP 404 explains retired model and quotes Groq',!r.passed&&r.observed==='provider_error'&&/retired/.test(r.error)&&/does not exist/.test(r.error));
 
 // 3. Missing provider usage must stay null, never be invented.
 f=fakeGroq(honestScript(byId.normal.invoiceText).map(s=>({...s,usage:null})));r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'m',f));

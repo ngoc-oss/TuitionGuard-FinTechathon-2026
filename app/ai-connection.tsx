@@ -10,7 +10,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
   const t = (en: string, vi: string, zh: string) => (lang === 'vi' ? vi : lang === 'zh' ? zh : en);
 
   const [key, setKey] = useState<string>('');
-  const [model, setModel] = useState<string>('llama-3.3-70b-versatile');
+  const [model, setModel] = useState<string>('openai/gpt-oss-120b');
   const [showKey, setShowKey] = useState<boolean>(false);
   const [running, setRunning] = useState<boolean>(false);
   const [results, setResults] = useState<AgentCheckResult[]>([]);
@@ -108,7 +108,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
           </label>
           <label>
             <span>{t('Model ID', 'Mã mô hình', '模型代号')}</span>
-            <input type="text" value={model} onChange={e => setModel(e.target.value)} placeholder="llama-3.3-70b-versatile" />
+            <input type="text" value={model} onChange={e => setModel(e.target.value)} placeholder="openai/gpt-oss-120b" />
           </label>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>

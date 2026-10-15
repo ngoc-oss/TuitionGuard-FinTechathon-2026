@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-15T19:18:40.352Z",
+  "generatedAt": "2026-10-15T19:46:33.383Z",
   "environment": "API handler tests, SQLite adapter, synthetic accounts; no bank transfers",
   "runs": [
     {
       "scenario": "timeout",
       "plan": {
-        "id": "e59d3e17-ef68-49a9-8f8f-67b1400701d2",
+        "id": "cc4ab92d-a277-4153-86b3-e5255ad18bb6",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -13,7 +13,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T19:18:40.294Z"
+          "deadline": "2026-10-17T19:46:33.298Z"
         },
         "quotes": [
           {
@@ -101,8 +101,8 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T19:18:40.295Z",
-            "durationMs": 1,
+            "startedAt": "2026-10-15T19:46:33.299Z",
+            "durationMs": 2,
             "input": {},
             "output": {
               "invoice": {
@@ -112,7 +112,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T19:18:40.294Z"
+                "deadline": "2026-10-17T19:46:33.298Z"
               },
               "complete": true
             },
@@ -120,7 +120,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T19:18:40.296Z",
+            "startedAt": "2026-10-15T19:46:33.301Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -131,8 +131,8 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T19:18:40.296Z",
-            "durationMs": 12,
+            "startedAt": "2026-10-15T19:46:33.301Z",
+            "durationMs": 20,
             "input": {},
             "output": {
               "quotes": [
@@ -164,7 +164,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T19:18:40.308Z",
+            "startedAt": "2026-10-15T19:46:33.321Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -188,19 +188,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "26e26bdbcf50a336a0b8eca8d84a999d50c03a7c602e3e25863089d696fe35e0",
-        "expiresAt": 1792092220308,
-        "generation": "c4511225-2161-4eaa-a40f-1e80e4827d1e",
+        "hash": "e628b7a0d5a3cfd1186d03bb3f4aa9972a5ce3781d74568dc8c1a687b4e2cea3",
+        "expiresAt": 1792093893321,
+        "generation": "423bedb9-2b15-4a93-b318-b298d17fef98",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "f9a30cbb-f1d8-466c-b6a1-b47d99396aaf",
+        "id": "0a5b6d0f-c95b-4ddb-97de-490d4700a647",
         "status": "SETTLED",
         "data": {
-          "id": "f9a30cbb-f1d8-466c-b6a1-b47d99396aaf",
-          "planId": "e59d3e17-ef68-49a9-8f8f-67b1400701d2",
+          "id": "0a5b6d0f-c95b-4ddb-97de-490d4700a647",
+          "planId": "cc4ab92d-a277-4153-86b3-e5255ad18bb6",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -208,7 +208,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T19:18:40.294Z"
+            "deadline": "2026-10-17T19:46:33.298Z"
           },
           "quote": {
             "id": "A",
@@ -224,8 +224,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "26e26bdbcf50a336a0b8eca8d84a999d50c03a7c602e3e25863089d696fe35e0",
-            "approvedAt": "2026-10-15T19:18:40.317Z"
+            "hash": "e628b7a0d5a3cfd1186d03bb3f4aa9972a5ce3781d74568dc8c1a687b4e2cea3",
+            "approvedAt": "2026-10-15T19:46:33.333Z"
           },
           "trace": [
             {
@@ -271,7 +271,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger f9a30cbb-f1d8-466c-b6a1-b47d99396aaf; provider status SETTLED."
+              "detail": "Read provider ledger 0a5b6d0f-c95b-4ddb-97de-490d4700a647; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -280,7 +280,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "f9a30cbb-f1d8-466c-b6a1-b47d99396aaf",
+            "providerReference": "0a5b6d0f-c95b-4ddb-97de-490d4700a647",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -289,7 +289,7 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T19:18:40.317Z",
+            "issuedAt": "2026-10-15T19:46:33.333Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "timeout"
           },
@@ -297,20 +297,20 @@
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T19:18:40.321Z",
-            "receiptHash": "3ee418cfa759ded674737c6e7e67fc745e54ad14ccd3a5c72321d7f7e389238b"
+            "checkedAt": "2026-10-15T19:46:33.338Z",
+            "receiptHash": "33e6d5515281c25d9322f29735633800315bde8d717e0f97ceb8db5fb4372b5b"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T19:18:40.317Z",
-        "settled_at": "2026-10-15T19:18:40.321Z",
-        "generation": "c4511225-2161-4eaa-a40f-1e80e4827d1e"
+        "created_at": "2026-10-15T19:46:33.333Z",
+        "settled_at": "2026-10-15T19:46:33.338Z",
+        "generation": "423bedb9-2b15-4a93-b318-b298d17fef98"
       }
     },
     {
       "scenario": "normal",
       "plan": {
-        "id": "b648e454-551a-4c45-9d05-1511c3749c27",
+        "id": "81010f75-fa09-4e5e-9359-23fd77420b56",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -318,7 +318,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T19:18:40.332Z"
+          "deadline": "2026-10-17T19:46:33.354Z"
         },
         "quotes": [
           {
@@ -406,7 +406,7 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T19:18:40.332Z",
+            "startedAt": "2026-10-15T19:46:33.355Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -417,7 +417,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T19:18:40.332Z"
+                "deadline": "2026-10-17T19:46:33.354Z"
               },
               "complete": true
             },
@@ -425,7 +425,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T19:18:40.332Z",
+            "startedAt": "2026-10-15T19:46:33.355Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -436,7 +436,7 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T19:18:40.332Z",
+            "startedAt": "2026-10-15T19:46:33.355Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -469,7 +469,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T19:18:40.332Z",
+            "startedAt": "2026-10-15T19:46:33.355Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -493,19 +493,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "3d7e96caf014a46d5e85a63571c3a1a16e8cf7786930fafff3d3e414615a7081",
-        "expiresAt": 1792092220332,
-        "generation": "732358c4-6e97-4af7-a3b4-150fc991703a",
+        "hash": "dfee8c660a934fb1c686c59b352339c8fb1f9a32a04a46dcc450e871b4de999f",
+        "expiresAt": 1792093893355,
+        "generation": "dbe8382b-a869-4a0e-8ed0-07317f7bd806",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "f4e88726-ebdc-406f-83c4-1b0ab3f73d03",
+        "id": "69e62421-37d4-4dd4-86e0-fc4ee976896b",
         "status": "SETTLED",
         "data": {
-          "id": "f4e88726-ebdc-406f-83c4-1b0ab3f73d03",
-          "planId": "b648e454-551a-4c45-9d05-1511c3749c27",
+          "id": "69e62421-37d4-4dd4-86e0-fc4ee976896b",
+          "planId": "81010f75-fa09-4e5e-9359-23fd77420b56",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -513,7 +513,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T19:18:40.332Z"
+            "deadline": "2026-10-17T19:46:33.354Z"
           },
           "quote": {
             "id": "A",
@@ -529,8 +529,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "3d7e96caf014a46d5e85a63571c3a1a16e8cf7786930fafff3d3e414615a7081",
-            "approvedAt": "2026-10-15T19:18:40.333Z"
+            "hash": "dfee8c660a934fb1c686c59b352339c8fb1f9a32a04a46dcc450e871b4de999f",
+            "approvedAt": "2026-10-15T19:46:33.356Z"
           },
           "trace": [
             {
@@ -576,7 +576,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger f4e88726-ebdc-406f-83c4-1b0ab3f73d03; provider status SETTLED."
+              "detail": "Read provider ledger 69e62421-37d4-4dd4-86e0-fc4ee976896b; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -585,7 +585,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "f4e88726-ebdc-406f-83c4-1b0ab3f73d03",
+            "providerReference": "69e62421-37d4-4dd4-86e0-fc4ee976896b",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -594,7 +594,7 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T19:18:40.333Z",
+            "issuedAt": "2026-10-15T19:46:33.356Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "normal"
           },
@@ -602,20 +602,20 @@
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T19:18:40.333Z",
-            "receiptHash": "291d006ee8eec19e51c4b08ab41097b181c6fdc1732458d852f8d0a4c64f3a42"
+            "checkedAt": "2026-10-15T19:46:33.356Z",
+            "receiptHash": "429f5b42def481264e7310103eeaba88baafd939486d72b9ce4b60b65fff5e5a"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T19:18:40.333Z",
-        "settled_at": "2026-10-15T19:18:40.333Z",
-        "generation": "732358c4-6e97-4af7-a3b4-150fc991703a"
+        "created_at": "2026-10-15T19:46:33.356Z",
+        "settled_at": "2026-10-15T19:46:33.356Z",
+        "generation": "dbe8382b-a869-4a0e-8ed0-07317f7bd806"
       }
     },
     {
       "scenario": "pending",
       "plan": {
-        "id": "536241c5-c33d-4b31-a04d-3646c328cd79",
+        "id": "af125e5a-b640-497e-9b0f-239a3727d143",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -623,7 +623,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T19:18:40.334Z"
+          "deadline": "2026-10-17T19:46:33.358Z"
         },
         "quotes": [
           {
@@ -711,8 +711,8 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T19:18:40.335Z",
-            "durationMs": 0,
+            "startedAt": "2026-10-15T19:46:33.358Z",
+            "durationMs": 1,
             "input": {},
             "output": {
               "invoice": {
@@ -722,7 +722,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T19:18:40.334Z"
+                "deadline": "2026-10-17T19:46:33.358Z"
               },
               "complete": true
             },
@@ -730,7 +730,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T19:18:40.335Z",
+            "startedAt": "2026-10-15T19:46:33.359Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -741,7 +741,7 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T19:18:40.335Z",
+            "startedAt": "2026-10-15T19:46:33.359Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -774,7 +774,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T19:18:40.335Z",
+            "startedAt": "2026-10-15T19:46:33.359Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -798,19 +798,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "66b5639da5c7bcef089932969d4fc0efbf83b6c0c86c0905390300c3ff409dba",
-        "expiresAt": 1792092220335,
-        "generation": "8759e48e-a4e6-438a-9086-93ec5495f184",
+        "hash": "96dc9a2b6b6064d9841f62e61f160383b31f767e6d92ea8d6acf9ca3486fc3c0",
+        "expiresAt": 1792093893359,
+        "generation": "812349b9-8167-48ac-b523-42f43eef17cf",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "325b27ca-4165-4070-98fa-88572223c415",
+        "id": "f34938c1-628b-49ad-ad7f-f993b83990dd",
         "status": "SETTLED",
         "data": {
-          "id": "325b27ca-4165-4070-98fa-88572223c415",
-          "planId": "536241c5-c33d-4b31-a04d-3646c328cd79",
+          "id": "f34938c1-628b-49ad-ad7f-f993b83990dd",
+          "planId": "af125e5a-b640-497e-9b0f-239a3727d143",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -818,7 +818,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T19:18:40.334Z"
+            "deadline": "2026-10-17T19:46:33.358Z"
           },
           "quote": {
             "id": "A",
@@ -834,8 +834,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "66b5639da5c7bcef089932969d4fc0efbf83b6c0c86c0905390300c3ff409dba",
-            "approvedAt": "2026-10-15T19:18:40.335Z"
+            "hash": "96dc9a2b6b6064d9841f62e61f160383b31f767e6d92ea8d6acf9ca3486fc3c0",
+            "approvedAt": "2026-10-15T19:46:33.359Z"
           },
           "trace": [
             {
@@ -881,7 +881,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 325b27ca-4165-4070-98fa-88572223c415; provider status PENDING."
+              "detail": "Read provider ledger f34938c1-628b-49ad-ad7f-f993b83990dd; provider status PENDING."
             },
             {
               "step": "compare_receipt",
@@ -891,7 +891,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 325b27ca-4165-4070-98fa-88572223c415; provider status SETTLED."
+              "detail": "Read provider ledger f34938c1-628b-49ad-ad7f-f993b83990dd; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -900,7 +900,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "325b27ca-4165-4070-98fa-88572223c415",
+            "providerReference": "f34938c1-628b-49ad-ad7f-f993b83990dd",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -909,7 +909,7 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T19:18:40.335Z",
+            "issuedAt": "2026-10-15T19:46:33.359Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "pending"
           },
@@ -917,20 +917,20 @@
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T19:18:40.337Z",
-            "receiptHash": "d45f2a6a86c13bd91ec896d5796e18167a0c872678924f77823b1c891deb9a13"
+            "checkedAt": "2026-10-15T19:46:33.362Z",
+            "receiptHash": "21be119e036f9b9bdc6e47d60db44b740b8ec761ade24d9e32e7572c8737a7a0"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T19:18:40.335Z",
-        "settled_at": "2026-10-15T19:18:40.337Z",
-        "generation": "8759e48e-a4e6-438a-9086-93ec5495f184"
+        "created_at": "2026-10-15T19:46:33.359Z",
+        "settled_at": "2026-10-15T19:46:33.362Z",
+        "generation": "812349b9-8167-48ac-b523-42f43eef17cf"
       }
     },
     {
       "scenario": "rejected",
       "plan": {
-        "id": "5cd479bd-740e-4c97-82e4-b1d9ec09cd4c",
+        "id": "3ae540de-9be5-403e-ab1a-ac3d6d426da2",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -938,7 +938,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T19:18:40.339Z"
+          "deadline": "2026-10-17T19:46:33.363Z"
         },
         "quotes": [
           {
@@ -1026,8 +1026,8 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T19:18:40.339Z",
-            "durationMs": 0,
+            "startedAt": "2026-10-15T19:46:33.363Z",
+            "durationMs": 1,
             "input": {},
             "output": {
               "invoice": {
@@ -1037,7 +1037,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T19:18:40.339Z"
+                "deadline": "2026-10-17T19:46:33.363Z"
               },
               "complete": true
             },
@@ -1045,7 +1045,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T19:18:40.339Z",
+            "startedAt": "2026-10-15T19:46:33.364Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1056,7 +1056,7 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T19:18:40.339Z",
+            "startedAt": "2026-10-15T19:46:33.364Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1089,7 +1089,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T19:18:40.339Z",
+            "startedAt": "2026-10-15T19:46:33.364Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1113,19 +1113,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "7d14d308e9eb5941129395d72e3d6d677e1413d6b4112faeeaf012fed5543f9b",
-        "expiresAt": 1792092220339,
-        "generation": "e74a52f6-dafb-4356-a918-b039f73960d5",
+        "hash": "593dcfda11787b3cbe3267d7e90650f8282f018c53679f63a3f4cdbb0693a3c4",
+        "expiresAt": 1792093893364,
+        "generation": "68110606-1f2a-4c97-b8a3-40d1f272145e",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "d801bb6f-f6f5-49ed-a84d-8598144851bf",
+        "id": "691c8d00-ab29-4f8e-9909-54293cb942b9",
         "status": "REJECTED",
         "data": {
-          "id": "d801bb6f-f6f5-49ed-a84d-8598144851bf",
-          "planId": "5cd479bd-740e-4c97-82e4-b1d9ec09cd4c",
+          "id": "691c8d00-ab29-4f8e-9909-54293cb942b9",
+          "planId": "3ae540de-9be5-403e-ab1a-ac3d6d426da2",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -1133,7 +1133,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T19:18:40.339Z"
+            "deadline": "2026-10-17T19:46:33.363Z"
           },
           "quote": {
             "id": "A",
@@ -1149,8 +1149,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "7d14d308e9eb5941129395d72e3d6d677e1413d6b4112faeeaf012fed5543f9b",
-            "approvedAt": "2026-10-15T19:18:40.340Z"
+            "hash": "593dcfda11787b3cbe3267d7e90650f8282f018c53679f63a3f4cdbb0693a3c4",
+            "approvedAt": "2026-10-15T19:46:33.365Z"
           },
           "trace": [
             {
@@ -1196,7 +1196,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger d801bb6f-f6f5-49ed-a84d-8598144851bf; provider status REJECTED."
+              "detail": "Read provider ledger 691c8d00-ab29-4f8e-9909-54293cb942b9; provider status REJECTED."
             },
             {
               "step": "compare_receipt",
@@ -1205,7 +1205,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "d801bb6f-f6f5-49ed-a84d-8598144851bf",
+            "providerReference": "691c8d00-ab29-4f8e-9909-54293cb942b9",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -1214,7 +1214,7 @@
             "debit": 105625000,
             "provider": "A",
             "status": "REJECTED",
-            "issuedAt": "2026-10-15T19:18:40.340Z",
+            "issuedAt": "2026-10-15T19:46:33.365Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "rejected"
           },
@@ -1222,20 +1222,20 @@
             "status": "REJECTED",
             "differences": [],
             "action": "Provider rejected the transfer. Release the reservation without debiting the account.",
-            "checkedAt": "2026-10-15T19:18:40.340Z",
-            "receiptHash": "9cd2e0ef8a1b55fb1a994a49cfbe314f17c2ecfdb6322e36d9310179b2e06944"
+            "checkedAt": "2026-10-15T19:46:33.366Z",
+            "receiptHash": "10c05a12730f45d2a5686ef409ea6e377859d6e5ffcb63cff76f9c570c1a7a92"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T19:18:40.340Z",
+        "created_at": "2026-10-15T19:46:33.365Z",
         "settled_at": null,
-        "generation": "e74a52f6-dafb-4356-a918-b039f73960d5"
+        "generation": "68110606-1f2a-4c97-b8a3-40d1f272145e"
       }
     },
     {
       "scenario": "amount_mismatch",
       "plan": {
-        "id": "fb991571-7f69-4385-a0b5-5ec4f6315fa9",
+        "id": "65a95878-6ab7-4733-8dad-30c88c328c4c",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -1243,7 +1243,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T19:18:40.342Z"
+          "deadline": "2026-10-17T19:46:33.369Z"
         },
         "quotes": [
           {
@@ -1331,7 +1331,7 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T19:18:40.342Z",
+            "startedAt": "2026-10-15T19:46:33.369Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1342,7 +1342,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T19:18:40.342Z"
+                "deadline": "2026-10-17T19:46:33.369Z"
               },
               "complete": true
             },
@@ -1350,7 +1350,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T19:18:40.342Z",
+            "startedAt": "2026-10-15T19:46:33.369Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1361,7 +1361,7 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T19:18:40.342Z",
+            "startedAt": "2026-10-15T19:46:33.369Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1394,7 +1394,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T19:18:40.342Z",
+            "startedAt": "2026-10-15T19:46:33.369Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1418,19 +1418,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "82248a1a1cfe361f89a0fd713570eb51397e18de7ea282135e8fea1ad733bef1",
-        "expiresAt": 1792092220342,
-        "generation": "5e12113b-3203-4e78-8af9-506a1427f3f6",
+        "hash": "0f84e2be58eaee45094e4ec846627ee781e6093403e77e330f54411cb0a33728",
+        "expiresAt": 1792093893369,
+        "generation": "8dc7caeb-d1b5-447c-ab37-60adc2bc0517",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "4646f06c-aeb4-4ed0-9746-004144643ce3",
+        "id": "940cc407-c750-44fb-ba8f-76e65a82686e",
         "status": "SETTLED",
         "data": {
-          "id": "4646f06c-aeb4-4ed0-9746-004144643ce3",
-          "planId": "fb991571-7f69-4385-a0b5-5ec4f6315fa9",
+          "id": "940cc407-c750-44fb-ba8f-76e65a82686e",
+          "planId": "65a95878-6ab7-4733-8dad-30c88c328c4c",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -1438,7 +1438,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T19:18:40.342Z"
+            "deadline": "2026-10-17T19:46:33.369Z"
           },
           "quote": {
             "id": "A",
@@ -1454,8 +1454,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "82248a1a1cfe361f89a0fd713570eb51397e18de7ea282135e8fea1ad733bef1",
-            "approvedAt": "2026-10-15T19:18:40.343Z"
+            "hash": "0f84e2be58eaee45094e4ec846627ee781e6093403e77e330f54411cb0a33728",
+            "approvedAt": "2026-10-15T19:46:33.370Z"
           },
           "trace": [
             {
@@ -1501,7 +1501,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 4646f06c-aeb4-4ed0-9746-004144643ce3; provider status SETTLED."
+              "detail": "Read provider ledger 940cc407-c750-44fb-ba8f-76e65a82686e; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -1511,7 +1511,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 4646f06c-aeb4-4ed0-9746-004144643ce3; provider status SETTLED."
+              "detail": "Read provider ledger 940cc407-c750-44fb-ba8f-76e65a82686e; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -1520,7 +1520,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "4646f06c-aeb4-4ed0-9746-004144643ce3",
+            "providerReference": "940cc407-c750-44fb-ba8f-76e65a82686e",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -1529,32 +1529,32 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T19:18:40.344Z",
+            "issuedAt": "2026-10-15T19:46:33.373Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "normal",
             "correction": {
               "reason": "Explicit sandbox discrepancy resolution",
-              "at": "2026-10-15T19:18:40.344Z"
+              "at": "2026-10-15T19:46:33.373Z"
             }
           },
           "reconciliation": {
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T19:18:40.345Z",
-            "receiptHash": "e2d03b3c6f903d3a69e6a2f53f8be89630cebf4881fb92a46c89d3bc7df48898"
+            "checkedAt": "2026-10-15T19:46:33.374Z",
+            "receiptHash": "5255233d6e859ec1fa760e73f0b4d7d3b31b21df1810bd68ceba78e0e9075186"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T19:18:40.343Z",
-        "settled_at": "2026-10-15T19:18:40.345Z",
-        "generation": "5e12113b-3203-4e78-8af9-506a1427f3f6"
+        "created_at": "2026-10-15T19:46:33.370Z",
+        "settled_at": "2026-10-15T19:46:33.374Z",
+        "generation": "8dc7caeb-d1b5-447c-ab37-60adc2bc0517"
       }
     },
     {
       "scenario": "recipient_mismatch",
       "plan": {
-        "id": "de6fefa8-bf2e-4bdb-827a-61a6bd0b935e",
+        "id": "58ddbe3f-38f6-480a-b100-05e62ba8ac4e",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -1562,7 +1562,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T19:18:40.346Z"
+          "deadline": "2026-10-17T19:46:33.375Z"
         },
         "quotes": [
           {
@@ -1650,7 +1650,7 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T19:18:40.346Z",
+            "startedAt": "2026-10-15T19:46:33.375Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1661,7 +1661,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T19:18:40.346Z"
+                "deadline": "2026-10-17T19:46:33.375Z"
               },
               "complete": true
             },
@@ -1669,7 +1669,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T19:18:40.346Z",
+            "startedAt": "2026-10-15T19:46:33.375Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1680,7 +1680,7 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T19:18:40.346Z",
+            "startedAt": "2026-10-15T19:46:33.375Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1713,7 +1713,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T19:18:40.346Z",
+            "startedAt": "2026-10-15T19:46:33.375Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -1737,19 +1737,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "0c698bb57f0e17ab73b461970943289961fa51753ed5826b51a3b7094dee5141",
-        "expiresAt": 1792092220346,
-        "generation": "6677f44b-6f3c-41cd-9dcd-c4e5e5cf0b20",
+        "hash": "3c2558ae67af01a9507974edc90fb399ef350942dad166157813fbd9f30899a0",
+        "expiresAt": 1792093893375,
+        "generation": "9b7584c8-a63b-48a1-880d-0f72832e921f",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "80fadd3b-a7bf-4b15-9eb0-0e801b6cb822",
+        "id": "0c9a9f89-81b1-4231-ab93-4e527d3fc425",
         "status": "SETTLED",
         "data": {
-          "id": "80fadd3b-a7bf-4b15-9eb0-0e801b6cb822",
-          "planId": "de6fefa8-bf2e-4bdb-827a-61a6bd0b935e",
+          "id": "0c9a9f89-81b1-4231-ab93-4e527d3fc425",
+          "planId": "58ddbe3f-38f6-480a-b100-05e62ba8ac4e",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -1757,7 +1757,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T19:18:40.346Z"
+            "deadline": "2026-10-17T19:46:33.375Z"
           },
           "quote": {
             "id": "A",
@@ -1773,8 +1773,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "0c698bb57f0e17ab73b461970943289961fa51753ed5826b51a3b7094dee5141",
-            "approvedAt": "2026-10-15T19:18:40.347Z"
+            "hash": "3c2558ae67af01a9507974edc90fb399ef350942dad166157813fbd9f30899a0",
+            "approvedAt": "2026-10-15T19:46:33.376Z"
           },
           "trace": [
             {
@@ -1820,7 +1820,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 80fadd3b-a7bf-4b15-9eb0-0e801b6cb822; provider status SETTLED."
+              "detail": "Read provider ledger 0c9a9f89-81b1-4231-ab93-4e527d3fc425; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -1830,7 +1830,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 80fadd3b-a7bf-4b15-9eb0-0e801b6cb822; provider status SETTLED."
+              "detail": "Read provider ledger 0c9a9f89-81b1-4231-ab93-4e527d3fc425; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -1839,7 +1839,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "80fadd3b-a7bf-4b15-9eb0-0e801b6cb822",
+            "providerReference": "0c9a9f89-81b1-4231-ab93-4e527d3fc425",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -1848,26 +1848,26 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T19:18:40.349Z",
+            "issuedAt": "2026-10-15T19:46:33.378Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "normal",
             "correction": {
               "reason": "Explicit sandbox discrepancy resolution",
-              "at": "2026-10-15T19:18:40.349Z"
+              "at": "2026-10-15T19:46:33.378Z"
             }
           },
           "reconciliation": {
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T19:18:40.350Z",
-            "receiptHash": "a9a48c9285434287fe67a0a7f66f924e83a75da902a2417b1fc1e5452479d866"
+            "checkedAt": "2026-10-15T19:46:33.379Z",
+            "receiptHash": "ab1be4234b4045b427caad74668e2c16d446828fb10575d802cf7683dd379c0a"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T19:18:40.347Z",
-        "settled_at": "2026-10-15T19:18:40.350Z",
-        "generation": "6677f44b-6f3c-41cd-9dcd-c4e5e5cf0b20"
+        "created_at": "2026-10-15T19:46:33.376Z",
+        "settled_at": "2026-10-15T19:46:33.379Z",
+        "generation": "9b7584c8-a63b-48a1-880d-0f72832e921f"
       }
     }
   ]

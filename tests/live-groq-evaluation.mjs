@@ -1,5 +1,5 @@
 import {readFileSync,writeFileSync} from 'node:fs';import {orchestrate} from '../lib/agent.ts';import {groqTools} from '../lib/server.ts';
-const key=process.env.GROQ_API_KEY,model=process.env.GROQ_MODEL||'llama-3.3-70b-versatile';
+const key=process.env.GROQ_API_KEY,model=process.env.GROQ_MODEL||'openai/gpt-oss-120b';
 if(!key){console.error('GROQ_API_KEY is required. No live evaluation was run.');process.exit(2);}
 const dataset=JSON.parse(readFileSync('tests/live-layout-cases.json','utf8'));const startedAt=new Date().toISOString();const deadline=new Date(Date.now()+48*3600000).toISOString();const results=[];
 for(const c of dataset.cases){const raw=c.invoiceText.replaceAll('{{DEADLINE}}',deadline);const expected={...c.expectedFields,deadline};const usage=[];let result,error=null,calls=0;const start=Date.now();try{result=await orchestrate(raw,{balance:125000000,reserved:0},18000000,(messages,tools)=>{calls++;return groqTools(key,model,messages,tools,u=>usage.push(u));});}catch(e){error=e.message;}

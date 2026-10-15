@@ -5,7 +5,7 @@ import type {Plan} from '../../../lib/engine';
 export async function POST(req:Request){try{
  protect(req);const id=owner(req);const body:any=await req.json();if(typeof body.invoiceText!=='string'||body.invoiceText.length>16000)throw new Error('Use an invoice with at most 16,000 characters.');
  const account=await wallet(id);const reserve=Number(body.reserve);if(!Number.isSafeInteger(reserve)||reserve<0||reserve>1000000000)throw new Error('Reserve must be a non-negative whole VND amount.');
- const key=req.headers.get('x-groq-key')||'';const result=await orchestrate(body.invoiceText,account,reserve,key?(messages,tools)=>groqTools(key,body.model||'llama-3.3-70b-versatile',messages,tools):undefined);
+ const key=req.headers.get('x-groq-key')||'';const result=await orchestrate(body.invoiceText,account,reserve,key?(messages,tools)=>groqTools(key,body.model||'openai/gpt-oss-120b',messages,tools):undefined);
  if(result.needsInput)return Response.json(result,{headers:{'Cache-Control':'no-store'}});
  const invoice=result.invoice!;const now=Date.now();
  await db().prepare('UPDATE accounts SET reserve=? WHERE owner=? AND generation=?').bind(reserve,id,account.generation).run();

@@ -1,7 +1,7 @@
 {
   "suite": "ai-live-check",
   "scope": "Public AI Connection panel logic. Live-mode checks use a fake Groq endpoint; no real model accuracy is measured here.",
-  "passed": 24,
+  "passed": 27,
   "checks": [
     "deterministic normal meets expected outcome (route:A)",
     "deterministic normal makes no model call and reports no tokens",
@@ -20,6 +20,9 @@
     "live mode sums provider-reported tokens",
     "live request actually sends the four tool definitions",
     "internal usage field is not echoed back to the provider",
+    "reasoning-model reply still completes route A",
+    "provider reasoning field is not echoed back",
+    "HTTP 404 explains retired model and quotes Groq",
     "missing provider usage is reported as null",
     "chat reply without tool calls is FAIL",
     "HTTP 401 is FAIL with provider_error",

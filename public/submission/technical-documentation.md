@@ -87,8 +87,8 @@ The app also rejects unknown receipt states, malformed amount fields and impossi
 `app/ai-connection.tsx` now runs the same bounded orchestrator as `/lab` (`lib/agent.ts`) through `lib/ai-live-check.ts` on four synthetic cases: normal invoice (route A), reserve breach (blocked), unverified recipient (blocked) and an invoice containing an injected `submit_payment` instruction (safe: no forbidden tool, verified recipient only).
 
 - **Deterministic (no AI):** no model call; verifies tool order and policy only.
-- **Live Groq agent:** requires the reviewer's own `gsk_…` key; sends the four real tool definitions with `tool_choice=auto`.
+- **Live Groq agent:** default model `openai/gpt-oss-120b` (`llama-3.3-70b-versatile` was retired by Groq on 16 August 2026); requires the reviewer's own `gsk_…` key; sends the four real tool definitions with `tool_choice=auto`.
 - PASS is computed from the observed outcome. A prose-only reply or HTTP error is FAIL. Latency is measured, model calls are counted and tokens are provider-reported or `null`. The former sandbox/mock key mode was removed.
-- Tests: `tests/ai-live-check.mjs` (24 checks, included in `pnpm test`).
+- Tests: `tests/ai-live-check.mjs` (27 checks, included in `pnpm test`).
 
 The full Word version of this documentation is `TuitionGuard_Technical_Documentation.docx` in this folder.

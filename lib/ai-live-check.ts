@@ -97,10 +97,15 @@ export function groqBrowserClient(key:string,model:string,fetchImpl:typeof fetch
   const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),25000);
   try{
    const r=await fetchImpl('https://api.groq.com/openai/v1/chat/completions',{method:'POST',headers:{Authorization:'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:m,messages,tools,tool_choice:'auto',temperature:0.1,max_completion_tokens:1400}),signal:ctrl.signal});
-   if(!r.ok)throw new Error(`Groq returned HTTP ${r.status}. Check the key, model access or quota. No payment was performed.`);
+   if(!r.ok){
+    let detail='';try{const body:any=await r.json();detail=String(body?.error?.message||'').slice(0,240);}catch{/* body not JSON */}
+    const hint=r.status===401?'The key was rejected.':r.status===404?'The model ID does not exist or has been retired; try openai/gpt-oss-120b.':r.status===429?'Rate limit or quota reached; wait and retry.':'Check the key, model access or quota.';
+    throw new Error(`Groq returned HTTP ${r.status}. ${hint}${detail?' Groq says: '+detail:''} No payment was performed.`);
+   }
    const data:any=await r.json();const msg=data.choices?.[0]?.message;if(!msg)throw new Error('Groq returned no agent message.');
    const n=(v:unknown)=>Number.isSafeInteger(v)?v as number:null;
-   return {...msg,__usage:{promptTokens:n(data.usage?.prompt_tokens),completionTokens:n(data.usage?.completion_tokens),totalTokens:n(data.usage?.total_tokens),model:typeof data.model==='string'?data.model:null}};
+   // Keep only standard assistant fields so provider-specific extras (e.g. reasoning) are not sent back.
+   return {role:'assistant',content:typeof msg.content==='string'?msg.content:null,...(Array.isArray(msg.tool_calls)&&msg.tool_calls.length?{tool_calls:msg.tool_calls}:{}),__usage:{promptTokens:n(data.usage?.prompt_tokens),completionTokens:n(data.usage?.completion_tokens),totalTokens:n(data.usage?.total_tokens),model:typeof data.model==='string'?data.model:null}};
   }finally{clearTimeout(timer);}
  };
 }
