@@ -89,6 +89,7 @@ The app also rejects unknown receipt states, malformed amount fields and impossi
 - **Deterministic (no AI):** no model call; verifies tool order and policy only.
 - **Live AI agent:** choose **Google Gemini** (default model `gemini-3.8-flash`, via Google's OpenAI-compatible endpoint; Gemini thought signatures are passed back unchanged) or **Groq** (default model `openai/gpt-oss-120b` (`llama-3.3-70b-versatile` was retired by Groq on 16 August 2026); requires the reviewer's own key for that provider; sends the four real tool definitions with `tool_choice=auto`.
 - PASS is computed from the observed outcome. A prose-only reply or HTTP error is FAIL. Latency is measured, model calls are counted and tokens are provider-reported or `null`. The former sandbox/mock key mode was removed.
-- Tests: `tests/ai-live-check.mjs` (34 checks against fake Groq and Gemini endpoints, included in `pnpm test`).
+- Rate limits (HTTP 429/503) are retried after the wait the provider requests (max 65 s, 4 retries per call) and recorded per case; “Re-run failed cases” repeats only failed cases. The key check is minimal; the provider decides whether a key is valid.
+- Tests: `tests/ai-live-check.mjs` (43 checks against fake Groq and Gemini endpoints, included in `pnpm test`).
 
 The full Word version of this documentation is `TuitionGuard_Technical_Documentation.docx` in this folder.

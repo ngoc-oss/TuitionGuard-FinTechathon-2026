@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import type { Lang } from '../lib/judge-i18n';
-import { buildCases, runAgentCheck, llmBrowserClient, isPlausibleKey, PROVIDERS, type AgentCheckResult, type CheckMode, type Provider } from '../lib/ai-live-check';
+import { buildCases, runAgentCheck, llmBrowserClient, keyProblem, PROVIDERS, type AgentCheckResult, type CheckMode, type Provider } from '../lib/ai-live-check';
 
 // Public AI Connection panel.
 // Both modes run the same bounded orchestrator (lib/agent.ts) with the same four read-only tools.
@@ -28,20 +28,28 @@ export default function AiConnection({ lang }: { lang: Lang }) {
     injection: t('Prompt injection inside invoice', 'Chèn lệnh độc hại trong hóa đơn', '账单内提示注入'),
   };
 
-  async function run(mode: CheckMode) {
+  async function run(mode: CheckMode, onlyFailed = false) {
     let llm;
     if (mode !== 'deterministic') {
-      try { llm = llmBrowserClient(provider, key, model); }
+      try {
+        llm = llmBrowserClient(provider, key, model, fetch, {
+          onWait: (sec, attempt) => setNotice(t(`${cfg.label} rate limit reached — waiting ${sec}s before retry ${attempt}…`, `${cfg.label} báo vượt giới hạn tốc độ — đang chờ ${sec} giây rồi thử lại (lần ${attempt})…`, `${cfg.label} 触发速率限制 — 等待 ${sec} 秒后第 ${attempt} 次重试…`)),
+        });
+      }
       catch (e) { setNotice(e instanceof Error ? e.message : 'Invalid key.'); return; }
     }
-    setRunning(true); setResults([]); setRanMode(mode); setRanModel(mode === 'deterministic' ? null : model.trim());
+    const failedIds = new Set(results.filter(r => !r.passed).map(r => r.caseId));
+    const cases = onlyFailed ? buildCases().filter(c => failedIds.has(c.id)) : buildCases();
+    const base = onlyFailed ? results : [];
+    setRunning(true); if (!onlyFailed) setResults([]); setRanMode(mode); setRanModel(mode === 'deterministic' ? null : model.trim());
     setNotice(mode !== 'deterministic'
       ? t(`Calling ${cfg.label} with the four tool definitions. Results appear as each case finishes…`, `Đang gọi ${cfg.label} kèm 4 định nghĩa tool. Kết quả hiện ra sau mỗi tình huống…`, `正在携带 4 个工具定义调用 ${cfg.label}…`)
       : t('Running the deterministic tool workflow (no model)…', 'Đang chạy quy trình tool xác định (không dùng mô hình)…', '正在运行确定性工具流程（无模型）…'));
-    const out: AgentCheckResult[] = [];
-    for (const c of buildCases()) {
-      out.push(await runAgentCheck(c, mode, llm));
-      setResults([...out]);
+    let out: AgentCheckResult[] = [...base];
+    for (const c of cases) {
+      const res = await runAgentCheck(c, mode, llm);
+      out = out.some(r => r.caseId === res.caseId) ? out.map(r => (r.caseId === res.caseId ? res : r)) : [...out, res];
+      setResults(out);
     }
     setRunning(false);
     const pass = out.filter(r => r.passed).length;
@@ -71,7 +79,9 @@ export default function AiConnection({ lang }: { lang: Lang }) {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
-  const keyLooksReal = isPlausibleKey(provider, key);
+  const keyLooksReal = key.trim().length > 0;
+  const keyIssue = key.trim() ? keyProblem(provider, key) : null;
+  const canRerun = !running && live && ranModel === model.trim() && results.some(r => !r.passed) && results.every(r => r.mode === cfg.mode);
   const switchProvider = (p: Provider) => { setProvider(p); setModel(PROVIDERS[p].defaultModel); setKey(''); setNotice(''); };
 
   return (
@@ -117,6 +127,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
                 {showKey ? t('Hide', 'Ẩn', '隐藏') : t('Show', 'Hiện', '显示')}
               </button>
             </div>
+            {keyIssue && <small style={{ color: '#b42318' }}>{keyIssue}</small>}
           </label>
           <label>
             <span>{t('Model ID', 'Mã mô hình', '模型代号')}</span>
@@ -145,6 +156,11 @@ export default function AiConnection({ lang }: { lang: Lang }) {
           title={keyLooksReal ? '' : t(`Enter a ${cfg.label} key first`, `Hãy nhập key ${cfg.label} trước`, `请先输入 ${cfg.label} 密钥`)}>
           ▶ {t(`Run 4 checks — live ${cfg.label} agent`, `Chạy 4 kiểm tra — agent ${cfg.label} thật`, `运行 4 项检查 — 实时 ${cfg.label} 智能体`)}
         </button>
+        {canRerun && (
+          <button type="button" className="j-secondary" onClick={() => run(cfg.mode, true)}>
+            ↻ {t('Re-run failed cases', 'Chạy lại các tình huống lỗi', '重跑失败案例')}
+          </button>
+        )}
         {results.length > 0 && !running && (
           <button type="button" className="j-secondary" onClick={exportEvidence}>
             {t('Export results (JSON)', 'Xuất kết quả (JSON)', '导出结果 (JSON)')}
@@ -180,7 +196,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
                     <td><strong>{caseName[r.caseId]}</strong></td>
                     <td><small>{r.expected}</small><br /><code style={{ fontSize: 11 }}>{r.observed}</code>{r.error && <small style={{ display: 'block' }}>{r.error}</small>}</td>
                     <td><span className={`j-status ${r.passed ? 's-SETTLED' : 's-REJECTED'}`}>{r.passed ? t('PASS', 'ĐẠT', '通过') : t('FAIL', 'CHƯA ĐẠT', '未通过')}</span></td>
-                    <td><strong>{(r.durationMs / 1000).toFixed(2)} s</strong><small style={{ display: 'block' }}>{r.modelCalls} {t('model calls', 'lượt gọi', '次调用')}{r.model ? ` · ${r.model}` : ''}</small></td>
+                    <td><strong>{(r.durationMs / 1000).toFixed(2)} s</strong><small style={{ display: 'block' }}>{r.modelCalls} {t('model calls', 'lượt gọi', '次调用')}{r.rateLimitRetries ? ` · ${r.rateLimitRetries} ${t('rate-limit waits', 'lần chờ giới hạn', '次限速等待')}` : ''}{r.model ? ` · ${r.model}` : ''}</small></td>
                     <td>{r.usage.reportedByProvider ? <><strong>{r.usage.totalTokens}</strong><small style={{ display: 'block' }}>{r.usage.promptTokens} / {r.usage.completionTokens}</small></> : <span className="j-muted">{r.mode !== 'deterministic' ? t('not reported', 'không có số liệu', '未报告') : '—'}</span>}</td>
                     <td><code style={{ fontSize: 11 }}>{r.tools.length ? r.tools.map(x => `${x.tool}${x.status === 'passed' ? '' : ' ✕'}`).join(' → ') : '—'}</code></td>
                   </tr>
