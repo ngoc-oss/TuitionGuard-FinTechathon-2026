@@ -21,6 +21,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
   const [results, setResults] = useState<AgentCheckResult[]>([]);
   const [ranMode, setRanMode] = useState<CheckMode | null>(null);
   const [notice, setNotice] = useState<string>('');
+  const [saveTokens, setSaveTokens] = useState<boolean>(true);
   const [layoutResults, setLayoutResults] = useState<LayoutResult[]>([]);
   const [layoutRunning, setLayoutRunning] = useState<boolean>(false);
   const [layoutMeta, setLayoutMeta] = useState<{ provider: string; model: string; startedAt: string } | null>(null);
@@ -53,7 +54,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
       : t('Running the deterministic tool workflow (no model)…', 'Đang chạy quy trình tool xác định (không dùng mô hình)…', '正在运行确定性工具流程（无模型）…'));
     let out: AgentCheckResult[] = [...base];
     for (const c of cases) {
-      const res = await runAgentCheck(c, mode, llm);
+      const res = await runAgentCheck(c, mode, llm, saveTokens ? 'extract' : 'full');
       out = out.some(r => r.caseId === res.caseId) ? out.map(r => (r.caseId === res.caseId ? res : r)) : [...out, res];
       setResults(out);
     }
@@ -75,6 +76,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
         : 'Deterministic run of lib/agent.ts with no language model. Shows policy and tool-order enforcement only; says nothing about model accuracy.',
       exportedAt: new Date().toISOString(),
       requestedModel: ranModel,
+      agentMode: results[0]?.agentMode ?? null,
       results,
       keyIncluded: false,
     };
@@ -108,7 +110,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
     for (let i = 0; i < todo.length; i++) {
       if (stopRef.current) break;
       setNotice(t(`20-invoice test: running ${todo[i].id} (${i + 1}/${todo.length})…`, `Bài test 20 hóa đơn: đang chạy ${todo[i].id} (${i + 1}/${todo.length})…`, `20 张账单测试：正在运行 ${todo[i].id}（${i + 1}/${todo.length}）…`));
-      const res = await runLayoutCase(todo[i], llm, deadline);
+      const res = await runLayoutCase(todo[i], llm, deadline, saveTokens ? 'extract' : 'full');
       out = out.some(r => r.id === res.id) ? out.map(r => (r.id === res.id ? res : r)) : [...out, res];
       out.sort((a, b) => a.id.localeCompare(b.id));
       setLayoutResults(out);
@@ -128,7 +130,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
   const exportLayouts = () => {
     const report = {
       product: 'TuitionGuard', mode: `Live ${layoutMeta?.provider} tool-calling run on 20 authored synthetic invoice layouts (tests/live-layout-cases.json)`,
-      requestedModel: layoutMeta?.model, startedAt: layoutMeta?.startedAt, exportedAt: new Date().toISOString(),
+      requestedModel: layoutMeta?.model, agentMode: layoutResults[0]?.agentMode ?? null, startedAt: layoutMeta?.startedAt, exportedAt: new Date().toISOString(),
       summary: summarize(layoutResults), results: layoutResults, keyIncluded: false,
       limitations: ['Authored synthetic layouts, not real invoices or an external benchmark.', 'No real payment executed.', 'Tokens are provider-reported; null when not reported.'],
     };
@@ -197,6 +199,18 @@ export default function AiConnection({ lang }: { lang: Lang }) {
           </a>
         </div>
       </div>
+
+      <label style={{ display: 'flex', gap: 10, alignItems: 'flex-start', marginTop: 14, cursor: 'pointer' }}>
+        <input type="checkbox" checked={saveTokens} disabled={busy} onChange={e => setSaveTokens(e.target.checked)} style={{ width: 18, height: 18, marginTop: 2, flexShrink: 0 }} />
+        <span>
+          <strong>{t('Token-saving mode (recommended for free tiers)', 'Chế độ tiết kiệm token (nên bật với gói miễn phí)', '省 token 模式（免费额度推荐）')}</strong>
+          <small className="j-muted" style={{ display: 'block' }}>
+            {t('The AI is called once per invoice and may only call read_invoice; verify_recipient, get_transfer_quotes and check_payment_policy then run deterministically through the same validators. About 5× fewer tokens. Turn off to let the AI drive all four tools.',
+              'AI chỉ được gọi 1 lần cho mỗi hóa đơn và chỉ được dùng read_invoice; verify_recipient, get_transfer_quotes và check_payment_policy sau đó chạy theo quy tắc qua cùng bộ kiểm tra. Tốn ít hơn khoảng 5 lần token. Tắt đi nếu muốn AI tự điều khiển cả 4 tool.',
+              '每张账单只调用一次 AI，且只能调用 read_invoice；其余三个工具通过相同校验确定性运行。token 约减少 5 倍。关闭则由 AI 驱动全部四个工具。')}
+          </small>
+        </span>
+      </label>
 
       <div className="j-notice" style={{ fontSize: 12, padding: '10px 14px', margin: '14px 0' }}>
         {t(`Privacy: the key stays in this page’s memory, is sent only to ${new URL(cfg.url).host} in the Authorization header, and is never included in exports. Live mode sends the synthetic invoice text to ${cfg.label}.`,
@@ -285,7 +299,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
               <strong style={{ fontSize: 20 }}>{layoutSummary.passed}/{layoutSummary.total}</strong>{' '}
               {t('invoices handled correctly', 'hóa đơn xử lý đúng', '张账单处理正确')} · {t('extraction', 'trích xuất', '提取')} {layoutSummary.extractionPassed}/{layoutSummary.extractionTotal} · {t('clarification', 'hỏi lại khi thiếu', '缺项追问')} {layoutSummary.clarificationPassed}/{layoutSummary.clarificationTotal} · {t('fields', 'trường', '字段')} {layoutSummary.fieldsCorrect}/{layoutSummary.fieldsTotal}
               {layoutSummary.providerErrors > 0 && <> · <span style={{ color: '#b42318' }}>{layoutSummary.providerErrors} {t('provider errors', 'lỗi nhà cung cấp', '服务商错误')}</span></>}
-              {layoutMeta && <small className="j-muted" style={{ display: 'block' }}>{layoutMeta.provider} · {layoutMeta.model}</small>}
+              {layoutMeta && <small className="j-muted" style={{ display: 'block' }}>{layoutMeta.provider} · {layoutMeta.model} · {layoutResults[0]?.agentMode === 'extract' ? t('token-saving mode', 'chế độ tiết kiệm token', '省 token 模式') : t('full agent mode', 'chế độ agent đầy đủ', '完整智能体模式')} · {layoutSummary.modelCalls} {t('model calls', 'lượt gọi', '次调用')}{layoutSummary.tokensTotal != null ? ` · ${layoutSummary.tokensTotal.toLocaleString('en-US')} tokens` : ''}</small>}
             </p>
             <div className="j-table-wrap">
               <table>

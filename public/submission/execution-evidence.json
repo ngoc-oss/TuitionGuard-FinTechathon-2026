@@ -1,11 +1,11 @@
 {
-  "generatedAt": "2026-10-15T20:26:51.471Z",
+  "generatedAt": "2026-10-15T20:37:09.984Z",
   "environment": "API handler tests, SQLite adapter, synthetic accounts; no bank transfers",
   "runs": [
     {
       "scenario": "timeout",
       "plan": {
-        "id": "42d575ae-a7d6-44c5-8240-821a50af4a97",
+        "id": "534e20e6-966a-4297-90ac-7edc52ab2398",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -13,7 +13,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T20:26:51.406Z"
+          "deadline": "2026-10-17T20:37:09.925Z"
         },
         "quotes": [
           {
@@ -101,7 +101,7 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T20:26:51.407Z",
+            "startedAt": "2026-10-15T20:37:09.926Z",
             "durationMs": 1,
             "input": {},
             "output": {
@@ -112,7 +112,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T20:26:51.406Z"
+                "deadline": "2026-10-17T20:37:09.925Z"
               },
               "complete": true
             },
@@ -120,7 +120,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T20:26:51.408Z",
+            "startedAt": "2026-10-15T20:37:09.927Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -131,8 +131,8 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T20:26:51.408Z",
-            "durationMs": 13,
+            "startedAt": "2026-10-15T20:37:09.927Z",
+            "durationMs": 14,
             "input": {},
             "output": {
               "quotes": [
@@ -164,8 +164,8 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T20:26:51.421Z",
-            "durationMs": 1,
+            "startedAt": "2026-10-15T20:37:09.941Z",
+            "durationMs": 0,
             "input": {},
             "output": {
               "selected": {
@@ -188,19 +188,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "9f4774f71905c5a8700089edc4cf7c0946d4d1e93f816059e6ad52945db17f7b",
-        "expiresAt": 1792096311422,
-        "generation": "46a9b368-7220-469b-94c8-5bd313e77cae",
+        "hash": "ce1073468a17ce56608db91ea5bf1c2db6fa94030c1605f2ac55b274bc37a56f",
+        "expiresAt": 1792096929941,
+        "generation": "aef50739-ac6e-4386-beca-1120b24a36a6",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "ad5af36a-a108-4960-9800-067c6843f757",
+        "id": "7f67660d-8e16-4cfe-b03a-d7543a3ade3f",
         "status": "SETTLED",
         "data": {
-          "id": "ad5af36a-a108-4960-9800-067c6843f757",
-          "planId": "42d575ae-a7d6-44c5-8240-821a50af4a97",
+          "id": "7f67660d-8e16-4cfe-b03a-d7543a3ade3f",
+          "planId": "534e20e6-966a-4297-90ac-7edc52ab2398",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -208,7 +208,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T20:26:51.406Z"
+            "deadline": "2026-10-17T20:37:09.925Z"
           },
           "quote": {
             "id": "A",
@@ -224,8 +224,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "9f4774f71905c5a8700089edc4cf7c0946d4d1e93f816059e6ad52945db17f7b",
-            "approvedAt": "2026-10-15T20:26:51.431Z"
+            "hash": "ce1073468a17ce56608db91ea5bf1c2db6fa94030c1605f2ac55b274bc37a56f",
+            "approvedAt": "2026-10-15T20:37:09.950Z"
           },
           "trace": [
             {
@@ -271,7 +271,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger ad5af36a-a108-4960-9800-067c6843f757; provider status SETTLED."
+              "detail": "Read provider ledger 7f67660d-8e16-4cfe-b03a-d7543a3ade3f; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -280,7 +280,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "ad5af36a-a108-4960-9800-067c6843f757",
+            "providerReference": "7f67660d-8e16-4cfe-b03a-d7543a3ade3f",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -289,7 +289,7 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T20:26:51.431Z",
+            "issuedAt": "2026-10-15T20:37:09.950Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "timeout"
           },
@@ -297,20 +297,20 @@
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T20:26:51.434Z",
-            "receiptHash": "9b07e152511b20a263202a92f0cfa50b15b7da1eed7ab166e0b2da6536efcc65"
+            "checkedAt": "2026-10-15T20:37:09.953Z",
+            "receiptHash": "8a1fdbcdbd47aff76b97b9e9240738e837430e20004bc55f5e11e8856fcd5981"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T20:26:51.431Z",
-        "settled_at": "2026-10-15T20:26:51.434Z",
-        "generation": "46a9b368-7220-469b-94c8-5bd313e77cae"
+        "created_at": "2026-10-15T20:37:09.950Z",
+        "settled_at": "2026-10-15T20:37:09.953Z",
+        "generation": "aef50739-ac6e-4386-beca-1120b24a36a6"
       }
     },
     {
       "scenario": "normal",
       "plan": {
-        "id": "c5e45b0e-6a6c-45f2-b371-f0a8a937cb60",
+        "id": "73e5bc20-3d91-404c-82bf-cca8c481f0e4",
         "invoice": {
           "invoiceId": "TG-2026-001",
           "studentReference": "STU-0086",
@@ -318,7 +318,7 @@
           "amount": 30000,
           "currency": "CNY",
           "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T20:26:51.446Z"
+          "deadline": "2026-10-17T20:37:09.964Z"
         },
         "quotes": [
           {
@@ -406,7 +406,7 @@
         "tools": [
           {
             "tool": "read_invoice",
-            "startedAt": "2026-10-15T20:26:51.446Z",
+            "startedAt": "2026-10-15T20:37:09.964Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -417,7 +417,7 @@
                 "amount": 30000,
                 "currency": "CNY",
                 "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T20:26:51.446Z"
+                "deadline": "2026-10-17T20:37:09.964Z"
               },
               "complete": true
             },
@@ -425,7 +425,7 @@
           },
           {
             "tool": "verify_recipient",
-            "startedAt": "2026-10-15T20:26:51.446Z",
+            "startedAt": "2026-10-15T20:37:09.964Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -436,7 +436,1251 @@
           },
           {
             "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T20:26:51.446Z",
+            "startedAt": "2026-10-15T20:37:09.964Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "quotes": [
+                {
+                  "provider": "A",
+                  "totalDebit": 105625000,
+                  "fee": 625000,
+                  "rate": 3500,
+                  "arrivalHours": 24
+                },
+                {
+                  "provider": "B",
+                  "totalDebit": 104858800,
+                  "fee": 458800,
+                  "rate": 3480,
+                  "arrivalHours": 72
+                },
+                {
+                  "provider": "C",
+                  "totalDebit": 105650000,
+                  "fee": 50000,
+                  "rate": 3520,
+                  "arrivalHours": 24
+                }
+              ],
+              "source": "Fixed sandbox provider catalogue"
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "check_payment_policy",
+            "startedAt": "2026-10-15T20:37:09.964Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "selected": {
+                "id": "A",
+                "name": "Campus Transfer",
+                "rate": 3500,
+                "bps": 50,
+                "fixed": 100000,
+                "hours": 24,
+                "debit": 105625000,
+                "fee": 625000,
+                "remaining": 19375000,
+                "eligible": true,
+                "reasons": []
+              },
+              "requiresHumanApproval": true,
+              "nextActions": []
+            },
+            "status": "passed"
+          }
+        ],
+        "nextActions": [],
+        "hash": "fe77de65a19e082af76d5bb7101267715ddd4ed6452c378261d5e19d8bfdf853",
+        "expiresAt": 1792096929964,
+        "generation": "b6d5e552-a3dc-4221-90c6-9b1c95498a83",
+        "reserve": 18000000,
+        "mode": "Deterministic tool workflow",
+        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
+      },
+      "transaction": {
+        "id": "847faae7-affa-4c8f-b7e9-136dd6546a04",
+        "status": "SETTLED",
+        "data": {
+          "id": "847faae7-affa-4c8f-b7e9-136dd6546a04",
+          "planId": "73e5bc20-3d91-404c-82bf-cca8c481f0e4",
+          "invoice": {
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "institution": "Demo International University",
+            "amount": 30000,
+            "currency": "CNY",
+            "recipient": "UNIVERSITY-CNY-001",
+            "deadline": "2026-10-17T20:37:09.964Z"
+          },
+          "quote": {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          "approval": {
+            "hash": "fe77de65a19e082af76d5bb7101267715ddd4ed6452c378261d5e19d8bfdf853",
+            "approvedAt": "2026-10-15T20:37:09.965Z"
+          },
+          "trace": [
+            {
+              "step": "Read invoice",
+              "status": "passed",
+              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+            },
+            {
+              "step": "Verify recipient",
+              "status": "passed",
+              "detail": "Account matches directory version 1."
+            },
+            {
+              "step": "Compare transfer routes",
+              "status": "passed",
+              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+            },
+            {
+              "step": "Check deadline and reserve",
+              "status": "passed",
+              "detail": "Campus Transfer meets all constraints."
+            },
+            {
+              "step": "Request student approval",
+              "status": "waiting",
+              "detail": "Exact terms must be approved before any funds are reserved."
+            },
+            {
+              "step": "Student approval",
+              "status": "passed",
+              "detail": "Authenticated approval is bound to this exact plan hash."
+            },
+            {
+              "step": "Reserve sandbox funds",
+              "status": "passed",
+              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
+            },
+            {
+              "step": "Submit sandbox transfer",
+              "status": "submitted",
+              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
+            },
+            {
+              "step": "query_provider_status",
+              "status": "passed",
+              "detail": "Read provider ledger 847faae7-affa-4c8f-b7e9-136dd6546a04; provider status SETTLED."
+            },
+            {
+              "step": "compare_receipt",
+              "status": "passed",
+              "detail": "Receipt matches every approved field. Settle the debit exactly once."
+            }
+          ],
+          "providerReceipt": {
+            "providerReference": "847faae7-affa-4c8f-b7e9-136dd6546a04",
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "recipient": "UNIVERSITY-CNY-001",
+            "currency": "CNY",
+            "amount": 30000,
+            "debit": 105625000,
+            "provider": "A",
+            "status": "SETTLED",
+            "issuedAt": "2026-10-15T20:37:09.965Z",
+            "issuer": "TuitionGuard sandbox provider",
+            "scenario": "normal"
+          },
+          "reconciliation": {
+            "status": "SETTLED",
+            "differences": [],
+            "action": "Receipt matches every approved field. Settle the debit exactly once.",
+            "checkedAt": "2026-10-15T20:37:09.966Z",
+            "receiptHash": "7e551cf0db00cfb513d82bcd3ee1508e60da586629e661cad2cf97ebdb8e91bb"
+          }
+        },
+        "debit": 105625000,
+        "created_at": "2026-10-15T20:37:09.965Z",
+        "settled_at": "2026-10-15T20:37:09.966Z",
+        "generation": "b6d5e552-a3dc-4221-90c6-9b1c95498a83"
+      }
+    },
+    {
+      "scenario": "pending",
+      "plan": {
+        "id": "96e19b24-bd6d-4b9e-9596-ea9b11cfcf98",
+        "invoice": {
+          "invoiceId": "TG-2026-001",
+          "studentReference": "STU-0086",
+          "institution": "Demo International University",
+          "amount": 30000,
+          "currency": "CNY",
+          "recipient": "UNIVERSITY-CNY-001",
+          "deadline": "2026-10-17T20:37:09.967Z"
+        },
+        "quotes": [
+          {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          {
+            "id": "B",
+            "name": "Economy Remit",
+            "rate": 3480,
+            "bps": 20,
+            "fixed": 250000,
+            "hours": 72,
+            "debit": 104858800,
+            "fee": 458800,
+            "remaining": 20141200,
+            "eligible": false,
+            "reasons": [
+              "Arrival would be after the tuition deadline."
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Express Tuition",
+            "rate": 3520,
+            "bps": 0,
+            "fixed": 50000,
+            "hours": 24,
+            "debit": 105650000,
+            "fee": 50000,
+            "remaining": 19350000,
+            "eligible": true,
+            "reasons": []
+          }
+        ],
+        "selected": {
+          "id": "A",
+          "name": "Campus Transfer",
+          "rate": 3500,
+          "bps": 50,
+          "fixed": 100000,
+          "hours": 24,
+          "debit": 105625000,
+          "fee": 625000,
+          "remaining": 19375000,
+          "eligible": true,
+          "reasons": []
+        },
+        "trace": [
+          {
+            "step": "Read invoice",
+            "status": "passed",
+            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+          },
+          {
+            "step": "Verify recipient",
+            "status": "passed",
+            "detail": "Account matches directory version 1."
+          },
+          {
+            "step": "Compare transfer routes",
+            "status": "passed",
+            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+          },
+          {
+            "step": "Check deadline and reserve",
+            "status": "passed",
+            "detail": "Campus Transfer meets all constraints."
+          },
+          {
+            "step": "Request student approval",
+            "status": "waiting",
+            "detail": "Exact terms must be approved before any funds are reserved."
+          }
+        ],
+        "tools": [
+          {
+            "tool": "read_invoice",
+            "startedAt": "2026-10-15T20:37:09.967Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "invoice": {
+                "invoiceId": "TG-2026-001",
+                "studentReference": "STU-0086",
+                "institution": "Demo International University",
+                "amount": 30000,
+                "currency": "CNY",
+                "recipient": "UNIVERSITY-CNY-001",
+                "deadline": "2026-10-17T20:37:09.967Z"
+              },
+              "complete": true
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "verify_recipient",
+            "startedAt": "2026-10-15T20:37:09.967Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "verified": true,
+              "directoryVersion": 1
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "get_transfer_quotes",
+            "startedAt": "2026-10-15T20:37:09.967Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "quotes": [
+                {
+                  "provider": "A",
+                  "totalDebit": 105625000,
+                  "fee": 625000,
+                  "rate": 3500,
+                  "arrivalHours": 24
+                },
+                {
+                  "provider": "B",
+                  "totalDebit": 104858800,
+                  "fee": 458800,
+                  "rate": 3480,
+                  "arrivalHours": 72
+                },
+                {
+                  "provider": "C",
+                  "totalDebit": 105650000,
+                  "fee": 50000,
+                  "rate": 3520,
+                  "arrivalHours": 24
+                }
+              ],
+              "source": "Fixed sandbox provider catalogue"
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "check_payment_policy",
+            "startedAt": "2026-10-15T20:37:09.967Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "selected": {
+                "id": "A",
+                "name": "Campus Transfer",
+                "rate": 3500,
+                "bps": 50,
+                "fixed": 100000,
+                "hours": 24,
+                "debit": 105625000,
+                "fee": 625000,
+                "remaining": 19375000,
+                "eligible": true,
+                "reasons": []
+              },
+              "requiresHumanApproval": true,
+              "nextActions": []
+            },
+            "status": "passed"
+          }
+        ],
+        "nextActions": [],
+        "hash": "ba9014a0998f73340c3c5ed942d7f2dfada3a62992c256b9b2f2f1313efdcd8d",
+        "expiresAt": 1792096929967,
+        "generation": "3fd8054e-a6b6-4194-a7d7-bf52ecf64a15",
+        "reserve": 18000000,
+        "mode": "Deterministic tool workflow",
+        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
+      },
+      "transaction": {
+        "id": "b33a7632-5d5b-48ee-9636-a2ef94b96488",
+        "status": "SETTLED",
+        "data": {
+          "id": "b33a7632-5d5b-48ee-9636-a2ef94b96488",
+          "planId": "96e19b24-bd6d-4b9e-9596-ea9b11cfcf98",
+          "invoice": {
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "institution": "Demo International University",
+            "amount": 30000,
+            "currency": "CNY",
+            "recipient": "UNIVERSITY-CNY-001",
+            "deadline": "2026-10-17T20:37:09.967Z"
+          },
+          "quote": {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          "approval": {
+            "hash": "ba9014a0998f73340c3c5ed942d7f2dfada3a62992c256b9b2f2f1313efdcd8d",
+            "approvedAt": "2026-10-15T20:37:09.968Z"
+          },
+          "trace": [
+            {
+              "step": "Read invoice",
+              "status": "passed",
+              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+            },
+            {
+              "step": "Verify recipient",
+              "status": "passed",
+              "detail": "Account matches directory version 1."
+            },
+            {
+              "step": "Compare transfer routes",
+              "status": "passed",
+              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+            },
+            {
+              "step": "Check deadline and reserve",
+              "status": "passed",
+              "detail": "Campus Transfer meets all constraints."
+            },
+            {
+              "step": "Request student approval",
+              "status": "waiting",
+              "detail": "Exact terms must be approved before any funds are reserved."
+            },
+            {
+              "step": "Student approval",
+              "status": "passed",
+              "detail": "Authenticated approval is bound to this exact plan hash."
+            },
+            {
+              "step": "Reserve sandbox funds",
+              "status": "passed",
+              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
+            },
+            {
+              "step": "Submit sandbox transfer",
+              "status": "submitted",
+              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
+            },
+            {
+              "step": "query_provider_status",
+              "status": "passed",
+              "detail": "Read provider ledger b33a7632-5d5b-48ee-9636-a2ef94b96488; provider status PENDING."
+            },
+            {
+              "step": "compare_receipt",
+              "status": "waiting",
+              "detail": "Provider is still processing. Check this transaction again; do not resubmit."
+            },
+            {
+              "step": "query_provider_status",
+              "status": "passed",
+              "detail": "Read provider ledger b33a7632-5d5b-48ee-9636-a2ef94b96488; provider status SETTLED."
+            },
+            {
+              "step": "compare_receipt",
+              "status": "passed",
+              "detail": "Receipt matches every approved field. Settle the debit exactly once."
+            }
+          ],
+          "providerReceipt": {
+            "providerReference": "b33a7632-5d5b-48ee-9636-a2ef94b96488",
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "recipient": "UNIVERSITY-CNY-001",
+            "currency": "CNY",
+            "amount": 30000,
+            "debit": 105625000,
+            "provider": "A",
+            "status": "SETTLED",
+            "issuedAt": "2026-10-15T20:37:09.968Z",
+            "issuer": "TuitionGuard sandbox provider",
+            "scenario": "pending"
+          },
+          "reconciliation": {
+            "status": "SETTLED",
+            "differences": [],
+            "action": "Receipt matches every approved field. Settle the debit exactly once.",
+            "checkedAt": "2026-10-15T20:37:09.970Z",
+            "receiptHash": "967e15f96d1e8bb5515e2a6d91faaa081cfc795ecf7d4ab79c89442b83e5d820"
+          }
+        },
+        "debit": 105625000,
+        "created_at": "2026-10-15T20:37:09.968Z",
+        "settled_at": "2026-10-15T20:37:09.970Z",
+        "generation": "3fd8054e-a6b6-4194-a7d7-bf52ecf64a15"
+      }
+    },
+    {
+      "scenario": "rejected",
+      "plan": {
+        "id": "7c1a47ac-d560-43b6-a7d2-4bba0a5434fb",
+        "invoice": {
+          "invoiceId": "TG-2026-001",
+          "studentReference": "STU-0086",
+          "institution": "Demo International University",
+          "amount": 30000,
+          "currency": "CNY",
+          "recipient": "UNIVERSITY-CNY-001",
+          "deadline": "2026-10-17T20:37:09.972Z"
+        },
+        "quotes": [
+          {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          {
+            "id": "B",
+            "name": "Economy Remit",
+            "rate": 3480,
+            "bps": 20,
+            "fixed": 250000,
+            "hours": 72,
+            "debit": 104858800,
+            "fee": 458800,
+            "remaining": 20141200,
+            "eligible": false,
+            "reasons": [
+              "Arrival would be after the tuition deadline."
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Express Tuition",
+            "rate": 3520,
+            "bps": 0,
+            "fixed": 50000,
+            "hours": 24,
+            "debit": 105650000,
+            "fee": 50000,
+            "remaining": 19350000,
+            "eligible": true,
+            "reasons": []
+          }
+        ],
+        "selected": {
+          "id": "A",
+          "name": "Campus Transfer",
+          "rate": 3500,
+          "bps": 50,
+          "fixed": 100000,
+          "hours": 24,
+          "debit": 105625000,
+          "fee": 625000,
+          "remaining": 19375000,
+          "eligible": true,
+          "reasons": []
+        },
+        "trace": [
+          {
+            "step": "Read invoice",
+            "status": "passed",
+            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+          },
+          {
+            "step": "Verify recipient",
+            "status": "passed",
+            "detail": "Account matches directory version 1."
+          },
+          {
+            "step": "Compare transfer routes",
+            "status": "passed",
+            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+          },
+          {
+            "step": "Check deadline and reserve",
+            "status": "passed",
+            "detail": "Campus Transfer meets all constraints."
+          },
+          {
+            "step": "Request student approval",
+            "status": "waiting",
+            "detail": "Exact terms must be approved before any funds are reserved."
+          }
+        ],
+        "tools": [
+          {
+            "tool": "read_invoice",
+            "startedAt": "2026-10-15T20:37:09.972Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "invoice": {
+                "invoiceId": "TG-2026-001",
+                "studentReference": "STU-0086",
+                "institution": "Demo International University",
+                "amount": 30000,
+                "currency": "CNY",
+                "recipient": "UNIVERSITY-CNY-001",
+                "deadline": "2026-10-17T20:37:09.972Z"
+              },
+              "complete": true
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "verify_recipient",
+            "startedAt": "2026-10-15T20:37:09.972Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "verified": true,
+              "directoryVersion": 1
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "get_transfer_quotes",
+            "startedAt": "2026-10-15T20:37:09.972Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "quotes": [
+                {
+                  "provider": "A",
+                  "totalDebit": 105625000,
+                  "fee": 625000,
+                  "rate": 3500,
+                  "arrivalHours": 24
+                },
+                {
+                  "provider": "B",
+                  "totalDebit": 104858800,
+                  "fee": 458800,
+                  "rate": 3480,
+                  "arrivalHours": 72
+                },
+                {
+                  "provider": "C",
+                  "totalDebit": 105650000,
+                  "fee": 50000,
+                  "rate": 3520,
+                  "arrivalHours": 24
+                }
+              ],
+              "source": "Fixed sandbox provider catalogue"
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "check_payment_policy",
+            "startedAt": "2026-10-15T20:37:09.972Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "selected": {
+                "id": "A",
+                "name": "Campus Transfer",
+                "rate": 3500,
+                "bps": 50,
+                "fixed": 100000,
+                "hours": 24,
+                "debit": 105625000,
+                "fee": 625000,
+                "remaining": 19375000,
+                "eligible": true,
+                "reasons": []
+              },
+              "requiresHumanApproval": true,
+              "nextActions": []
+            },
+            "status": "passed"
+          }
+        ],
+        "nextActions": [],
+        "hash": "df5bb32b14d832e7f98e82b77e8183d71de1a341a303392395c3c4550961e130",
+        "expiresAt": 1792096929972,
+        "generation": "1d1f4660-cb59-413d-8358-75f149edf6c8",
+        "reserve": 18000000,
+        "mode": "Deterministic tool workflow",
+        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
+      },
+      "transaction": {
+        "id": "19828616-a5a0-4d29-b4b0-a912b57898ef",
+        "status": "REJECTED",
+        "data": {
+          "id": "19828616-a5a0-4d29-b4b0-a912b57898ef",
+          "planId": "7c1a47ac-d560-43b6-a7d2-4bba0a5434fb",
+          "invoice": {
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "institution": "Demo International University",
+            "amount": 30000,
+            "currency": "CNY",
+            "recipient": "UNIVERSITY-CNY-001",
+            "deadline": "2026-10-17T20:37:09.972Z"
+          },
+          "quote": {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          "approval": {
+            "hash": "df5bb32b14d832e7f98e82b77e8183d71de1a341a303392395c3c4550961e130",
+            "approvedAt": "2026-10-15T20:37:09.972Z"
+          },
+          "trace": [
+            {
+              "step": "Read invoice",
+              "status": "passed",
+              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+            },
+            {
+              "step": "Verify recipient",
+              "status": "passed",
+              "detail": "Account matches directory version 1."
+            },
+            {
+              "step": "Compare transfer routes",
+              "status": "passed",
+              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+            },
+            {
+              "step": "Check deadline and reserve",
+              "status": "passed",
+              "detail": "Campus Transfer meets all constraints."
+            },
+            {
+              "step": "Request student approval",
+              "status": "waiting",
+              "detail": "Exact terms must be approved before any funds are reserved."
+            },
+            {
+              "step": "Student approval",
+              "status": "passed",
+              "detail": "Authenticated approval is bound to this exact plan hash."
+            },
+            {
+              "step": "Reserve sandbox funds",
+              "status": "passed",
+              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
+            },
+            {
+              "step": "Submit sandbox transfer",
+              "status": "submitted",
+              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
+            },
+            {
+              "step": "query_provider_status",
+              "status": "passed",
+              "detail": "Read provider ledger 19828616-a5a0-4d29-b4b0-a912b57898ef; provider status REJECTED."
+            },
+            {
+              "step": "compare_receipt",
+              "status": "rejected",
+              "detail": "Provider rejected the transfer. Release the reservation without debiting the account."
+            }
+          ],
+          "providerReceipt": {
+            "providerReference": "19828616-a5a0-4d29-b4b0-a912b57898ef",
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "recipient": "UNIVERSITY-CNY-001",
+            "currency": "CNY",
+            "amount": 30000,
+            "debit": 105625000,
+            "provider": "A",
+            "status": "REJECTED",
+            "issuedAt": "2026-10-15T20:37:09.972Z",
+            "issuer": "TuitionGuard sandbox provider",
+            "scenario": "rejected"
+          },
+          "reconciliation": {
+            "status": "REJECTED",
+            "differences": [],
+            "action": "Provider rejected the transfer. Release the reservation without debiting the account.",
+            "checkedAt": "2026-10-15T20:37:09.973Z",
+            "receiptHash": "b5e43ce57174a1d3c13035ecf37a1d5d37b0ea55392031f24ac9e03bc67ade7e"
+          }
+        },
+        "debit": 105625000,
+        "created_at": "2026-10-15T20:37:09.972Z",
+        "settled_at": null,
+        "generation": "1d1f4660-cb59-413d-8358-75f149edf6c8"
+      }
+    },
+    {
+      "scenario": "amount_mismatch",
+      "plan": {
+        "id": "2fa85a7e-cf3e-4768-8fdc-7dc2c23eb2be",
+        "invoice": {
+          "invoiceId": "TG-2026-001",
+          "studentReference": "STU-0086",
+          "institution": "Demo International University",
+          "amount": 30000,
+          "currency": "CNY",
+          "recipient": "UNIVERSITY-CNY-001",
+          "deadline": "2026-10-17T20:37:09.974Z"
+        },
+        "quotes": [
+          {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          {
+            "id": "B",
+            "name": "Economy Remit",
+            "rate": 3480,
+            "bps": 20,
+            "fixed": 250000,
+            "hours": 72,
+            "debit": 104858800,
+            "fee": 458800,
+            "remaining": 20141200,
+            "eligible": false,
+            "reasons": [
+              "Arrival would be after the tuition deadline."
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Express Tuition",
+            "rate": 3520,
+            "bps": 0,
+            "fixed": 50000,
+            "hours": 24,
+            "debit": 105650000,
+            "fee": 50000,
+            "remaining": 19350000,
+            "eligible": true,
+            "reasons": []
+          }
+        ],
+        "selected": {
+          "id": "A",
+          "name": "Campus Transfer",
+          "rate": 3500,
+          "bps": 50,
+          "fixed": 100000,
+          "hours": 24,
+          "debit": 105625000,
+          "fee": 625000,
+          "remaining": 19375000,
+          "eligible": true,
+          "reasons": []
+        },
+        "trace": [
+          {
+            "step": "Read invoice",
+            "status": "passed",
+            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+          },
+          {
+            "step": "Verify recipient",
+            "status": "passed",
+            "detail": "Account matches directory version 1."
+          },
+          {
+            "step": "Compare transfer routes",
+            "status": "passed",
+            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+          },
+          {
+            "step": "Check deadline and reserve",
+            "status": "passed",
+            "detail": "Campus Transfer meets all constraints."
+          },
+          {
+            "step": "Request student approval",
+            "status": "waiting",
+            "detail": "Exact terms must be approved before any funds are reserved."
+          }
+        ],
+        "tools": [
+          {
+            "tool": "read_invoice",
+            "startedAt": "2026-10-15T20:37:09.974Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "invoice": {
+                "invoiceId": "TG-2026-001",
+                "studentReference": "STU-0086",
+                "institution": "Demo International University",
+                "amount": 30000,
+                "currency": "CNY",
+                "recipient": "UNIVERSITY-CNY-001",
+                "deadline": "2026-10-17T20:37:09.974Z"
+              },
+              "complete": true
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "verify_recipient",
+            "startedAt": "2026-10-15T20:37:09.974Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "verified": true,
+              "directoryVersion": 1
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "get_transfer_quotes",
+            "startedAt": "2026-10-15T20:37:09.974Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "quotes": [
+                {
+                  "provider": "A",
+                  "totalDebit": 105625000,
+                  "fee": 625000,
+                  "rate": 3500,
+                  "arrivalHours": 24
+                },
+                {
+                  "provider": "B",
+                  "totalDebit": 104858800,
+                  "fee": 458800,
+                  "rate": 3480,
+                  "arrivalHours": 72
+                },
+                {
+                  "provider": "C",
+                  "totalDebit": 105650000,
+                  "fee": 50000,
+                  "rate": 3520,
+                  "arrivalHours": 24
+                }
+              ],
+              "source": "Fixed sandbox provider catalogue"
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "check_payment_policy",
+            "startedAt": "2026-10-15T20:37:09.974Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "selected": {
+                "id": "A",
+                "name": "Campus Transfer",
+                "rate": 3500,
+                "bps": 50,
+                "fixed": 100000,
+                "hours": 24,
+                "debit": 105625000,
+                "fee": 625000,
+                "remaining": 19375000,
+                "eligible": true,
+                "reasons": []
+              },
+              "requiresHumanApproval": true,
+              "nextActions": []
+            },
+            "status": "passed"
+          }
+        ],
+        "nextActions": [],
+        "hash": "b897bed8ab1054578d2889fa539612c256d75631509005d36db782ae89122842",
+        "expiresAt": 1792096929974,
+        "generation": "b6b1a64d-981b-4616-af66-b08dd13b6875",
+        "reserve": 18000000,
+        "mode": "Deterministic tool workflow",
+        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
+      },
+      "transaction": {
+        "id": "511e92f9-cb69-4a5c-827d-cae9402e916e",
+        "status": "SETTLED",
+        "data": {
+          "id": "511e92f9-cb69-4a5c-827d-cae9402e916e",
+          "planId": "2fa85a7e-cf3e-4768-8fdc-7dc2c23eb2be",
+          "invoice": {
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "institution": "Demo International University",
+            "amount": 30000,
+            "currency": "CNY",
+            "recipient": "UNIVERSITY-CNY-001",
+            "deadline": "2026-10-17T20:37:09.974Z"
+          },
+          "quote": {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          "approval": {
+            "hash": "b897bed8ab1054578d2889fa539612c256d75631509005d36db782ae89122842",
+            "approvedAt": "2026-10-15T20:37:09.975Z"
+          },
+          "trace": [
+            {
+              "step": "Read invoice",
+              "status": "passed",
+              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+            },
+            {
+              "step": "Verify recipient",
+              "status": "passed",
+              "detail": "Account matches directory version 1."
+            },
+            {
+              "step": "Compare transfer routes",
+              "status": "passed",
+              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+            },
+            {
+              "step": "Check deadline and reserve",
+              "status": "passed",
+              "detail": "Campus Transfer meets all constraints."
+            },
+            {
+              "step": "Request student approval",
+              "status": "waiting",
+              "detail": "Exact terms must be approved before any funds are reserved."
+            },
+            {
+              "step": "Student approval",
+              "status": "passed",
+              "detail": "Authenticated approval is bound to this exact plan hash."
+            },
+            {
+              "step": "Reserve sandbox funds",
+              "status": "passed",
+              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
+            },
+            {
+              "step": "Submit sandbox transfer",
+              "status": "submitted",
+              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
+            },
+            {
+              "step": "query_provider_status",
+              "status": "passed",
+              "detail": "Read provider ledger 511e92f9-cb69-4a5c-827d-cae9402e916e; provider status SETTLED."
+            },
+            {
+              "step": "compare_receipt",
+              "status": "waiting",
+              "detail": "Keep funds reserved. Investigate the provider receipt; never submit another transfer. amount does not match approved terms"
+            },
+            {
+              "step": "query_provider_status",
+              "status": "passed",
+              "detail": "Read provider ledger 511e92f9-cb69-4a5c-827d-cae9402e916e; provider status SETTLED."
+            },
+            {
+              "step": "compare_receipt",
+              "status": "passed",
+              "detail": "Receipt matches every approved field. Settle the debit exactly once."
+            }
+          ],
+          "providerReceipt": {
+            "providerReference": "511e92f9-cb69-4a5c-827d-cae9402e916e",
+            "invoiceId": "TG-2026-001",
+            "studentReference": "STU-0086",
+            "recipient": "UNIVERSITY-CNY-001",
+            "currency": "CNY",
+            "amount": 30000,
+            "debit": 105625000,
+            "provider": "A",
+            "status": "SETTLED",
+            "issuedAt": "2026-10-15T20:37:09.977Z",
+            "issuer": "TuitionGuard sandbox provider",
+            "scenario": "normal",
+            "correction": {
+              "reason": "Explicit sandbox discrepancy resolution",
+              "at": "2026-10-15T20:37:09.977Z"
+            }
+          },
+          "reconciliation": {
+            "status": "SETTLED",
+            "differences": [],
+            "action": "Receipt matches every approved field. Settle the debit exactly once.",
+            "checkedAt": "2026-10-15T20:37:09.977Z",
+            "receiptHash": "28dba30267a90e79852a4c1ab1826502c73d21a5fc3159e3d99ef573080e823e"
+          }
+        },
+        "debit": 105625000,
+        "created_at": "2026-10-15T20:37:09.975Z",
+        "settled_at": "2026-10-15T20:37:09.977Z",
+        "generation": "b6b1a64d-981b-4616-af66-b08dd13b6875"
+      }
+    },
+    {
+      "scenario": "recipient_mismatch",
+      "plan": {
+        "id": "bacc3d3a-7622-4c89-bb3e-eeb89c396254",
+        "invoice": {
+          "invoiceId": "TG-2026-001",
+          "studentReference": "STU-0086",
+          "institution": "Demo International University",
+          "amount": 30000,
+          "currency": "CNY",
+          "recipient": "UNIVERSITY-CNY-001",
+          "deadline": "2026-10-17T20:37:09.978Z"
+        },
+        "quotes": [
+          {
+            "id": "A",
+            "name": "Campus Transfer",
+            "rate": 3500,
+            "bps": 50,
+            "fixed": 100000,
+            "hours": 24,
+            "debit": 105625000,
+            "fee": 625000,
+            "remaining": 19375000,
+            "eligible": true,
+            "reasons": []
+          },
+          {
+            "id": "B",
+            "name": "Economy Remit",
+            "rate": 3480,
+            "bps": 20,
+            "fixed": 250000,
+            "hours": 72,
+            "debit": 104858800,
+            "fee": 458800,
+            "remaining": 20141200,
+            "eligible": false,
+            "reasons": [
+              "Arrival would be after the tuition deadline."
+            ]
+          },
+          {
+            "id": "C",
+            "name": "Express Tuition",
+            "rate": 3520,
+            "bps": 0,
+            "fixed": 50000,
+            "hours": 24,
+            "debit": 105650000,
+            "fee": 50000,
+            "remaining": 19350000,
+            "eligible": true,
+            "reasons": []
+          }
+        ],
+        "selected": {
+          "id": "A",
+          "name": "Campus Transfer",
+          "rate": 3500,
+          "bps": 50,
+          "fixed": 100000,
+          "hours": 24,
+          "debit": 105625000,
+          "fee": 625000,
+          "remaining": 19375000,
+          "eligible": true,
+          "reasons": []
+        },
+        "trace": [
+          {
+            "step": "Read invoice",
+            "status": "passed",
+            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
+          },
+          {
+            "step": "Verify recipient",
+            "status": "passed",
+            "detail": "Account matches directory version 1."
+          },
+          {
+            "step": "Compare transfer routes",
+            "status": "passed",
+            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
+          },
+          {
+            "step": "Check deadline and reserve",
+            "status": "passed",
+            "detail": "Campus Transfer meets all constraints."
+          },
+          {
+            "step": "Request student approval",
+            "status": "waiting",
+            "detail": "Exact terms must be approved before any funds are reserved."
+          }
+        ],
+        "tools": [
+          {
+            "tool": "read_invoice",
+            "startedAt": "2026-10-15T20:37:09.978Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "invoice": {
+                "invoiceId": "TG-2026-001",
+                "studentReference": "STU-0086",
+                "institution": "Demo International University",
+                "amount": 30000,
+                "currency": "CNY",
+                "recipient": "UNIVERSITY-CNY-001",
+                "deadline": "2026-10-17T20:37:09.978Z"
+              },
+              "complete": true
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "verify_recipient",
+            "startedAt": "2026-10-15T20:37:09.978Z",
+            "durationMs": 0,
+            "input": {},
+            "output": {
+              "verified": true,
+              "directoryVersion": 1
+            },
+            "status": "passed"
+          },
+          {
+            "tool": "get_transfer_quotes",
+            "startedAt": "2026-10-15T20:37:09.978Z",
             "durationMs": 1,
             "input": {},
             "output": {
@@ -469,7 +1713,7 @@
           },
           {
             "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T20:26:51.447Z",
+            "startedAt": "2026-10-15T20:37:09.979Z",
             "durationMs": 0,
             "input": {},
             "output": {
@@ -493,19 +1737,19 @@
           }
         ],
         "nextActions": [],
-        "hash": "cb38bd7c542954b7b8fe6c2dfce87f8e3480757ce072f9bbac750db0b50c9055",
-        "expiresAt": 1792096311447,
-        "generation": "ec363836-3551-400e-a217-94ed5edd345e",
+        "hash": "1f4544091daca26fe93be9f69183ef17694a90fc06d78ebd682b7e2f614e717d",
+        "expiresAt": 1792096929979,
+        "generation": "f10594e6-8471-40a4-9ce5-8a134ef1b005",
         "reserve": 18000000,
         "mode": "Deterministic tool workflow",
         "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
       },
       "transaction": {
-        "id": "d0c473cd-988d-4673-a518-f146daf0deb9",
+        "id": "f01e7302-a1ac-4861-9117-dd15e24ea1cf",
         "status": "SETTLED",
         "data": {
-          "id": "d0c473cd-988d-4673-a518-f146daf0deb9",
-          "planId": "c5e45b0e-6a6c-45f2-b371-f0a8a937cb60",
+          "id": "f01e7302-a1ac-4861-9117-dd15e24ea1cf",
+          "planId": "bacc3d3a-7622-4c89-bb3e-eeb89c396254",
           "invoice": {
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
@@ -513,7 +1757,7 @@
             "amount": 30000,
             "currency": "CNY",
             "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T20:26:51.446Z"
+            "deadline": "2026-10-17T20:37:09.978Z"
           },
           "quote": {
             "id": "A",
@@ -529,8 +1773,8 @@
             "reasons": []
           },
           "approval": {
-            "hash": "cb38bd7c542954b7b8fe6c2dfce87f8e3480757ce072f9bbac750db0b50c9055",
-            "approvedAt": "2026-10-15T20:26:51.448Z"
+            "hash": "1f4544091daca26fe93be9f69183ef17694a90fc06d78ebd682b7e2f614e717d",
+            "approvedAt": "2026-10-15T20:37:09.979Z"
           },
           "trace": [
             {
@@ -576,1251 +1820,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger d0c473cd-988d-4673-a518-f146daf0deb9; provider status SETTLED."
-            },
-            {
-              "step": "compare_receipt",
-              "status": "passed",
-              "detail": "Receipt matches every approved field. Settle the debit exactly once."
-            }
-          ],
-          "providerReceipt": {
-            "providerReference": "d0c473cd-988d-4673-a518-f146daf0deb9",
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "recipient": "UNIVERSITY-CNY-001",
-            "currency": "CNY",
-            "amount": 30000,
-            "debit": 105625000,
-            "provider": "A",
-            "status": "SETTLED",
-            "issuedAt": "2026-10-15T20:26:51.448Z",
-            "issuer": "TuitionGuard sandbox provider",
-            "scenario": "normal"
-          },
-          "reconciliation": {
-            "status": "SETTLED",
-            "differences": [],
-            "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T20:26:51.448Z",
-            "receiptHash": "6b3bb24bc05d3a2dcb7cba671ab0a6e54a82488cc8893bdca32a2aa0626f602c"
-          }
-        },
-        "debit": 105625000,
-        "created_at": "2026-10-15T20:26:51.448Z",
-        "settled_at": "2026-10-15T20:26:51.448Z",
-        "generation": "ec363836-3551-400e-a217-94ed5edd345e"
-      }
-    },
-    {
-      "scenario": "pending",
-      "plan": {
-        "id": "a816d8a0-2e3a-4153-b9e3-9e3ac01d65d2",
-        "invoice": {
-          "invoiceId": "TG-2026-001",
-          "studentReference": "STU-0086",
-          "institution": "Demo International University",
-          "amount": 30000,
-          "currency": "CNY",
-          "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T20:26:51.450Z"
-        },
-        "quotes": [
-          {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          {
-            "id": "B",
-            "name": "Economy Remit",
-            "rate": 3480,
-            "bps": 20,
-            "fixed": 250000,
-            "hours": 72,
-            "debit": 104858800,
-            "fee": 458800,
-            "remaining": 20141200,
-            "eligible": false,
-            "reasons": [
-              "Arrival would be after the tuition deadline."
-            ]
-          },
-          {
-            "id": "C",
-            "name": "Express Tuition",
-            "rate": 3520,
-            "bps": 0,
-            "fixed": 50000,
-            "hours": 24,
-            "debit": 105650000,
-            "fee": 50000,
-            "remaining": 19350000,
-            "eligible": true,
-            "reasons": []
-          }
-        ],
-        "selected": {
-          "id": "A",
-          "name": "Campus Transfer",
-          "rate": 3500,
-          "bps": 50,
-          "fixed": 100000,
-          "hours": 24,
-          "debit": 105625000,
-          "fee": 625000,
-          "remaining": 19375000,
-          "eligible": true,
-          "reasons": []
-        },
-        "trace": [
-          {
-            "step": "Read invoice",
-            "status": "passed",
-            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-          },
-          {
-            "step": "Verify recipient",
-            "status": "passed",
-            "detail": "Account matches directory version 1."
-          },
-          {
-            "step": "Compare transfer routes",
-            "status": "passed",
-            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-          },
-          {
-            "step": "Check deadline and reserve",
-            "status": "passed",
-            "detail": "Campus Transfer meets all constraints."
-          },
-          {
-            "step": "Request student approval",
-            "status": "waiting",
-            "detail": "Exact terms must be approved before any funds are reserved."
-          }
-        ],
-        "tools": [
-          {
-            "tool": "read_invoice",
-            "startedAt": "2026-10-15T20:26:51.450Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "invoice": {
-                "invoiceId": "TG-2026-001",
-                "studentReference": "STU-0086",
-                "institution": "Demo International University",
-                "amount": 30000,
-                "currency": "CNY",
-                "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T20:26:51.450Z"
-              },
-              "complete": true
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "verify_recipient",
-            "startedAt": "2026-10-15T20:26:51.450Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "verified": true,
-              "directoryVersion": 1
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T20:26:51.450Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "quotes": [
-                {
-                  "provider": "A",
-                  "totalDebit": 105625000,
-                  "fee": 625000,
-                  "rate": 3500,
-                  "arrivalHours": 24
-                },
-                {
-                  "provider": "B",
-                  "totalDebit": 104858800,
-                  "fee": 458800,
-                  "rate": 3480,
-                  "arrivalHours": 72
-                },
-                {
-                  "provider": "C",
-                  "totalDebit": 105650000,
-                  "fee": 50000,
-                  "rate": 3520,
-                  "arrivalHours": 24
-                }
-              ],
-              "source": "Fixed sandbox provider catalogue"
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T20:26:51.450Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "selected": {
-                "id": "A",
-                "name": "Campus Transfer",
-                "rate": 3500,
-                "bps": 50,
-                "fixed": 100000,
-                "hours": 24,
-                "debit": 105625000,
-                "fee": 625000,
-                "remaining": 19375000,
-                "eligible": true,
-                "reasons": []
-              },
-              "requiresHumanApproval": true,
-              "nextActions": []
-            },
-            "status": "passed"
-          }
-        ],
-        "nextActions": [],
-        "hash": "c210b43bea83729e704156681961437c24863a19be58684d2dc466d3048c1460",
-        "expiresAt": 1792096311450,
-        "generation": "6683d14e-2f45-4e1c-b297-76f517811b20",
-        "reserve": 18000000,
-        "mode": "Deterministic tool workflow",
-        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
-      },
-      "transaction": {
-        "id": "a7478408-1187-4653-ab28-6a410205904a",
-        "status": "SETTLED",
-        "data": {
-          "id": "a7478408-1187-4653-ab28-6a410205904a",
-          "planId": "a816d8a0-2e3a-4153-b9e3-9e3ac01d65d2",
-          "invoice": {
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "institution": "Demo International University",
-            "amount": 30000,
-            "currency": "CNY",
-            "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T20:26:51.450Z"
-          },
-          "quote": {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          "approval": {
-            "hash": "c210b43bea83729e704156681961437c24863a19be58684d2dc466d3048c1460",
-            "approvedAt": "2026-10-15T20:26:51.451Z"
-          },
-          "trace": [
-            {
-              "step": "Read invoice",
-              "status": "passed",
-              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-            },
-            {
-              "step": "Verify recipient",
-              "status": "passed",
-              "detail": "Account matches directory version 1."
-            },
-            {
-              "step": "Compare transfer routes",
-              "status": "passed",
-              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-            },
-            {
-              "step": "Check deadline and reserve",
-              "status": "passed",
-              "detail": "Campus Transfer meets all constraints."
-            },
-            {
-              "step": "Request student approval",
-              "status": "waiting",
-              "detail": "Exact terms must be approved before any funds are reserved."
-            },
-            {
-              "step": "Student approval",
-              "status": "passed",
-              "detail": "Authenticated approval is bound to this exact plan hash."
-            },
-            {
-              "step": "Reserve sandbox funds",
-              "status": "passed",
-              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
-            },
-            {
-              "step": "Submit sandbox transfer",
-              "status": "submitted",
-              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
-            },
-            {
-              "step": "query_provider_status",
-              "status": "passed",
-              "detail": "Read provider ledger a7478408-1187-4653-ab28-6a410205904a; provider status PENDING."
-            },
-            {
-              "step": "compare_receipt",
-              "status": "waiting",
-              "detail": "Provider is still processing. Check this transaction again; do not resubmit."
-            },
-            {
-              "step": "query_provider_status",
-              "status": "passed",
-              "detail": "Read provider ledger a7478408-1187-4653-ab28-6a410205904a; provider status SETTLED."
-            },
-            {
-              "step": "compare_receipt",
-              "status": "passed",
-              "detail": "Receipt matches every approved field. Settle the debit exactly once."
-            }
-          ],
-          "providerReceipt": {
-            "providerReference": "a7478408-1187-4653-ab28-6a410205904a",
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "recipient": "UNIVERSITY-CNY-001",
-            "currency": "CNY",
-            "amount": 30000,
-            "debit": 105625000,
-            "provider": "A",
-            "status": "SETTLED",
-            "issuedAt": "2026-10-15T20:26:51.451Z",
-            "issuer": "TuitionGuard sandbox provider",
-            "scenario": "pending"
-          },
-          "reconciliation": {
-            "status": "SETTLED",
-            "differences": [],
-            "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T20:26:51.453Z",
-            "receiptHash": "3ae9eb751733d7058fd040d29e56af5ff72e84f7bcf002f507911208dd115ca5"
-          }
-        },
-        "debit": 105625000,
-        "created_at": "2026-10-15T20:26:51.451Z",
-        "settled_at": "2026-10-15T20:26:51.453Z",
-        "generation": "6683d14e-2f45-4e1c-b297-76f517811b20"
-      }
-    },
-    {
-      "scenario": "rejected",
-      "plan": {
-        "id": "436856a0-2540-4b19-88f9-d8acc5839379",
-        "invoice": {
-          "invoiceId": "TG-2026-001",
-          "studentReference": "STU-0086",
-          "institution": "Demo International University",
-          "amount": 30000,
-          "currency": "CNY",
-          "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T20:26:51.456Z"
-        },
-        "quotes": [
-          {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          {
-            "id": "B",
-            "name": "Economy Remit",
-            "rate": 3480,
-            "bps": 20,
-            "fixed": 250000,
-            "hours": 72,
-            "debit": 104858800,
-            "fee": 458800,
-            "remaining": 20141200,
-            "eligible": false,
-            "reasons": [
-              "Arrival would be after the tuition deadline."
-            ]
-          },
-          {
-            "id": "C",
-            "name": "Express Tuition",
-            "rate": 3520,
-            "bps": 0,
-            "fixed": 50000,
-            "hours": 24,
-            "debit": 105650000,
-            "fee": 50000,
-            "remaining": 19350000,
-            "eligible": true,
-            "reasons": []
-          }
-        ],
-        "selected": {
-          "id": "A",
-          "name": "Campus Transfer",
-          "rate": 3500,
-          "bps": 50,
-          "fixed": 100000,
-          "hours": 24,
-          "debit": 105625000,
-          "fee": 625000,
-          "remaining": 19375000,
-          "eligible": true,
-          "reasons": []
-        },
-        "trace": [
-          {
-            "step": "Read invoice",
-            "status": "passed",
-            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-          },
-          {
-            "step": "Verify recipient",
-            "status": "passed",
-            "detail": "Account matches directory version 1."
-          },
-          {
-            "step": "Compare transfer routes",
-            "status": "passed",
-            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-          },
-          {
-            "step": "Check deadline and reserve",
-            "status": "passed",
-            "detail": "Campus Transfer meets all constraints."
-          },
-          {
-            "step": "Request student approval",
-            "status": "waiting",
-            "detail": "Exact terms must be approved before any funds are reserved."
-          }
-        ],
-        "tools": [
-          {
-            "tool": "read_invoice",
-            "startedAt": "2026-10-15T20:26:51.456Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "invoice": {
-                "invoiceId": "TG-2026-001",
-                "studentReference": "STU-0086",
-                "institution": "Demo International University",
-                "amount": 30000,
-                "currency": "CNY",
-                "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T20:26:51.456Z"
-              },
-              "complete": true
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "verify_recipient",
-            "startedAt": "2026-10-15T20:26:51.456Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "verified": true,
-              "directoryVersion": 1
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T20:26:51.456Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "quotes": [
-                {
-                  "provider": "A",
-                  "totalDebit": 105625000,
-                  "fee": 625000,
-                  "rate": 3500,
-                  "arrivalHours": 24
-                },
-                {
-                  "provider": "B",
-                  "totalDebit": 104858800,
-                  "fee": 458800,
-                  "rate": 3480,
-                  "arrivalHours": 72
-                },
-                {
-                  "provider": "C",
-                  "totalDebit": 105650000,
-                  "fee": 50000,
-                  "rate": 3520,
-                  "arrivalHours": 24
-                }
-              ],
-              "source": "Fixed sandbox provider catalogue"
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T20:26:51.456Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "selected": {
-                "id": "A",
-                "name": "Campus Transfer",
-                "rate": 3500,
-                "bps": 50,
-                "fixed": 100000,
-                "hours": 24,
-                "debit": 105625000,
-                "fee": 625000,
-                "remaining": 19375000,
-                "eligible": true,
-                "reasons": []
-              },
-              "requiresHumanApproval": true,
-              "nextActions": []
-            },
-            "status": "passed"
-          }
-        ],
-        "nextActions": [],
-        "hash": "d86bc7e9338926dc5d6e4baa76d24fea7d70afbb41d1d005223fe0c06c3fc5aa",
-        "expiresAt": 1792096311456,
-        "generation": "03e019a9-da77-400d-ade2-00be8c8dd81f",
-        "reserve": 18000000,
-        "mode": "Deterministic tool workflow",
-        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
-      },
-      "transaction": {
-        "id": "1d4f2b7f-be9b-4d28-9695-b1b6f0487cb8",
-        "status": "REJECTED",
-        "data": {
-          "id": "1d4f2b7f-be9b-4d28-9695-b1b6f0487cb8",
-          "planId": "436856a0-2540-4b19-88f9-d8acc5839379",
-          "invoice": {
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "institution": "Demo International University",
-            "amount": 30000,
-            "currency": "CNY",
-            "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T20:26:51.456Z"
-          },
-          "quote": {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          "approval": {
-            "hash": "d86bc7e9338926dc5d6e4baa76d24fea7d70afbb41d1d005223fe0c06c3fc5aa",
-            "approvedAt": "2026-10-15T20:26:51.457Z"
-          },
-          "trace": [
-            {
-              "step": "Read invoice",
-              "status": "passed",
-              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-            },
-            {
-              "step": "Verify recipient",
-              "status": "passed",
-              "detail": "Account matches directory version 1."
-            },
-            {
-              "step": "Compare transfer routes",
-              "status": "passed",
-              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-            },
-            {
-              "step": "Check deadline and reserve",
-              "status": "passed",
-              "detail": "Campus Transfer meets all constraints."
-            },
-            {
-              "step": "Request student approval",
-              "status": "waiting",
-              "detail": "Exact terms must be approved before any funds are reserved."
-            },
-            {
-              "step": "Student approval",
-              "status": "passed",
-              "detail": "Authenticated approval is bound to this exact plan hash."
-            },
-            {
-              "step": "Reserve sandbox funds",
-              "status": "passed",
-              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
-            },
-            {
-              "step": "Submit sandbox transfer",
-              "status": "submitted",
-              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
-            },
-            {
-              "step": "query_provider_status",
-              "status": "passed",
-              "detail": "Read provider ledger 1d4f2b7f-be9b-4d28-9695-b1b6f0487cb8; provider status REJECTED."
-            },
-            {
-              "step": "compare_receipt",
-              "status": "rejected",
-              "detail": "Provider rejected the transfer. Release the reservation without debiting the account."
-            }
-          ],
-          "providerReceipt": {
-            "providerReference": "1d4f2b7f-be9b-4d28-9695-b1b6f0487cb8",
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "recipient": "UNIVERSITY-CNY-001",
-            "currency": "CNY",
-            "amount": 30000,
-            "debit": 105625000,
-            "provider": "A",
-            "status": "REJECTED",
-            "issuedAt": "2026-10-15T20:26:51.457Z",
-            "issuer": "TuitionGuard sandbox provider",
-            "scenario": "rejected"
-          },
-          "reconciliation": {
-            "status": "REJECTED",
-            "differences": [],
-            "action": "Provider rejected the transfer. Release the reservation without debiting the account.",
-            "checkedAt": "2026-10-15T20:26:51.458Z",
-            "receiptHash": "a7206690a194e95e4b9b23ede6c5d25726c295adeaf9764be3e7d15d7dd59e8a"
-          }
-        },
-        "debit": 105625000,
-        "created_at": "2026-10-15T20:26:51.457Z",
-        "settled_at": null,
-        "generation": "03e019a9-da77-400d-ade2-00be8c8dd81f"
-      }
-    },
-    {
-      "scenario": "amount_mismatch",
-      "plan": {
-        "id": "c0746480-8369-4d38-a6f6-0e012f156023",
-        "invoice": {
-          "invoiceId": "TG-2026-001",
-          "studentReference": "STU-0086",
-          "institution": "Demo International University",
-          "amount": 30000,
-          "currency": "CNY",
-          "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T20:26:51.460Z"
-        },
-        "quotes": [
-          {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          {
-            "id": "B",
-            "name": "Economy Remit",
-            "rate": 3480,
-            "bps": 20,
-            "fixed": 250000,
-            "hours": 72,
-            "debit": 104858800,
-            "fee": 458800,
-            "remaining": 20141200,
-            "eligible": false,
-            "reasons": [
-              "Arrival would be after the tuition deadline."
-            ]
-          },
-          {
-            "id": "C",
-            "name": "Express Tuition",
-            "rate": 3520,
-            "bps": 0,
-            "fixed": 50000,
-            "hours": 24,
-            "debit": 105650000,
-            "fee": 50000,
-            "remaining": 19350000,
-            "eligible": true,
-            "reasons": []
-          }
-        ],
-        "selected": {
-          "id": "A",
-          "name": "Campus Transfer",
-          "rate": 3500,
-          "bps": 50,
-          "fixed": 100000,
-          "hours": 24,
-          "debit": 105625000,
-          "fee": 625000,
-          "remaining": 19375000,
-          "eligible": true,
-          "reasons": []
-        },
-        "trace": [
-          {
-            "step": "Read invoice",
-            "status": "passed",
-            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-          },
-          {
-            "step": "Verify recipient",
-            "status": "passed",
-            "detail": "Account matches directory version 1."
-          },
-          {
-            "step": "Compare transfer routes",
-            "status": "passed",
-            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-          },
-          {
-            "step": "Check deadline and reserve",
-            "status": "passed",
-            "detail": "Campus Transfer meets all constraints."
-          },
-          {
-            "step": "Request student approval",
-            "status": "waiting",
-            "detail": "Exact terms must be approved before any funds are reserved."
-          }
-        ],
-        "tools": [
-          {
-            "tool": "read_invoice",
-            "startedAt": "2026-10-15T20:26:51.460Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "invoice": {
-                "invoiceId": "TG-2026-001",
-                "studentReference": "STU-0086",
-                "institution": "Demo International University",
-                "amount": 30000,
-                "currency": "CNY",
-                "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T20:26:51.460Z"
-              },
-              "complete": true
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "verify_recipient",
-            "startedAt": "2026-10-15T20:26:51.460Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "verified": true,
-              "directoryVersion": 1
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T20:26:51.460Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "quotes": [
-                {
-                  "provider": "A",
-                  "totalDebit": 105625000,
-                  "fee": 625000,
-                  "rate": 3500,
-                  "arrivalHours": 24
-                },
-                {
-                  "provider": "B",
-                  "totalDebit": 104858800,
-                  "fee": 458800,
-                  "rate": 3480,
-                  "arrivalHours": 72
-                },
-                {
-                  "provider": "C",
-                  "totalDebit": 105650000,
-                  "fee": 50000,
-                  "rate": 3520,
-                  "arrivalHours": 24
-                }
-              ],
-              "source": "Fixed sandbox provider catalogue"
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T20:26:51.460Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "selected": {
-                "id": "A",
-                "name": "Campus Transfer",
-                "rate": 3500,
-                "bps": 50,
-                "fixed": 100000,
-                "hours": 24,
-                "debit": 105625000,
-                "fee": 625000,
-                "remaining": 19375000,
-                "eligible": true,
-                "reasons": []
-              },
-              "requiresHumanApproval": true,
-              "nextActions": []
-            },
-            "status": "passed"
-          }
-        ],
-        "nextActions": [],
-        "hash": "8e1bae60451aed5d5314e277593f77343f2500d9fad1c73031f76cddf3fd1db4",
-        "expiresAt": 1792096311460,
-        "generation": "ef3f5872-fa8d-479b-88f2-510143ef505b",
-        "reserve": 18000000,
-        "mode": "Deterministic tool workflow",
-        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
-      },
-      "transaction": {
-        "id": "2d92826e-f6a4-470f-8b19-da900dba6666",
-        "status": "SETTLED",
-        "data": {
-          "id": "2d92826e-f6a4-470f-8b19-da900dba6666",
-          "planId": "c0746480-8369-4d38-a6f6-0e012f156023",
-          "invoice": {
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "institution": "Demo International University",
-            "amount": 30000,
-            "currency": "CNY",
-            "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T20:26:51.460Z"
-          },
-          "quote": {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          "approval": {
-            "hash": "8e1bae60451aed5d5314e277593f77343f2500d9fad1c73031f76cddf3fd1db4",
-            "approvedAt": "2026-10-15T20:26:51.460Z"
-          },
-          "trace": [
-            {
-              "step": "Read invoice",
-              "status": "passed",
-              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-            },
-            {
-              "step": "Verify recipient",
-              "status": "passed",
-              "detail": "Account matches directory version 1."
-            },
-            {
-              "step": "Compare transfer routes",
-              "status": "passed",
-              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-            },
-            {
-              "step": "Check deadline and reserve",
-              "status": "passed",
-              "detail": "Campus Transfer meets all constraints."
-            },
-            {
-              "step": "Request student approval",
-              "status": "waiting",
-              "detail": "Exact terms must be approved before any funds are reserved."
-            },
-            {
-              "step": "Student approval",
-              "status": "passed",
-              "detail": "Authenticated approval is bound to this exact plan hash."
-            },
-            {
-              "step": "Reserve sandbox funds",
-              "status": "passed",
-              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
-            },
-            {
-              "step": "Submit sandbox transfer",
-              "status": "submitted",
-              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
-            },
-            {
-              "step": "query_provider_status",
-              "status": "passed",
-              "detail": "Read provider ledger 2d92826e-f6a4-470f-8b19-da900dba6666; provider status SETTLED."
-            },
-            {
-              "step": "compare_receipt",
-              "status": "waiting",
-              "detail": "Keep funds reserved. Investigate the provider receipt; never submit another transfer. amount does not match approved terms"
-            },
-            {
-              "step": "query_provider_status",
-              "status": "passed",
-              "detail": "Read provider ledger 2d92826e-f6a4-470f-8b19-da900dba6666; provider status SETTLED."
-            },
-            {
-              "step": "compare_receipt",
-              "status": "passed",
-              "detail": "Receipt matches every approved field. Settle the debit exactly once."
-            }
-          ],
-          "providerReceipt": {
-            "providerReference": "2d92826e-f6a4-470f-8b19-da900dba6666",
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "recipient": "UNIVERSITY-CNY-001",
-            "currency": "CNY",
-            "amount": 30000,
-            "debit": 105625000,
-            "provider": "A",
-            "status": "SETTLED",
-            "issuedAt": "2026-10-15T20:26:51.462Z",
-            "issuer": "TuitionGuard sandbox provider",
-            "scenario": "normal",
-            "correction": {
-              "reason": "Explicit sandbox discrepancy resolution",
-              "at": "2026-10-15T20:26:51.462Z"
-            }
-          },
-          "reconciliation": {
-            "status": "SETTLED",
-            "differences": [],
-            "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T20:26:51.463Z",
-            "receiptHash": "85fc145adffa8fe0e6935f8338d11d6d0e7b17d13090bcac535b57534726fc23"
-          }
-        },
-        "debit": 105625000,
-        "created_at": "2026-10-15T20:26:51.460Z",
-        "settled_at": "2026-10-15T20:26:51.463Z",
-        "generation": "ef3f5872-fa8d-479b-88f2-510143ef505b"
-      }
-    },
-    {
-      "scenario": "recipient_mismatch",
-      "plan": {
-        "id": "a8bbb5c0-d2d1-49cd-876d-d9c6c5c397a4",
-        "invoice": {
-          "invoiceId": "TG-2026-001",
-          "studentReference": "STU-0086",
-          "institution": "Demo International University",
-          "amount": 30000,
-          "currency": "CNY",
-          "recipient": "UNIVERSITY-CNY-001",
-          "deadline": "2026-10-17T20:26:51.464Z"
-        },
-        "quotes": [
-          {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          {
-            "id": "B",
-            "name": "Economy Remit",
-            "rate": 3480,
-            "bps": 20,
-            "fixed": 250000,
-            "hours": 72,
-            "debit": 104858800,
-            "fee": 458800,
-            "remaining": 20141200,
-            "eligible": false,
-            "reasons": [
-              "Arrival would be after the tuition deadline."
-            ]
-          },
-          {
-            "id": "C",
-            "name": "Express Tuition",
-            "rate": 3520,
-            "bps": 0,
-            "fixed": 50000,
-            "hours": 24,
-            "debit": 105650000,
-            "fee": 50000,
-            "remaining": 19350000,
-            "eligible": true,
-            "reasons": []
-          }
-        ],
-        "selected": {
-          "id": "A",
-          "name": "Campus Transfer",
-          "rate": 3500,
-          "bps": 50,
-          "fixed": 100000,
-          "hours": 24,
-          "debit": 105625000,
-          "fee": 625000,
-          "remaining": 19375000,
-          "eligible": true,
-          "reasons": []
-        },
-        "trace": [
-          {
-            "step": "Read invoice",
-            "status": "passed",
-            "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-          },
-          {
-            "step": "Verify recipient",
-            "status": "passed",
-            "detail": "Account matches directory version 1."
-          },
-          {
-            "step": "Compare transfer routes",
-            "status": "passed",
-            "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-          },
-          {
-            "step": "Check deadline and reserve",
-            "status": "passed",
-            "detail": "Campus Transfer meets all constraints."
-          },
-          {
-            "step": "Request student approval",
-            "status": "waiting",
-            "detail": "Exact terms must be approved before any funds are reserved."
-          }
-        ],
-        "tools": [
-          {
-            "tool": "read_invoice",
-            "startedAt": "2026-10-15T20:26:51.464Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "invoice": {
-                "invoiceId": "TG-2026-001",
-                "studentReference": "STU-0086",
-                "institution": "Demo International University",
-                "amount": 30000,
-                "currency": "CNY",
-                "recipient": "UNIVERSITY-CNY-001",
-                "deadline": "2026-10-17T20:26:51.464Z"
-              },
-              "complete": true
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "verify_recipient",
-            "startedAt": "2026-10-15T20:26:51.464Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "verified": true,
-              "directoryVersion": 1
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "get_transfer_quotes",
-            "startedAt": "2026-10-15T20:26:51.464Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "quotes": [
-                {
-                  "provider": "A",
-                  "totalDebit": 105625000,
-                  "fee": 625000,
-                  "rate": 3500,
-                  "arrivalHours": 24
-                },
-                {
-                  "provider": "B",
-                  "totalDebit": 104858800,
-                  "fee": 458800,
-                  "rate": 3480,
-                  "arrivalHours": 72
-                },
-                {
-                  "provider": "C",
-                  "totalDebit": 105650000,
-                  "fee": 50000,
-                  "rate": 3520,
-                  "arrivalHours": 24
-                }
-              ],
-              "source": "Fixed sandbox provider catalogue"
-            },
-            "status": "passed"
-          },
-          {
-            "tool": "check_payment_policy",
-            "startedAt": "2026-10-15T20:26:51.464Z",
-            "durationMs": 0,
-            "input": {},
-            "output": {
-              "selected": {
-                "id": "A",
-                "name": "Campus Transfer",
-                "rate": 3500,
-                "bps": 50,
-                "fixed": 100000,
-                "hours": 24,
-                "debit": 105625000,
-                "fee": 625000,
-                "remaining": 19375000,
-                "eligible": true,
-                "reasons": []
-              },
-              "requiresHumanApproval": true,
-              "nextActions": []
-            },
-            "status": "passed"
-          }
-        ],
-        "nextActions": [],
-        "hash": "946e0025943c55f8cd436895eb9130e48e9e255ef0765b1c1ca489bee978a2df",
-        "expiresAt": 1792096311464,
-        "generation": "9c0b086c-8386-41f0-b1ce-fc284cc8d360",
-        "reserve": 18000000,
-        "mode": "Deterministic tool workflow",
-        "explanation": "Campus Transfer is the lowest-cost eligible route. It debits 105,625,000 VND, delivers 30,000 CNY in the sandbox within 24 hours, and leaves 19,375,000 VND available. Approve the exact terms to continue."
-      },
-      "transaction": {
-        "id": "2095b6be-0080-457b-93fc-8c21486fa7b9",
-        "status": "SETTLED",
-        "data": {
-          "id": "2095b6be-0080-457b-93fc-8c21486fa7b9",
-          "planId": "a8bbb5c0-d2d1-49cd-876d-d9c6c5c397a4",
-          "invoice": {
-            "invoiceId": "TG-2026-001",
-            "studentReference": "STU-0086",
-            "institution": "Demo International University",
-            "amount": 30000,
-            "currency": "CNY",
-            "recipient": "UNIVERSITY-CNY-001",
-            "deadline": "2026-10-17T20:26:51.464Z"
-          },
-          "quote": {
-            "id": "A",
-            "name": "Campus Transfer",
-            "rate": 3500,
-            "bps": 50,
-            "fixed": 100000,
-            "hours": 24,
-            "debit": 105625000,
-            "fee": 625000,
-            "remaining": 19375000,
-            "eligible": true,
-            "reasons": []
-          },
-          "approval": {
-            "hash": "946e0025943c55f8cd436895eb9130e48e9e255ef0765b1c1ca489bee978a2df",
-            "approvedAt": "2026-10-15T20:26:51.465Z"
-          },
-          "trace": [
-            {
-              "step": "Read invoice",
-              "status": "passed",
-              "detail": "TG-2026-001: 30,000 CNY; all required fields provided."
-            },
-            {
-              "step": "Verify recipient",
-              "status": "passed",
-              "detail": "Account matches directory version 1."
-            },
-            {
-              "step": "Compare transfer routes",
-              "status": "passed",
-              "detail": "Three fixed sandbox quotes calculated with integer arithmetic. Rates are illustrative, not live market quotes."
-            },
-            {
-              "step": "Check deadline and reserve",
-              "status": "passed",
-              "detail": "Campus Transfer meets all constraints."
-            },
-            {
-              "step": "Request student approval",
-              "status": "waiting",
-              "detail": "Exact terms must be approved before any funds are reserved."
-            },
-            {
-              "step": "Student approval",
-              "status": "passed",
-              "detail": "Authenticated approval is bound to this exact plan hash."
-            },
-            {
-              "step": "Reserve sandbox funds",
-              "status": "passed",
-              "detail": "Funds reserved atomically; duplicate invoice constraint enforced."
-            },
-            {
-              "step": "Submit sandbox transfer",
-              "status": "submitted",
-              "detail": "Sandbox provider accepted the request. Settlement is not yet confirmed."
-            },
-            {
-              "step": "query_provider_status",
-              "status": "passed",
-              "detail": "Read provider ledger 2095b6be-0080-457b-93fc-8c21486fa7b9; provider status SETTLED."
+              "detail": "Read provider ledger f01e7302-a1ac-4861-9117-dd15e24ea1cf; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -1830,7 +1830,7 @@
             {
               "step": "query_provider_status",
               "status": "passed",
-              "detail": "Read provider ledger 2095b6be-0080-457b-93fc-8c21486fa7b9; provider status SETTLED."
+              "detail": "Read provider ledger f01e7302-a1ac-4861-9117-dd15e24ea1cf; provider status SETTLED."
             },
             {
               "step": "compare_receipt",
@@ -1839,7 +1839,7 @@
             }
           ],
           "providerReceipt": {
-            "providerReference": "2095b6be-0080-457b-93fc-8c21486fa7b9",
+            "providerReference": "f01e7302-a1ac-4861-9117-dd15e24ea1cf",
             "invoiceId": "TG-2026-001",
             "studentReference": "STU-0086",
             "recipient": "UNIVERSITY-CNY-001",
@@ -1848,26 +1848,26 @@
             "debit": 105625000,
             "provider": "A",
             "status": "SETTLED",
-            "issuedAt": "2026-10-15T20:26:51.467Z",
+            "issuedAt": "2026-10-15T20:37:09.981Z",
             "issuer": "TuitionGuard sandbox provider",
             "scenario": "normal",
             "correction": {
               "reason": "Explicit sandbox discrepancy resolution",
-              "at": "2026-10-15T20:26:51.467Z"
+              "at": "2026-10-15T20:37:09.981Z"
             }
           },
           "reconciliation": {
             "status": "SETTLED",
             "differences": [],
             "action": "Receipt matches every approved field. Settle the debit exactly once.",
-            "checkedAt": "2026-10-15T20:26:51.468Z",
-            "receiptHash": "79adc149e07029222159e33e6a156d6f1f30f4d706e58afc760c1b03f2bb4530"
+            "checkedAt": "2026-10-15T20:37:09.982Z",
+            "receiptHash": "d6575654d2c8943b3f87d1174b71f6502ca981748e394a483dd3094e3c45df83"
           }
         },
         "debit": 105625000,
-        "created_at": "2026-10-15T20:26:51.465Z",
-        "settled_at": "2026-10-15T20:26:51.468Z",
-        "generation": "9c0b086c-8386-41f0-b1ce-fc284cc8d360"
+        "created_at": "2026-10-15T20:37:09.979Z",
+        "settled_at": "2026-10-15T20:37:09.982Z",
+        "generation": "f10594e6-8471-40a4-9ce5-8a134ef1b005"
       }
     }
   ]

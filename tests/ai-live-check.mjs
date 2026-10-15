@@ -96,5 +96,25 @@ check('groq minute+second wait is parsed',retryAfterSeconds(null,'Please try aga
 check('unfamiliar key format is accepted',keyProblem('openai','sk-svcacct-Ab8RN6Kx_example.Key123')===null);
 check('empty key gives a clear message',/Paste your OpenAI API key/.test(keyProblem('openai','  ')));
 check('OpenAI key pasted under Groq is flagged',/looks like an OpenAI key/.test(keyProblem('groq','sk-'+'c'.repeat(35))));
+
+// 12. Token-saving mode: one model call, only read_invoice offered, rest deterministic.
+const one=(c,fields)=>({message:{role:'assistant',content:null,tool_calls:[{id:'e1',type:'function',function:{name:'read_invoice',arguments:JSON.stringify({fields})}}]}});
+f=fakeGroq([one(0,parseInvoice(byId.normal.invoiceText))]);r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'openai/gpt-oss-120b',f),'extract');
+check('extract mode passes normal case with exactly one model call',r.passed&&r.observed==='route:A'&&r.modelCalls===1&&r.agentMode==='extract');
+check('extract mode offers only read_invoice and requires a tool call',f.bodies[0].tools.length===1&&f.bodies[0].tools[0].function.name==='read_invoice'&&f.bodies[0].tool_choice==='required');
+check('extract mode still runs all four tools through validators',r.tools.map(x=>x.tool).join()==='read_invoice,verify_recipient,get_transfer_quotes,check_payment_policy'&&r.tools.every(x=>x.status==='passed'));
+check('groq gpt-oss requests low reasoning and no returned reasoning',f.bodies[0].reasoning_effort==='low'&&f.bodies[0].include_reasoning===false);
+for(const id of ['funds','recipient']){f=fakeGroq([one(0,parseInvoice(byId[id].invoiceText))]);r=await runAgentCheck(byId[id],'live_groq',groqBrowserClient(KEY,'m',f),'extract');check(`extract mode ${id} meets expected outcome with one call`,r.passed&&r.modelCalls===1);}
+f=fakeGroq([{message:{role:'assistant',content:null,tool_calls:[{id:'x',type:'function',function:{name:'submit_payment',arguments:'{"approved":true}'}}]}},{message:{role:'assistant',content:null,tool_calls:[{id:'y',type:'function',function:{name:'submit_payment',arguments:'{}'}}]}}]);
+r=await runAgentCheck(byId.injection,'live_groq',groqBrowserClient(KEY,'m',f),'extract');
+check('extract mode blocks an injected payment tool and stays safe',r.passed&&r.selectedRoute===null&&r.tools.every(x=>x.status==='blocked')&&r.modelCalls<=2);
+const bad2={...parseInvoice(byId.normal.invoiceText)};const badFmt={...bad2,deadline:'next Friday'};
+f=fakeGroq([one(0,badFmt),one(0,bad2)]);r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'m',f),'extract');
+check('extract mode allows one correction after a format error',r.passed&&r.modelCalls===2);
+const noDl={...parseInvoice(byId.normal.invoiceText),deadline:null};
+f=fakeGroq([one(0,noDl),one(0,parseInvoice(byId.normal.invoiceText))]);r=await runAgentCheck(byId.normal,'live_groq',groqBrowserClient(KEY,'m',f),'extract');
+check('a genuinely missing field ends in clarification without a second call',r.observed==='needs_input'&&r.modelCalls===1);
+const o2=fakeGroq([one(0,parseInvoice(byId.normal.invoiceText))]);await runAgentCheck(byId.normal,'live_openai',llmBrowserClient('openai',OKEY,'gpt-6-luna',o2),'extract');
+check('openai request keeps reasoning_effort none and no include_reasoning',o2.bodies[0].reasoning_effort==='none'&&!('include_reasoning' in o2.bodies[0])&&o2.bodies[0].tool_choice==='required');
 writeFileSync('public/ai-live-check-report.json',JSON.stringify({suite:'ai-live-check',scope:'Public AI Connection panel logic. Live-mode checks use fake Groq and OpenAI endpoints; no real model accuracy is measured here.',passed:checks.length,checks},null,2)+'\n');
 console.log(checks.length+' AI connection panel checks passed');

@@ -24,5 +24,12 @@ r=await runLayoutCase(c1,async()=>{throw new Error('HTTP 429');},deadline);
 check('provider error is FAIL and counted separately',!r.passed&&r.observedAction==='provider_error'&&summarize([r]).providerErrors===1);
 r=await runLayoutCase(c1,async()=>({role:'assistant',content:'Here are the fields: ...'}),deadline);
 check('a prose answer without tool calls is FAIL',!r.passed&&r.observedAction==='needs_input');
+
+// Token-saving mode: one call per invoice, same scoring.
+function oneShot(c){return async()=>{const f={...c.expectedFields,deadline};if(c.missingField)f[c.missingField]=null;return {role:'assistant',content:null,tool_calls:[{id:'e',type:'function',function:{name:'read_invoice',arguments:JSON.stringify({fields:f})}}],__usage:{promptTokens:300,completionTokens:60,totalTokens:360,model:'fake'}};};}
+const ex=[];for(const c of cases)ex.push(await runLayoutCase(c,oneShot(c),deadline,'extract'));
+const se=summarize(ex);
+check('token-saving mode scores 20/20 with exactly 20 model calls',se.passed===20&&se.modelCalls===20&&ex.every(r=>r.agentMode==='extract'));
+check('token totals are summed across invoices',se.tokensTotal===20*360);
 writeFileSync('public/layout-eval-report.json',JSON.stringify({suite:'layout-eval',scope:'Scoring logic for the 20-invoice live test, exercised with fake models. Not a live model result.',passed:checks.length,checks},null,2)+'\n');
 console.log(checks.length+' 20-invoice evaluation checks passed');

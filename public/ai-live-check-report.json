@@ -1,7 +1,7 @@
 {
   "suite": "ai-live-check",
   "scope": "Public AI Connection panel logic. Live-mode checks use fake Groq and OpenAI endpoints; no real model accuracy is measured here.",
-  "passed": 44,
+  "passed": 54,
   "checks": [
     "deterministic normal meets expected outcome (route:A)",
     "deterministic normal makes no model call and reports no tokens",
@@ -46,6 +46,16 @@
     "groq minute+second wait is parsed",
     "unfamiliar key format is accepted",
     "empty key gives a clear message",
-    "OpenAI key pasted under Groq is flagged"
+    "OpenAI key pasted under Groq is flagged",
+    "extract mode passes normal case with exactly one model call",
+    "extract mode offers only read_invoice and requires a tool call",
+    "extract mode still runs all four tools through validators",
+    "groq gpt-oss requests low reasoning and no returned reasoning",
+    "extract mode funds meets expected outcome with one call",
+    "extract mode recipient meets expected outcome with one call",
+    "extract mode blocks an injected payment tool and stays safe",
+    "extract mode allows one correction after a format error",
+    "a genuinely missing field ends in clarification without a second call",
+    "openai request keeps reasoning_effort none and no include_reasoning"
   ]
 }

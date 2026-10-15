@@ -2,12 +2,12 @@
 // Every result below is computed from what actually ran: the bounded orchestrator in lib/agent.ts,
 // either in deterministic mode (no model) or with a user-supplied Groq key (real tool calling).
 // Nothing in this file fabricates a PASS, latency, token count or tool trace.
-import {orchestrate,toolDefinitions} from './agent';
+import {orchestrate,toolDefinitions,type OrchestrateMode} from './agent';
 import {sampleInvoice,UNIVERSITY} from './engine';
 
 export type CheckMode='deterministic'|'live_groq'|'live_openai';
 export type ProviderUsage={promptTokens:number|null;completionTokens:number|null;totalTokens:number|null;model:string|null};
-export type LLM=(messages:any[],tools:any[])=>Promise<any>;
+export type LLM=(messages:any[],tools:any[],opts?:{toolChoice?:'auto'|'required'})=>Promise<any>;
 
 export type AgentCheckCase={
  id:'normal'|'funds'|'recipient'|'injection';
@@ -25,6 +25,7 @@ export type AgentCheckResult={
  passed:boolean;
  durationMs:number;
  modelCalls:number;
+ agentMode:OrchestrateMode;
  rateLimitRetries:number;
  usage:{promptTokens:number|null;completionTokens:number|null;totalTokens:number|null;reportedByProvider:boolean};
  model:string|null;
@@ -70,17 +71,17 @@ export function judge(c:AgentCheckCase,observed:string,result:any):boolean{
  return !!result&&!forbiddenRan&&recipientOk;
 }
 
-export async function runAgentCheck(c:AgentCheckCase,mode:CheckMode,llm?:LLM):Promise<AgentCheckResult>{
+export async function runAgentCheck(c:AgentCheckCase,mode:CheckMode,llm?:LLM,agentMode:OrchestrateMode='full'):Promise<AgentCheckResult>{
  const usage:ProviderUsage[]=[];let modelCalls=0,rateLimitRetries=0;let result:any;let error:string|null=null;
  const start=(typeof performance!=='undefined'?performance.now():Date.now());
- const counted:LLM|undefined=mode!=='deterministic'&&llm?async(messages,tools)=>{modelCalls++;const m=await llm(messages,tools);if(m&&m.__usage){usage.push(m.__usage);delete m.__usage;}if(m&&typeof m.__retries==='number'){rateLimitRetries+=m.__retries;delete m.__retries;}return m;}:undefined;
+ const counted:LLM|undefined=mode!=='deterministic'&&llm?async(messages,tools,o)=>{modelCalls++;const m=await llm(messages,tools,o);if(m&&m.__usage){usage.push(m.__usage);delete m.__usage;}if(m&&typeof m.__retries==='number'){rateLimitRetries+=m.__retries;delete m.__retries;}return m;}:undefined;
  if(mode!=='deterministic'&&!counted)throw new Error('Live mode requires a model client.');
- try{result=await orchestrate(c.invoiceText,c.account,c.reserve,counted);}catch(e){error=e instanceof Error?e.message:'Agent run failed';}
+ try{result=await orchestrate(c.invoiceText,c.account,c.reserve,counted,agentMode);}catch(e){error=e instanceof Error?e.message:'Agent run failed';}
  const durationMs=Math.round((typeof performance!=='undefined'?performance.now():Date.now())-start);
  const observed=error?'provider_error':classify(result);
  const sum=(k:'promptTokens'|'completionTokens'|'totalTokens')=>usage.length&&usage.every(u=>u[k]!=null)?usage.reduce((a,u)=>a+(u[k] as number),0):null;
  return {
-  caseId:c.id,mode,expected:c.expected,observed,passed:!error&&judge(c,observed,result),durationMs,modelCalls,rateLimitRetries,
+  caseId:c.id,mode,expected:c.expected,observed,passed:!error&&judge(c,observed,result),durationMs,modelCalls,agentMode,rateLimitRetries,
   usage:{promptTokens:sum('promptTokens'),completionTokens:sum('completionTokens'),totalTokens:sum('totalTokens'),reportedByProvider:usage.length>0&&usage.every(u=>u.totalTokens!=null)},
   model:usage.find(u=>u.model)?.model??null,
   tools:(result?.tools||[]).map((t:any)=>({tool:t.tool,status:t.status})),
@@ -124,13 +125,15 @@ export function llmBrowserClient(provider:Provider,key:string,model:string,fetch
  if(!/^[a-zA-Z0-9/_.:-]{1,100}$/.test(m))throw new Error('The model ID is invalid.');
  const sleep=opts.sleep||((ms:number)=>new Promise<void>(res=>setTimeout(res,ms)));
  const maxRetries=opts.maxRetries??4,maxWait=opts.maxWaitSeconds??65;
- return async(messages,tools)=>{
+ // gpt-oss on Groq: low reasoning effort and no returned reasoning keep completion tokens small.
+ const extra={...cfg.extra,...(provider==='groq'&&/gpt-oss/.test(m)?{reasoning_effort:'low',include_reasoning:false}:{})};
+ return async(messages,tools,o)=>{
   let retries=0;
   for(;;){
    const ctrl=new AbortController();const timer=setTimeout(()=>ctrl.abort(),30000);
    try{
     let r:Response;
-    try{r=await fetchImpl(cfg.url,{method:'POST',headers:{Authorization:'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:m,messages,tools,tool_choice:'auto',...cfg.extra,[cfg.maxField]:cfg.maxTokens}),signal:ctrl.signal});}
+    try{r=await fetchImpl(cfg.url,{method:'POST',headers:{Authorization:'Bearer '+k,'Content-Type':'application/json'},body:JSON.stringify({model:m,messages,tools,tool_choice:o?.toolChoice||'auto',...extra,[cfg.maxField]:cfg.maxTokens}),signal:ctrl.signal});}
     catch(e){throw new Error(`${cfg.label} could not be reached from this browser (${e instanceof Error?e.name:'network error'}). Check the internet connection, VPN or browser extensions. No payment was performed.`);}
     if(!r.ok){
      let detail='';try{const raw:any=await r.json();const body=Array.isArray(raw)?raw[0]:raw;detail=String(body?.error?.message||'').slice(0,400);if(!/retryDelay/.test(detail)&&body?.error?.details)detail+=' '+JSON.stringify(body.error.details).slice(0,200);}catch{/* body not JSON */}
