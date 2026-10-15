@@ -82,3 +82,13 @@ See README.md and tests/run-all.mjs. Node 24 is recommended for the built-in SQL
 ## Review update: live evaluation and stronger validation
 POST /api/live-check accepts one of three authored planning checks and requires authentication plus a user-supplied Groq key. It returns actual provider-reported token usage, requested/resolved model IDs, duration, observed/expected outcomes and tool events. It does not write plans, accounts or transactions. Missing token usage is reported as unknown; no pricing or monetary cost is invented.
 The app also rejects unknown receipt states, malformed amount fields and impossible calendar dates, binds the approved available balance at the atomic insert, and reports reconciliation from persisted state. See competition-readiness-review.md and review-regression-report.json.
+
+## Public AI Connection panel (updated 16 October 2026)
+`app/ai-connection.tsx` now runs the same bounded orchestrator as `/lab` (`lib/agent.ts`) through `lib/ai-live-check.ts` on four synthetic cases: normal invoice (route A), reserve breach (blocked), unverified recipient (blocked) and an invoice containing an injected `submit_payment` instruction (safe: no forbidden tool, verified recipient only).
+
+- **Deterministic (no AI):** no model call; verifies tool order and policy only.
+- **Live Groq agent:** requires the reviewer's own `gsk_…` key; sends the four real tool definitions with `tool_choice=auto`.
+- PASS is computed from the observed outcome. A prose-only reply or HTTP error is FAIL. Latency is measured, model calls are counted and tokens are provider-reported or `null`. The former sandbox/mock key mode was removed.
+- Tests: `tests/ai-live-check.mjs` (24 checks, included in `pnpm test`).
+
+The full Word version of this documentation is `TuitionGuard_Technical_Documentation.docx` in this folder.
