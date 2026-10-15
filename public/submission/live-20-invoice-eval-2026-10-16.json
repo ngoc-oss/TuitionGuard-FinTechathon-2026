@@ -1,0 +1,929 @@
+{
+  "product": "TuitionGuard",
+  "mode": "Live Groq tool-calling run on 20 authored synthetic invoice layouts (tests/live-layout-cases.json)",
+  "requestedModel": "openai/gpt-oss-120b",
+  "agentMode": "extract",
+  "startedAt": "2026-10-15T20:41:44.806Z",
+  "exportedAt": "2026-10-15T20:45:36.378Z",
+  "summary": {
+    "total": 20,
+    "passed": 20,
+    "extractionPassed": 18,
+    "extractionTotal": 18,
+    "clarificationPassed": 2,
+    "clarificationTotal": 2,
+    "fieldsCorrect": 126,
+    "fieldsTotal": 126,
+    "providerErrors": 0,
+    "tokensTotal": 10489,
+    "modelCalls": 20
+  },
+  "results": [
+    {
+      "id": "LAYOUT-001",
+      "layout": "labelled English",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 974,
+      "usage": {
+        "promptTokens": 356,
+        "completionTokens": 145,
+        "totalTokens": 501
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-002",
+      "layout": "English letter",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 1020,
+      "usage": {
+        "promptTokens": 348,
+        "completionTokens": 201,
+        "totalTokens": 549
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-003",
+      "layout": "Vietnamese labels",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 599,
+      "usage": {
+        "promptTokens": 377,
+        "completionTokens": 167,
+        "totalTokens": 544
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-004",
+      "layout": "Chinese labels",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 736,
+      "usage": {
+        "promptTokens": 358,
+        "completionTokens": 167,
+        "totalTokens": 525
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-005",
+      "layout": "JSON",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 766,
+      "usage": {
+        "promptTokens": 376,
+        "completionTokens": 119,
+        "totalTokens": 495
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-006",
+      "layout": "reordered paragraph",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 662,
+      "usage": {
+        "promptTokens": 345,
+        "completionTokens": 186,
+        "totalTokens": 531
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-007",
+      "layout": "labelled English",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 721,
+      "usage": {
+        "promptTokens": 356,
+        "completionTokens": 144,
+        "totalTokens": 500
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-008",
+      "layout": "English letter",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 1222,
+      "usage": {
+        "promptTokens": 348,
+        "completionTokens": 194,
+        "totalTokens": 542
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-009",
+      "layout": "Vietnamese labels",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 799,
+      "usage": {
+        "promptTokens": 377,
+        "completionTokens": 194,
+        "totalTokens": 571
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-010",
+      "layout": "Chinese labels",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 943,
+      "usage": {
+        "promptTokens": 358,
+        "completionTokens": 186,
+        "totalTokens": 544
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-011",
+      "layout": "JSON",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 770,
+      "usage": {
+        "promptTokens": 376,
+        "completionTokens": 119,
+        "totalTokens": 495
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-012",
+      "layout": "reordered paragraph",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 965,
+      "usage": {
+        "promptTokens": 345,
+        "completionTokens": 186,
+        "totalTokens": 531
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-013",
+      "layout": "labelled English",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 1133,
+      "usage": {
+        "promptTokens": 356,
+        "completionTokens": 144,
+        "totalTokens": 500
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-014",
+      "layout": "English letter",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 932,
+      "usage": {
+        "promptTokens": 348,
+        "completionTokens": 182,
+        "totalTokens": 530
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-015",
+      "layout": "Vietnamese labels",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 911,
+      "usage": {
+        "promptTokens": 377,
+        "completionTokens": 193,
+        "totalTokens": 570
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-016",
+      "layout": "Chinese labels",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 1281,
+      "usage": {
+        "promptTokens": 358,
+        "completionTokens": 167,
+        "totalTokens": 525
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-017",
+      "layout": "JSON",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 867,
+      "usage": {
+        "promptTokens": 376,
+        "completionTokens": 118,
+        "totalTokens": 494
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-018",
+      "layout": "reordered paragraph",
+      "expectedAction": "complete",
+      "missingField": null,
+      "observedAction": "complete",
+      "passed": true,
+      "fieldMatches": {
+        "institution": true,
+        "invoiceId": true,
+        "studentReference": true,
+        "amount": true,
+        "currency": true,
+        "recipient": true,
+        "deadline": true
+      },
+      "fieldsCorrect": 7,
+      "fieldsTotal": 7,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 719,
+      "usage": {
+        "promptTokens": 345,
+        "completionTokens": 186,
+        "totalTokens": 531
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "passed"
+        },
+        {
+          "tool": "verify_recipient",
+          "status": "passed"
+        },
+        {
+          "tool": "get_transfer_quotes",
+          "status": "passed"
+        },
+        {
+          "tool": "check_payment_policy",
+          "status": "passed"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-019",
+      "layout": "labelled English",
+      "expectedAction": "needs_input",
+      "missingField": "deadline",
+      "observedAction": "needs_input",
+      "passed": true,
+      "fieldMatches": null,
+      "fieldsCorrect": null,
+      "fieldsTotal": null,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 718,
+      "usage": {
+        "promptTokens": 344,
+        "completionTokens": 124,
+        "totalTokens": 468
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "blocked"
+        }
+      ],
+      "error": null
+    },
+    {
+      "id": "LAYOUT-020",
+      "layout": "English letter",
+      "expectedAction": "needs_input",
+      "missingField": "studentReference",
+      "observedAction": "needs_input",
+      "passed": true,
+      "fieldMatches": null,
+      "fieldsCorrect": null,
+      "fieldsTotal": null,
+      "modelCalls": 1,
+      "agentMode": "extract",
+      "rateLimitRetries": 0,
+      "elapsedMs": 1526,
+      "usage": {
+        "promptTokens": 347,
+        "completionTokens": 196,
+        "totalTokens": 543
+      },
+      "tools": [
+        {
+          "tool": "read_invoice",
+          "status": "blocked"
+        }
+      ],
+      "error": null
+    }
+  ],
+  "keyIncluded": false,
+  "limitations": [
+    "Authored synthetic layouts, not real invoices or an external benchmark.",
+    "No real payment executed.",
+    "Tokens are provider-reported; null when not reported."
+  ]
+}
