@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import type { Lang } from '../lib/judge-i18n';
-import { buildCases, runAgentCheck, groqBrowserClient, type AgentCheckResult, type CheckMode } from '../lib/ai-live-check';
+import { buildCases, runAgentCheck, llmBrowserClient, isPlausibleKey, PROVIDERS, type AgentCheckResult, type CheckMode, type Provider } from '../lib/ai-live-check';
 
 // Public AI Connection panel.
 // Both modes run the same bounded orchestrator (lib/agent.ts) with the same four read-only tools.
@@ -9,13 +9,17 @@ import { buildCases, runAgentCheck, groqBrowserClient, type AgentCheckResult, ty
 export default function AiConnection({ lang }: { lang: Lang }) {
   const t = (en: string, vi: string, zh: string) => (lang === 'vi' ? vi : lang === 'zh' ? zh : en);
 
+  const [provider, setProvider] = useState<Provider>('gemini');
   const [key, setKey] = useState<string>('');
-  const [model, setModel] = useState<string>('openai/gpt-oss-120b');
+  const [model, setModel] = useState<string>(PROVIDERS.gemini.defaultModel);
+  const [ranModel, setRanModel] = useState<string | null>(null);
+  const cfg = PROVIDERS[provider];
   const [showKey, setShowKey] = useState<boolean>(false);
   const [running, setRunning] = useState<boolean>(false);
   const [results, setResults] = useState<AgentCheckResult[]>([]);
   const [ranMode, setRanMode] = useState<CheckMode | null>(null);
   const [notice, setNotice] = useState<string>('');
+  const live = ranMode !== null && ranMode !== 'deterministic';
 
   const caseName: Record<AgentCheckResult['caseId'], string> = {
     normal: t('Normal payment (eligible)', 'Thanh toán bình thường (đủ điều kiện)', '正常付款（符合条件）'),
@@ -26,13 +30,13 @@ export default function AiConnection({ lang }: { lang: Lang }) {
 
   async function run(mode: CheckMode) {
     let llm;
-    if (mode === 'live_groq') {
-      try { llm = groqBrowserClient(key, model); }
+    if (mode !== 'deterministic') {
+      try { llm = llmBrowserClient(provider, key, model); }
       catch (e) { setNotice(e instanceof Error ? e.message : 'Invalid key.'); return; }
     }
-    setRunning(true); setResults([]); setRanMode(mode);
-    setNotice(mode === 'live_groq'
-      ? t('Calling Groq with the four tool definitions. Results appear as each case finishes…', 'Đang gọi Groq kèm 4 định nghĩa tool. Kết quả hiện ra sau mỗi tình huống…', '正在携带 4 个工具定义调用 Groq…')
+    setRunning(true); setResults([]); setRanMode(mode); setRanModel(mode === 'deterministic' ? null : model.trim());
+    setNotice(mode !== 'deterministic'
+      ? t(`Calling ${cfg.label} with the four tool definitions. Results appear as each case finishes…`, `Đang gọi ${cfg.label} kèm 4 định nghĩa tool. Kết quả hiện ra sau mỗi tình huống…`, `正在携带 4 个工具定义调用 ${cfg.label}…`)
       : t('Running the deterministic tool workflow (no model)…', 'Đang chạy quy trình tool xác định (không dùng mô hình)…', '正在运行确定性工具流程（无模型）…'));
     const out: AgentCheckResult[] = [];
     for (const c of buildCases()) {
@@ -52,11 +56,11 @@ export default function AiConnection({ lang }: { lang: Lang }) {
       track: 'FinTechathon International Track · Topic C',
       panel: 'Public AI Connection — bounded agent checks',
       mode: ranMode,
-      scope: ranMode === 'live_groq'
-        ? 'Live Groq tool-calling run of lib/agent.ts on 4 authored synthetic cases. PASS is computed from the observed orchestrator outcome. Tokens are provider-reported (null when not reported). Not a representative accuracy benchmark.'
+      scope: live
+        ? `Live ${ranMode === 'live_gemini' ? 'Gemini' : 'Groq'} tool-calling run of lib/agent.ts on 4 authored synthetic cases. PASS is computed from the observed orchestrator outcome. Tokens are provider-reported (null when not reported). Not a representative accuracy benchmark.`
         : 'Deterministic run of lib/agent.ts with no language model. Shows policy and tool-order enforcement only; says nothing about model accuracy.',
       exportedAt: new Date().toISOString(),
-      requestedModel: ranMode === 'live_groq' ? model : null,
+      requestedModel: ranModel,
       results,
       keyIncluded: false,
     };
@@ -67,7 +71,8 @@ export default function AiConnection({ lang }: { lang: Lang }) {
     setTimeout(() => URL.revokeObjectURL(url), 1000);
   };
 
-  const keyLooksReal = /^gsk_[A-Za-z0-9]{20,}$/.test(key.trim());
+  const keyLooksReal = isPlausibleKey(provider, key);
+  const switchProvider = (p: Provider) => { setProvider(p); setModel(PROVIDERS[p].defaultModel); setKey(''); setNotice(''); };
 
   return (
     <section className="j-card j-section">
@@ -75,7 +80,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
         <div>
           <span className="j-tag" style={{ marginRight: 8 }}>AI AGENT · BOUNDED TOOL CALLING</span>
           <span className={`j-status ${keyLooksReal ? 's-SETTLED' : 's-UNKNOWN'}`}>
-            {keyLooksReal ? t('Groq key entered — live mode available', 'Đã nhập key Groq — có thể chạy live', '已输入 Groq 密钥 — 可运行实时模式')
+            {keyLooksReal ? t(`${cfg.label} key entered — live mode available`, `Đã nhập key ${cfg.label} — có thể chạy live`, `已输入 ${cfg.label} 密钥 — 可运行实时模式`)
               : t('No key — deterministic mode only', 'Chưa có key — chỉ chạy chế độ xác định', '无密钥 — 仅确定性模式')}
           </span>
         </div>
@@ -96,11 +101,18 @@ export default function AiConnection({ lang }: { lang: Lang }) {
 
       <div className="j-form" style={{ marginTop: 16 }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(220px,1fr))', gap: 16 }}>
+          <label className="j-select-label">
+            <span>{t('AI provider', 'Nhà cung cấp AI', 'AI 服务商')}</span>
+            <select value={provider} onChange={e => switchProvider(e.target.value as Provider)}>
+              <option value="gemini">Google Gemini</option>
+              <option value="groq">Groq</option>
+            </select>
+          </label>
           <label>
-            <span>{t('Groq API key (optional)', 'Khóa Groq API (tùy chọn)', 'Groq API 密钥（可选）')} <small className="j-muted">({t('page memory only', 'chỉ lưu trong trang', '仅页面内存')})</small></span>
+            <span>{t(`${cfg.label} API key (optional)`, `Khóa API ${cfg.label} (tùy chọn)`, `${cfg.label} API 密钥（可选）`)} <small className="j-muted">({t('page memory only', 'chỉ lưu trong trang', '仅页面内存')})</small></span>
             <div style={{ display: 'flex', gap: 8 }}>
               <input type={showKey ? 'text' : 'password'} autoComplete="off" spellCheck={false} value={key}
-                onChange={e => setKey(e.target.value)} placeholder="gsk_..." />
+                onChange={e => setKey(e.target.value)} placeholder={cfg.keyHint} />
               <button type="button" className="j-secondary" style={{ padding: '0 12px', flexShrink: 0 }} onClick={() => setShowKey(!showKey)}>
                 {showKey ? t('Hide', 'Ẩn', '隐藏') : t('Show', 'Hiện', '显示')}
               </button>
@@ -108,30 +120,30 @@ export default function AiConnection({ lang }: { lang: Lang }) {
           </label>
           <label>
             <span>{t('Model ID', 'Mã mô hình', '模型代号')}</span>
-            <input type="text" value={model} onChange={e => setModel(e.target.value)} placeholder="openai/gpt-oss-120b" />
+            <input type="text" value={model} onChange={e => setModel(e.target.value)} placeholder={cfg.defaultModel} />
           </label>
         </div>
         <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap', alignItems: 'center' }}>
           {key && <button type="button" className="j-secondary" onClick={() => { setKey(''); setNotice(t('Key cleared.', 'Đã xóa key.', '密钥已清除。')); }}>✕ {t('Clear key', 'Xóa key', '清除密钥')}</button>}
-          <a className="j-link" href="https://console.groq.com/keys" target="_blank" rel="noreferrer" style={{ marginLeft: 'auto' }}>
-            {t('Get a free Groq key', 'Lấy key Groq miễn phí', '获取免费 Groq 密钥')} ↗
+          <a className="j-link" href={cfg.keyPage} target="_blank" rel="noreferrer" style={{ marginLeft: 'auto' }}>
+            {t(`Get a free ${cfg.label} key`, `Lấy key ${cfg.label} miễn phí`, `获取免费 ${cfg.label} 密钥`)} ↗
           </a>
         </div>
       </div>
 
       <div className="j-notice" style={{ fontSize: 12, padding: '10px 14px', margin: '14px 0' }}>
-        {t('Privacy: the key stays in this page’s memory, is sent only to api.groq.com in the Authorization header, and is never included in exports. Live mode sends the synthetic invoice text to Groq.',
-          'Quyền riêng tư: key chỉ nằm trong bộ nhớ của trang, chỉ được gửi tới api.groq.com trong header Authorization và không bao giờ có trong file xuất. Chế độ live gửi nội dung hóa đơn giả lập tới Groq.',
-          '隐私：密钥仅保存在本页内存，只在 Authorization 头中发送至 api.groq.com，导出文件不含密钥。实时模式会将合成账单文本发送给 Groq。')}
+        {t(`Privacy: the key stays in this page’s memory, is sent only to ${new URL(cfg.url).host} in the Authorization header, and is never included in exports. Live mode sends the synthetic invoice text to ${cfg.label}.`,
+          `Quyền riêng tư: key chỉ nằm trong bộ nhớ của trang, chỉ được gửi tới ${new URL(cfg.url).host} trong header Authorization và không bao giờ có trong file xuất. Chế độ live gửi nội dung hóa đơn giả lập tới ${cfg.label}.`,
+          `隐私：密钥仅保存在本页内存，只在 Authorization 头中发送至 ${new URL(cfg.url).host}，导出文件不含密钥。实时模式会将合成账单文本发送给 ${cfg.label}。`)}
       </div>
 
       <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', marginTop: 18 }}>
         <button type="button" className="j-secondary" disabled={running} onClick={() => run('deterministic')}>
           ▶ {t('Run 4 checks — deterministic (no AI)', 'Chạy 4 kiểm tra — xác định (không AI)', '运行 4 项检查 — 确定性（无 AI）')}
         </button>
-        <button type="button" className="j-primary" disabled={running || !keyLooksReal} onClick={() => run('live_groq')}
-          title={keyLooksReal ? '' : t('Enter a Groq key first', 'Hãy nhập key Groq trước', '请先输入 Groq 密钥')}>
-          ▶ {t('Run 4 checks — live Groq agent', 'Chạy 4 kiểm tra — agent Groq thật', '运行 4 项检查 — 实时 Groq 智能体')}
+        <button type="button" className="j-primary" disabled={running || !keyLooksReal} onClick={() => run(cfg.mode)}
+          title={keyLooksReal ? '' : t(`Enter a ${cfg.label} key first`, `Hãy nhập key ${cfg.label} trước`, `请先输入 ${cfg.label} 密钥`)}>
+          ▶ {t(`Run 4 checks — live ${cfg.label} agent`, `Chạy 4 kiểm tra — agent ${cfg.label} thật`, `运行 4 项检查 — 实时 ${cfg.label} 智能体`)}
         </button>
         {results.length > 0 && !running && (
           <button type="button" className="j-secondary" onClick={exportEvidence}>
@@ -143,10 +155,10 @@ export default function AiConnection({ lang }: { lang: Lang }) {
       {results.length > 0 && (
         <div style={{ marginTop: 22 }}>
           <h3 style={{ fontSize: 15, marginBottom: 6 }}>
-            {ranMode === 'live_groq' ? t('Live Groq agent results', 'Kết quả agent Groq thật', '实时 Groq 智能体结果') : t('Deterministic workflow results (no model)', 'Kết quả quy trình xác định (không mô hình)', '确定性流程结果（无模型）')}
+            {live ? t(`Live AI agent results · ${ranModel}`, `Kết quả agent AI thật · ${ranModel}`, `实时 AI 智能体结果 · ${ranModel}`) : t('Deterministic workflow results (no model)', 'Kết quả quy trình xác định (không mô hình)', '确定性流程结果（无模型）')}
           </h3>
           <p className="j-muted j-small">
-            {ranMode === 'live_groq'
+            {live
               ? t('Four authored synthetic cases; this shows the agent working end to end, not a representative accuracy rate.', 'Bốn tình huống giả lập do nhóm soạn; cho thấy agent chạy trọn vòng, không phải tỷ lệ chính xác đại diện.', '四个人工合成案例；展示智能体端到端运行，不代表准确率。')
               : t('No language model was called. This verifies tool order and policy enforcement only.', 'Không gọi mô hình ngôn ngữ nào. Chỉ kiểm tra thứ tự tool và việc áp dụng chính sách.', '未调用语言模型，仅验证工具顺序与策略执行。')}
           </p>
@@ -169,7 +181,7 @@ export default function AiConnection({ lang }: { lang: Lang }) {
                     <td><small>{r.expected}</small><br /><code style={{ fontSize: 11 }}>{r.observed}</code>{r.error && <small style={{ display: 'block' }}>{r.error}</small>}</td>
                     <td><span className={`j-status ${r.passed ? 's-SETTLED' : 's-REJECTED'}`}>{r.passed ? t('PASS', 'ĐẠT', '通过') : t('FAIL', 'CHƯA ĐẠT', '未通过')}</span></td>
                     <td><strong>{(r.durationMs / 1000).toFixed(2)} s</strong><small style={{ display: 'block' }}>{r.modelCalls} {t('model calls', 'lượt gọi', '次调用')}{r.model ? ` · ${r.model}` : ''}</small></td>
-                    <td>{r.usage.reportedByProvider ? <><strong>{r.usage.totalTokens}</strong><small style={{ display: 'block' }}>{r.usage.promptTokens} / {r.usage.completionTokens}</small></> : <span className="j-muted">{r.mode === 'live_groq' ? t('not reported', 'không có số liệu', '未报告') : '—'}</span>}</td>
+                    <td>{r.usage.reportedByProvider ? <><strong>{r.usage.totalTokens}</strong><small style={{ display: 'block' }}>{r.usage.promptTokens} / {r.usage.completionTokens}</small></> : <span className="j-muted">{r.mode !== 'deterministic' ? t('not reported', 'không có số liệu', '未报告') : '—'}</span>}</td>
                     <td><code style={{ fontSize: 11 }}>{r.tools.length ? r.tools.map(x => `${x.tool}${x.status === 'passed' ? '' : ' ✕'}`).join(' → ') : '—'}</code></td>
                   </tr>
                 ))}

@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';import {writeFileSync} from 'node:fs';
-import {buildCases,runAgentCheck,groqBrowserClient} from '../lib/ai-live-check.ts';
+import {buildCases,runAgentCheck,groqBrowserClient,llmBrowserClient,PROVIDERS} from '../lib/ai-live-check.ts';
 import {parseInvoice} from '../lib/engine.ts';
 const checks=[];const check=(name,v)=>{assert.ok(v,name);checks.push(name);};
 const cases=buildCases();const byId=Object.fromEntries(cases.map(c=>[c.id,c]));
@@ -11,7 +11,7 @@ for(const c of cases){const r=await runAgentCheck(c,'deterministic');
  check(`deterministic ${c.id} records a real tool trace`,r.tools.length>=2&&r.tools[0].tool==='read_invoice');}
 
 // 2. Live client against a fake Groq endpoint that follows the protocol correctly.
-function fakeGroq(script){let i=0;const bodies=[];const f=async(url,init)=>{bodies.push(JSON.parse(init.body));const step=script[i++];if(step.status&&step.status!==200)return {ok:false,status:step.status,json:async()=>(step.errorBody||{})};return {ok:true,status:200,json:async()=>({model:'fake-model',usage:step.usage===undefined?{prompt_tokens:100,completion_tokens:20,total_tokens:120}:step.usage,choices:[{message:step.message}]})};};f.bodies=bodies;return f;}
+function fakeGroq(script){let i=0;const bodies=[],urls=[];const f=async(url,init)=>{urls.push(url);bodies.push(JSON.parse(init.body));const step=script[i++];if(step.status&&step.status!==200)return {ok:false,status:step.status,json:async()=>(step.errorBody||{})};return {ok:true,status:200,json:async()=>({model:'fake-model',usage:step.usage===undefined?{prompt_tokens:100,completion_tokens:20,total_tokens:120}:step.usage,choices:[{message:step.message}]})};};f.bodies=bodies;f.urls=urls;return f;}
 const call=(id,name,args)=>({message:{role:'assistant',content:null,tool_calls:[{id,type:'function',function:{name,arguments:JSON.stringify(args)}}]}});
 function honestScript(text){const fields=parseInvoice(text);return [call('1','read_invoice',{fields}),call('2','verify_recipient',{}),call('3','get_transfer_quotes',{}),call('4','check_payment_policy',{}),{message:{role:'assistant',content:'done'}}];}
 const KEY='gsk_'+'a'.repeat(40);
@@ -56,5 +56,19 @@ check('attacker recipient is blocked by directory verification',r.observed==='bl
 check('sandbox-style fake key is refused',(()=>{try{groqBrowserClient('gsk_sandbox_mock_fintechathon_2026','m');return false;}catch{return true;}})());
 check('results never claim a payment',[r].every(x=>x.paymentExecuted===false));
 
-writeFileSync('public/ai-live-check-report.json',JSON.stringify({suite:'ai-live-check',scope:'Public AI Connection panel logic. Live-mode checks use a fake Groq endpoint; no real model accuracy is measured here.',passed:checks.length,checks},null,2)+'\n');
+
+// 9. Google Gemini through its OpenAI-compatible endpoint.
+const GKEY='AIza'+'b'.repeat(35);
+const sig=(m,n)=>({...m,message:{...m.message,tool_calls:m.message.tool_calls?.map(c=>({...c,extra_content:{google:{thought_signature:'SIG-'+n}}}))}});
+f=fakeGroq(honestScript(byId.normal.invoiceText).map((m,n)=>sig(m,n)));r=await runAgentCheck(byId.normal,PROVIDERS.gemini.mode,llmBrowserClient('gemini',GKEY,PROVIDERS.gemini.defaultModel,f));
+check('gemini normal case passes with route A',r.passed&&r.observed==='route:A'&&r.mode==='live_gemini');
+check('gemini calls the Google OpenAI-compatible endpoint',f.urls.every(u=>u==='https://generativelanguage.googleapis.com/v1beta/openai/chat/completions'));
+check('gemini request sends tools and max_tokens',f.bodies[0].tools.length===4&&f.bodies[0].max_tokens>0&&!('max_completion_tokens' in f.bodies[0]));
+check('gemini thought signatures are sent back on the next turn',JSON.stringify(f.bodies[1].messages).includes('SIG-0'));
+f=fakeGroq([{status:400,errorBody:[{error:{message:'API key not valid. Please pass a valid API key.'}}]}]);r=await runAgentCheck(byId.normal,'live_gemini',llmBrowserClient('gemini',GKEY,'gemini-3.8-flash',f));
+check('gemini array-style error body is surfaced',!r.passed&&/Google Gemini returned HTTP 400/.test(r.error)&&/API key not valid/.test(r.error));
+r=await runAgentCheck(byId.normal,'live_gemini',llmBrowserClient('gemini',GKEY,'gemini-3.8-flash',async()=>{throw new TypeError('Failed to fetch');}));
+check('network/CORS failure is a clear FAIL',!r.passed&&r.observed==='provider_error'&&/could not be reached/.test(r.error));
+check('a Groq key is not accepted as a Gemini key',(()=>{try{llmBrowserClient('gemini','gsk_x','m');return false;}catch{return true;}})());
+writeFileSync('public/ai-live-check-report.json',JSON.stringify({suite:'ai-live-check',scope:'Public AI Connection panel logic. Live-mode checks use fake Groq and Gemini endpoints; no real model accuracy is measured here.',passed:checks.length,checks},null,2)+'\n');
 console.log(checks.length+' AI connection panel checks passed');

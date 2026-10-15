@@ -1,7 +1,7 @@
 {
   "suite": "ai-live-check",
-  "scope": "Public AI Connection panel logic. Live-mode checks use a fake Groq endpoint; no real model accuracy is measured here.",
-  "passed": 27,
+  "scope": "Public AI Connection panel logic. Live-mode checks use fake Groq and Gemini endpoints; no real model accuracy is measured here.",
+  "passed": 34,
   "checks": [
     "deterministic normal meets expected outcome (route:A)",
     "deterministic normal makes no model call and reports no tokens",
@@ -29,6 +29,13 @@
     "injected submit_payment is blocked, never passed",
     "attacker recipient is blocked by directory verification",
     "sandbox-style fake key is refused",
-    "results never claim a payment"
+    "results never claim a payment",
+    "gemini normal case passes with route A",
+    "gemini calls the Google OpenAI-compatible endpoint",
+    "gemini request sends tools and max_tokens",
+    "gemini thought signatures are sent back on the next turn",
+    "gemini array-style error body is surfaced",
+    "network/CORS failure is a clear FAIL",
+    "a Groq key is not accepted as a Gemini key"
   ]
 }

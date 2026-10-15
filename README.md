@@ -78,7 +78,7 @@ pnpm preview:demo    # Preview the production bundle at http://127.0.0.1:4173
 
 - **`app/`**: Next.js / Vite React application components:
   - `judge.tsx`: Public reviewer simulator with multi-currency corridors and guided risk scenarios.
-  - `ai-connection.tsx`: AI Connection panel. Runs the bounded four-tool agent (`lib/agent.ts`) on four synthetic cases, either deterministically (no model) or with the viewer's own Groq key (real tool calling). PASS, latency, model calls, tokens and tool trace come from the actual run (`lib/ai-live-check.ts`, tested by `tests/ai-live-check.mjs`).
+  - `ai-connection.tsx`: AI Connection panel. Runs the bounded four-tool agent (`lib/agent.ts`) on four synthetic cases, either deterministically (no model) or with the viewer's own Google Gemini or Groq key (real tool calling). PASS, latency, model calls, tokens and tool trace come from the actual run (`lib/ai-live-check.ts`, tested by `tests/ai-live-check.mjs`).
   - `participant-agents.tsx`: Autonomous Risk, FX, and Conditional Release milestone escrow agents.
   - `workspace.tsx`: Authenticated student workspace.
 - **`lib/`**: Core financial engine, reconciliation state machine, deterministic policies, and i18n dictionaries.
